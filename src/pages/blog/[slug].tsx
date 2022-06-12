@@ -164,9 +164,6 @@ const RenderPost = ({
           />
           <TwitterTimeline />
           <IndexList heading="★ MOKUJI ★" blocks={blocks} />
-          <p>
-            スクロールしても目次がくっついてくるように改造したい...只今格闘中
-          </p>
         </div>
       </div>
       <div className={styles.endContent}>
