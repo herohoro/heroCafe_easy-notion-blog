@@ -189,6 +189,9 @@
     -webkit-flex-direction: column;
     align-items: center;
   }
+  .subContent > div{
+    width:100%;
+  }
   .postSlug {
     padding: 2% 5%;
   }
