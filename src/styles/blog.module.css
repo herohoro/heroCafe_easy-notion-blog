@@ -168,8 +168,7 @@
   }
   .flexWraper {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: center
   }
   .mainContent {
     width: 70%;
@@ -184,7 +183,11 @@
   .subContent {
     width: 33%;
     padding: 0 3%;
-    display: block;
+    display: flex;
+    flex-direction:column;
+    /* justify-content: space-between; */
+    -webkit-flex-direction: column;
+    align-items: center;
   }
   .postSlug {
     padding: 2% 5%;

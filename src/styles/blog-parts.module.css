@@ -274,12 +274,19 @@
   color: var(--hero-hover-fg);
 }
 .indexList {
-  margin: 0px;
+  margin-top: auto;
   background: #fefdfb;
   border: 3px dashed #dddddd;
   border-radius: 10px;
-  padding: 5px 4px;
+  padding: 45px 4px;
   overflow-x: auto;
+
+  /* scroll固定 */
+  position: sticky;
+  position: -webkit-sticky;
+  right: auto;
+  bottom:10px;
+  /* z-index: 1; */
 }
 .indexList a:hover {
   color: var(--hero-hover-fg);
