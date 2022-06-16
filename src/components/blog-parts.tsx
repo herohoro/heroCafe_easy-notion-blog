@@ -237,6 +237,15 @@ export const TwitterTimeline = () => (
     ></script>
   </div>
 )
+export const RssFeed = ()=>(
+  <div>
+    <h3>新着記事を通知したい？？</h3>
+    <hr/>
+    <p>RSSリーダーにatomのリンクを登録すると通知が行くよ🐌</p>
+    <code>https://herohoro.com/atom</code>
+    <p>やってみてね(*´ω`*)(*´ω`*)</p>
+  </div>
+)
 export const BlogPostLink = ({ heading, posts, enableThumnail = false }) => (
   <div className={styles.blogPostLink}>
     <h3>{heading}</h3>

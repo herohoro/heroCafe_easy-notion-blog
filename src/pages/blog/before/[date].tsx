@@ -15,6 +15,7 @@ import {
   PostsNotFound,
   PostThumbnail,
   TwitterTimeline,
+  RssFeed
 } from '../../../components/blog-parts'
 import stylesParts from '../../../styles/blog-parts.module.css'
 import styles from '../../../styles/blog.module.css'
@@ -151,6 +152,7 @@ const RenderPostsBeforeDate = ({
           </footer>
         </div>
         <div className={styles.subContent}>
+          <RssFeed/>
           <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <TwitterTimeline />

@@ -14,6 +14,7 @@ import {
   PostsNotFound,
   PostThumbnail,
   TwitterTimeline,
+  RssFeed
 } from '../../../components/blog-parts'
 import styles from '../../../styles/blog.module.css'
 import { getTagLink } from '../../../lib/blog-helpers'
@@ -145,6 +146,7 @@ const RenderPostsByTags = ({
         </div>
 
         <div className={styles.subContent}>
+          <RssFeed/>
           <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <BlogPostLink heading="Latest Posts" posts={recentPosts} />

@@ -18,6 +18,7 @@ import {
   ClosePhrase,
   IndexList,
   NewPostList,
+  RssFeed
 } from '../../components/blog-parts'
 import SocialButtons from '../../components/social-buttons'
 import styles from '../../styles/blog.module.css'
@@ -146,6 +147,7 @@ const RenderPost = ({
         </div>
 
         <div className={styles.subContent}>
+          <RssFeed />
           <BlogPostLink
             heading="Posts in the same tag"
             posts={sameTagPosts}
@@ -167,7 +169,7 @@ const RenderPost = ({
         </div>
       </div>
       <div className={styles.endContent}>
-        <p>記事を読んだ後に表示させたい関連記事一覧</p>
+        
         <div className={styles.endSection}>
           <BlogPostLink
             heading="Posts in the same tag"
