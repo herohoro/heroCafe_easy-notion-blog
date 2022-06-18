@@ -285,7 +285,7 @@ const NotionBlock = ({ block }) => {
   } else if (block.Type === 'bookmark' || block.Type === 'link_preview') {
     return <Bookmark block={block} />
   } else if (block.Type === 'divider') {
-    return <hr className="divider" />
+    return <hr className={styles.divider} />
   } else if (block.Type === 'table') {
     return <Table block={block} />
   } else if (block.Type === 'bulleted_list' || block.Type === 'numbered_list') {
