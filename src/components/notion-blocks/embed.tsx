@@ -13,6 +13,8 @@ const Embed = ({ block }) => {
     return <TweetEmbed url={block.Embed.Url} />
   } else if (/^https:\/\/www\.youtube\.com/.test(block.Embed.Url)) {
     return <Video url={block.Embed.Url} />
+  } else if (/^https:\/\/youtu\.be\.com/.test(block.Embed.Url)){
+    return <Video url={block.Embed.Url} />
   } else if (/^https:\/\/gist\.github\.com/.test(block.Embed.Url)) {
     return <LinkPreview url={block.Embed.Url} className={styles.linkPreview} />
   }
