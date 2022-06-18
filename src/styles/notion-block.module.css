@@ -110,6 +110,16 @@
 .callout div:first-child {
   margin-right: 0.7rem;
 }
+.divider{
+  background:url(/divider-icon.png);
+  height: 15px;
+  width: 50%;
+  margin: 15px auto;
+  border: none; /* 一旦線を解除 */
+  background-position:center;  
+  background-size:contain;
+  background-repeat: space;    
+}
 
 .table {
   overflow-x: auto;
