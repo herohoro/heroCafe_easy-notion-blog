@@ -1,39 +1,43 @@
 import styles from '../../styles/notion-block.module.css'
 
-import React from 'react';
-import YouTube, { YouTubeProps } from 'react-youtube';
+import React, { useState } from 'react';
+// import ReactDOM from 'react-dom';
+import YouTube, { YouTubePlayer } from 'react-youtube';
+
+// import './styles.css';
+
+// const url = "https://www.youtube.com/watch?v=8nXqcugV2Y4";
+// const VIDEOS = url.match(/[a-zA-Z0-9-_]{11}$/);
+
 
 const Video=({url})=> {
-    let matched
-    try {
-        matched = new URL(url).pathname.match(/\/[a-zA-Z0-9-_]{11}$/)
-    } catch (error) {
-        console.log(error)
-        return null
-    }
-
-    if (!matched) {
-        return null
-    }
-  const onPlayerReady: YouTubeProps['onReady'] = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  }
-
-  const opts: YouTubeProps['opts'] = {
-    height: '390',
-    width: '640',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  };
+  const VIDEOS = new URL(url).pathname.match(/[a-zA-Z0-9-_]{11}$/);
+  const [player, setPlayer] = useState<YouTubePlayer>();
+  const [videoIndex, setVideoIndex] = useState(0);
+  const [width, setWidth] = useState(600);
+//   const [hidden, setHidden] = useState(false);
+  const [autoplay, setAutoplay] = useState(false);
 
   return (
     <div className={styles.Video}>
-        <YouTube videoId={matched[1]} opts={opts} onReady={onPlayerReady} />
-    </div> 
-  )
+      
+        <YouTube
+          videoId={VIDEOS[videoIndex]}
+          opts={{
+            width,
+            height: width * (9 / 16),
+            playerVars: {
+              autoplay: autoplay ? 1 : 0,
+            },
+          }}
+          className="container"
+          onReady={(event) => setPlayer(event.target)}
+        />
+    </div>
+  );
 }
+
+// ReactDOM.render(<Video />, document.getElementById('app'));
+
 
 export default Video;
