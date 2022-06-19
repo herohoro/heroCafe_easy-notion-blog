@@ -372,8 +372,6 @@
     padding: 0;
   }
 
-  .blogTagLink {
-  }
   .blogTagLink h3,
   .blogPostLink h3,
   .twitterTimeline h3 {
@@ -407,8 +405,7 @@
     background: #333;
   }
 
-  .postsNotFound {
-  }
+  
   .thumbnail {
     width: 23vw;
     height: calc(23vw * 0.53);

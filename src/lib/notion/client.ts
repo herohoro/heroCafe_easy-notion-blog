@@ -429,7 +429,9 @@ export async function getAllBlocksByBlockId(blockId) {
           }
           if (item.video.type === 'external') {
             video.External = { Url: item.video.external.url }
-          } 
+          } else {
+            null
+          }
 
           block.Video = video
           break
