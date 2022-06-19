@@ -77,7 +77,6 @@ export interface Image {
 export interface Video{
   Type: string
   External?: External
-  File?: File
 }
 export interface File {
   Url: string
