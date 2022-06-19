@@ -1,18 +1,11 @@
 import styles from '../../styles/notion-block.module.css'
-
 import React from 'react';
 import YouTube, {YouTubeProps } from 'react-youtube';
 
-// import './styles.css';
-
-// const url = "https://www.youtube.com/watch?v=8nXqcugV2Y4";
-// const VIDEOS = url.match(/[a-zA-Z0-9-_]{11}$/);
-
-
 const Video=({block})=> {
   const url = block.Video.External.Url
-  const VIDEOS =new URL(url).pathname.match(/[a-zA-Z0-9-_]{11}$/);
-  const videoID=""+VIDEOS+"";
+  const VIDEOS =url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+  const videoID=""+VIDEOS[1]+"";
   //npm
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
     // access to player in all event handlers via event.target
@@ -22,7 +15,6 @@ const Video=({block})=> {
     height: '390',
     width: '640',
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
   };
@@ -34,10 +26,8 @@ const Video=({block})=> {
         取得videoID______   {videoID}
       </p>
       <YouTube videoId={videoID} opts={opts} onReady={onPlayerReady} className={styles.youtube}/>
-        
     </div>
   );
 }
-
 
 export default Video;
