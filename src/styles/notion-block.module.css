@@ -199,15 +199,9 @@
 .tweetEmbed div:first-child div:first-child {
   margin: auto;
 }
-.Video .youtube {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;
-}
-.Video .iframe {
-  position: absolute;
+.youtube :first-child {
+  /* position: absolute; */
   top: 0;
   right: 0;
   width: 100%;
-  height: 100%;
 }
