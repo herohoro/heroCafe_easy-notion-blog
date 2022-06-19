@@ -26,6 +26,7 @@ export interface Block {
   Quote?: Quote
   Callout?: Callout
   Embed?: Embed
+  Video?: Video
   Bookmark?: Bookmark
   LinkPreview?: LinkPreview
   Table?: Table
@@ -73,7 +74,10 @@ export interface Image {
   Width?: number
   Height?: number
 }
-
+export interface Video{
+  Type: string
+  External?: External
+}
 export interface File {
   Url: string
 }
