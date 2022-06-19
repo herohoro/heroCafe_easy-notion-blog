@@ -11,8 +11,8 @@ import YouTube, {YouTubeProps } from 'react-youtube';
 
 const Video=({block})=> {
   const url = block.Video.External.Url
-  const VIDEOS =new URL(url).pathname.match(/[a-zA-Z0-9-_]{11}$/);
-  const videoID=""+VIDEOS+"";
+  const VIDEOS =url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+  const videoID=""+VIDEOS[1]+"";
   //npm
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
     // access to player in all event handlers via event.target
