@@ -45,8 +45,8 @@ module.exports = {
 }
 
 // serialize as JSON
-const { withSuperjson } = require('next-superjson')
+// const { withSuperjson } = require('next-superjson')
 
-module.exports = withSuperjson()({
-  reactStrictMode: true,
-})
+// module.exports = withSuperjson()({
+//   reactStrictMode: true,
+// })
