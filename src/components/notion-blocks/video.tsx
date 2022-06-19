@@ -11,8 +11,8 @@ import YouTube, {YouTubeProps } from 'react-youtube';
 
 const Video=({block})=> {
   const url = block.Video.External.Url
-  const VIDEOS = new URL(url).pathname.match(/[a-zA-Z0-9-_]{11}$/).toString();
-  
+  const VIDEOS =new URL(url).pathname.match(/[a-zA-Z0-9-_]{11}$/);
+  const videoID=""+VIDEOS+"";
   //npm
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
     // access to player in all event handlers via event.target
@@ -30,10 +30,10 @@ const Video=({block})=> {
   
   return (
     <div className={styles.Video}>
-      {/* <p>
-        取得videoID:{VIDEOS}
-      </p> */}
-      <YouTube videoId={VIDEOS} opts={opts} onReady={onPlayerReady} className={styles.youtube}/>
+      <p>
+        取得videoID______   {videoID}
+      </p>
+      <YouTube videoId={videoID} opts={opts} onReady={onPlayerReady} className={styles.youtube}/>
         
     </div>
   );
