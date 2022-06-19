@@ -11,7 +11,7 @@ import YouTube, {YouTubeProps } from 'react-youtube';
 
 const Video=({block})=> {
   const url = block.Video.External.Url
-  const VIDEOS = new URL(url).pathname.match(/[a-zA-Z0-9-_]{11}$/);
+  const VIDEOS = new URL(url).pathname.match(/[a-zA-Z0-9-_]{11}$/).toString();
   
   //npm
   const onPlayerReady: YouTubeProps['onReady'] = (event) => {
