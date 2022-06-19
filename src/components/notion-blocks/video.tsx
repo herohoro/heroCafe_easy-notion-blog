@@ -10,16 +10,21 @@ import YouTube, { YouTubePlayer } from 'react-youtube';
 // const VIDEOS = url.match(/[a-zA-Z0-9-_]{11}$/);
 
 
-const Video=({url})=> {
+const Video=({block})=> {
+  const url = block.Video.External.Url
   const VIDEOS = new URL(url).pathname.match(/[a-zA-Z0-9-_]{11}$/);
   const [player, setPlayer] = useState<YouTubePlayer>();
   const [videoIndex, setVideoIndex] = useState(0);
   const [width, setWidth] = useState(600);
 //   const [hidden, setHidden] = useState(false);
   const [autoplay, setAutoplay] = useState(false);
-
+  console.log(VIDEOS)
+  console.log(VIDEOS,{videoIndex})
   return (
     <div className={styles.Video}>
+      <p>
+        herohoro
+      </p>
       
         <YouTube
           videoId={VIDEOS[videoIndex]}
