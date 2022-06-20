@@ -22,9 +22,9 @@ const Video=({block})=> {
   
   return (
     <div className={styles.Video}>
-      <p>
+      {/* <p>
         取得videoID______   {videoID}
-      </p>
+      </p> */}
       <YouTube videoId={videoID} opts={opts} onReady={onPlayerReady} className={styles.youtube}/>
     </div>
   );
