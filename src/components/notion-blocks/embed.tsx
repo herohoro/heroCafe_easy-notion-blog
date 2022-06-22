@@ -21,7 +21,7 @@ const Embed = ({ block }) => {
 
   return (
     <div>
-    <p>embedコンポ上でキャッチできなかったの</p>
+    <code>embedコンポ上でキャッチできなかったの😵 ※ 後で修正します〜</code>
     </div>
   )
 }
