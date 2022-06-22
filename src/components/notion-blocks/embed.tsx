@@ -14,7 +14,11 @@ const Embed = ({ block }) => {
     return <LinkPreview url={block.Embed.Url} className={styles.linkPreview} />
   }
 
-  return null
+  return (
+    <>
+    <code> embedがうまく動かない状態です😵 後日復旧させます〜 </code>
+    </>
+  )
 }
 
 export default Embed
