@@ -14,11 +14,7 @@ const Embed = ({ block }) => {
     return <LinkPreview url={block.Embed.Url} className={styles.linkPreview} />
   }
 
-  return (
-    <div>
-    <code>embedコンポ上でキャッチできなかったの😵 ※ 後で修正します〜</code>
-    </div>
-  )
+  return null
 }
 
 export default Embed
