@@ -210,7 +210,7 @@
   margin: auto;
 }
 
-.youtube :first-child {
+.video .youtube :first-child {
   top: 0;
   right: 0;
   width: 100%;
