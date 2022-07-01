@@ -18,8 +18,7 @@ import {
   ClosePhrase,
   IndexList,
   NewPostList,
-  RssFeed,
-  LikeBotton
+  RssFeed
 } from '../../components/blog-parts'
 import SocialButtons from '../../components/social-buttons'
 import styles from '../../styles/blog.module.css'
@@ -139,7 +138,7 @@ const RenderPost = ({
                   id={post.Slug}
                 />
               )}  
-              <LikeBotton post={post}/>
+              {/* <LikeBotton post={post}/> */}
             </footer>
             <p>
               ▼　この記事に興味があったら同じタグから関連記事をのぞいてみてね
