@@ -11,6 +11,7 @@ import {
 
 import * as gtag from '../lib/gtag'
 import styles from '../styles/social-buttons.module.css'
+import LikeButton from './like-button'
 
 const SocialButtons = ({ title = '', url, id = null }) => (
   <ul className={styles.socialButtons}>
@@ -72,6 +73,9 @@ const SocialButtons = ({ title = '', url, id = null }) => (
       >
         <HatenaIcon size={32} round={true} />
       </HatenaShareButton>
+    </li>
+    <li>
+      <LikeButton id={id} />
     </li>
   </ul>
 )
