@@ -82,6 +82,7 @@ export interface Video {
 }
 export interface File {
   Url: string
+  ExpiryTime?: string
 }
 
 export interface External {
