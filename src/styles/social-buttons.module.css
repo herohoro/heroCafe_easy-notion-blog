@@ -7,3 +7,7 @@
   display: inline-block;
   margin-right: 0.5rem;
 }
+.socialButtons li:last-child {
+  display: inline-block;
+  margin-left: auto;
+}

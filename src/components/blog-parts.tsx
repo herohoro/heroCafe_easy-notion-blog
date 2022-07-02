@@ -107,14 +107,6 @@ export const PostTags = ({ post }) => (
       ))}
   </div>
 )
-export const LikeBotton = ({post}) =>{
-  const [count, setCount] = useState(post.Like);
-  const handleClick = () => {
-    setCount(count + 1);
-  };
-  return(
-    <div className={styles.likeBotton} onClick={handleClick}>♥ {count}</div>
-)}
 
 export const PostExcerpt = ({ post }) => (
   <div className={styles.postExcerpt}>
