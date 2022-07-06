@@ -390,3 +390,33 @@ footer span {
 footer span a {
   color: inherit;
 }
+
+/* sec-notion */
+
+.gray{
+  background-color: lightgrey;
+}
+ .brown{
+  background-color: tan;
+}
+.orange{
+  background-color: lightsalmon;
+}
+.yellow{
+  background-color: rgb(251, 251, 166);
+}
+.green{
+  background-color: #8fc5aa;
+}
+.blue{
+  background-color: lightblue;
+}
+.purple{
+  background-color: #c5aeda;
+}
+.pink{
+  background-color: #e49ca5;
+}
+.red{
+  background-color: #ff7070;
+}
