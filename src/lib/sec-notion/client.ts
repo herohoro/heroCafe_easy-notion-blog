@@ -1,0 +1,57 @@
+import { SEC_NOTION_API_SECRET, SEC_DATABASE_ID } from '../notion/server-constants'
+import { Post } from './interfaces'
+
+const { Client } = require('@notionhq/client')
+const client = new Client({
+    auth: SEC_NOTION_API_SECRET,
+  })
+
+
+  export async function getAllSecPosts() {
+    let results = []
+  
+    
+    const params = {
+        database_id: SEC_DATABASE_ID,
+        filter: {  
+            property: 'tags',
+            select: {
+                equals: "posting",
+            }
+        },
+        sorts: [
+            {
+            property: 'date',
+            direction: 'descending',
+            },
+        ]
+    }    
+    const data = await client.databases.query(params)
+  
+    results = results.concat(data.results)
+
+    params['start_cursor'] = data.next_cursor
+    
+      
+    return results.map(item => _buildPost(item))
+  }
+
+function _buildPost(data) {
+    const prop = data.properties
+  
+    const post: Post = {
+        title: prop.title.title[0].plain_text,
+        date: prop.date.date.start,
+        tags: prop.tags.select.name,
+        description:
+        prop.description.rich_text.length > 0
+            ? prop.description.rich_text[0].plain_text
+            : '',
+        last_edit: prop.last_edit.last_edited_time,
+        URL:prop.URL.url,
+        site: prop.site.select.name,
+        siteCollor: prop.site.select.color
+    }
+  
+    return post
+}
