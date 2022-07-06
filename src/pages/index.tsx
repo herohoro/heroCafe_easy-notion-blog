@@ -7,26 +7,32 @@ import {
   BlogTagLink,
   TwitterTimeline,
 } from '../components/blog-parts'
+import { getEditTimeStr } from '../lib/blog-helpers'
 
 import styles from '../styles/page.module.css'
+import SecStyles from '../styles/sec-notion.module.css'
 import { getPosts, getRankedPosts, getAllTags } from '../lib/notion/client'
+import { getAllSecPosts } from '../lib/sec-notion/client'
+
 
 export async function getStaticProps() {
   const posts = await getPosts()
   const rankedPosts = await getRankedPosts()
   const tags = await getAllTags()
+  const secPosts = await getAllSecPosts()
 
   return {
     props: {
       posts,
       rankedPosts,
       tags,
+      secPosts
     },
     revalidate: 60,
   }
 }
 
-const RenderPage = ({ rankedPosts = [], tags = [] }) => (
+const RenderPage = ({ rankedPosts = [], tags = [],secPosts=[] }) => (
   <div className={styles.container}>
     <DocumentHead />
     <div className={styles.mainContent}>
@@ -83,11 +89,36 @@ const RenderPage = ({ rankedPosts = [], tags = [] }) => (
           notionに書き溜めた記録をブログっぽく公開していきながらポートフォリオも兼ねて発展させていきたいなーと思っています＼(^o^)／よろしくねー
         </p>
       </div>
-      <iframe
+      <div className={SecStyles.grid}>
+        <h3>
+          \ 他のサイトへの記事投稿 /
+        </h3>
+        <p>
+          たまに気が向くと投稿することがあるので良かったらのぞいてみてください＼(^o^)／
+        </p>
+        {secPosts.map(secPost => {
+          return(
+            <div className={SecStyles.card} key={secPost.title}>
+            <div >
+              <div className={`${secPost.siteCollor}`}>
+                <p>{secPost.site}</p>
+              </div>
+            </div>
+            <h3>{secPost.date}</h3>
+            <Link href={secPost.URL} passHref><p>📝 {secPost.title}</p></Link>
+            <p>&#128537; {(secPost.description)?(secPost.description):null}</p>
+            <hr/>
+            <p>last edit : {getEditTimeStr(secPost.last_edit)}</p>
+          </div>
+          )
+        })}
+      </div>
+
+      {/* <iframe
         src="https://dev.herohoro.com/posting"
         width="100%"
         height="600"
-      ></iframe>
+      ></iframe> */}
     </div>
 
     <div className={styles.subContent}>
