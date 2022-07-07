@@ -108,6 +108,7 @@
   margin: 0.3rem 0;
   font-size: 1rem;
   min-height: 1.8rem;
+  white-space: pre-wrap;
 }
 .postSlug :global(video),
 .postSlug :global(img),
