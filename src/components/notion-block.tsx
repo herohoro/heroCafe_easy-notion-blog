@@ -298,4 +298,47 @@ const NotionBlock = ({ block }) => {
   return null
 }
 
-export default NotionBlock
+const NotionBlocks = ({ blocks }) => (
+  <>
+    {wrapListItems(blocks).map((block: interfaces.Block, i: number) => (
+      <NotionBlock block={block} key={`block-${i}`} />
+    ))}
+  </>
+)
+
+const wrapListItems = (blocks: Array<interfaces.Block>) =>
+  blocks.reduce((arr, block: interfaces.Block, i: number) => {
+    const isBulletedListItem = block.Type === 'bulleted_list_item'
+    const isNumberedListItem = block.Type === 'numbered_list_item'
+
+    if (!isBulletedListItem && !isNumberedListItem) return arr.concat(block)
+
+    const listType = isBulletedListItem ? 'bulleted_list' : 'numbered_list'
+
+    if (i === 0) {
+      const list: interfaces.List = {
+        Type: listType,
+        ListItems: [block],
+      }
+      return arr.concat(list)
+    }
+
+    const prevList = arr[arr.length - 1]
+
+    if (
+      (isBulletedListItem && prevList.Type !== 'bulleted_list') ||
+      (isNumberedListItem && prevList.Type !== 'numbered_list')
+    ) {
+      const list: interfaces.List = {
+        Type: listType,
+        ListItems: [block],
+      }
+      return arr.concat(list)
+    }
+
+    prevList.ListItems.push(block)
+
+    return arr
+  }, [])
+
+export default NotionBlocks
