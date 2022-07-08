@@ -14,7 +14,7 @@ export const getTagBeforeLink = (tag: string, date: string) => {
   return `/blog/tag/${encodeURIComponent(tag)}/before/${date}`
 }
 
-export const getDateStr = date => {
+export const getDateStr = (date: string) => {
   const dt = new Date(date)
   const y = dt.getFullYear()
   const m = ('00' + (dt.getMonth() + 1)).slice(-2)
@@ -28,9 +28,8 @@ export const getEditTimeStr = last_edited_time => {
   const d = ('00' + dt.getDate()).slice(-2)
   return y + '-' + m + '-' + d
 }
-export const normalizeSlug = slug => {
-  if (typeof slug !== 'string') return slug
 
+export const normalizeSlug = (slug: string) => {
   const startingSlash = slug.startsWith('/')
   const endingSlash = slug.endsWith('/')
 
