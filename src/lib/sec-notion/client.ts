@@ -6,6 +6,34 @@ const client = new Client({
     auth: SEC_NOTION_API_SECRET,
   })
 
+  export async function getAllSecShinyaPosts() {
+    let results = []
+  
+    
+    const params = {
+        database_id: SEC_DATABASE_ID,
+        filter: {  
+            property: 'tags',
+            select: {
+                equals: "深夜学習",
+            }
+        },
+        sorts: [
+            {
+            property: 'date',
+            direction: 'descending',
+            },
+        ]
+    }    
+    const data = await client.databases.query(params)
+  
+    results = results.concat(data.results)
+
+    params['start_cursor'] = data.next_cursor
+    
+      
+    return results.map(item => _buildPost(item))
+  }
 
   export async function getAllSecPosts() {
     let results = []
@@ -50,7 +78,7 @@ function _buildPost(data) {
         last_edit: prop.last_edit.last_edited_time,
         URL:prop.URL.url,
         site: prop.site.select.name,
-        siteCollor: prop.site.select.color
+        siteCollor: prop.site.select.color,
     }
   
     return post
