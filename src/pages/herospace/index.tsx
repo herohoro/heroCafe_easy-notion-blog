@@ -36,12 +36,6 @@ const RenderPostsSpace = ({
       <DocumentHead title="Space" />
       <div className={styles.flexWraper}>
         <div className={styles.mainContent}>
-          <h3>このページは作って遊ぶ場所＼(^o^)／</h3>
-          <p>
-            未完成だけどできたのが嬉しくて貼り付けて・・・
-            <br />
-            いろいろ好きなように使ってます〜
-          </p>
           <div className={SecStyles.grid}>
         <h3>
           \ 深夜に学習を深める【深夜学習】開催中 /
@@ -69,7 +63,7 @@ const RenderPostsSpace = ({
             height="300"
             // frameborder="0"
           ></iframe>
-          <p>▼　Lofi動画をアップロードしてみた</p>
+          <p>▼　25分のタイマーにどうぞ〜</p>
 
           <iframe
             src="https://www.youtube.com/embed/videoseries?list=PLUq06vyynuEUdRd1lu3ncpfTSjbogScmR"
@@ -79,6 +73,8 @@ const RenderPostsSpace = ({
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             // allowfullscreen
           ></iframe>
+
+          <p>▼　日々の振り返りで特に残しておきたいのをPick Up!!</p>
           <iframe
             src="https://dev.herohoro.com"
             width="100%"
