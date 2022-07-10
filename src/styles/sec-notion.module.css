@@ -8,7 +8,7 @@
 }
 .fukidashi {
   align-items: center;
-  max-width: 80%;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -27,7 +27,6 @@
 }
 
 .fukiCard {
-  width: 80%;
   position: relative;
   display: inline-block;
 }
@@ -81,7 +80,14 @@
   }
 }
 @media (max-width: 660px) {
-  .fukidashi img {
+  .fukidashi img,
+  .fukiCard:before {
     display: none !important;
+  }
+  .fukiCard :nth-child(1) {
+    font-size: 1rem !important;
+  }
+  .fukiCard :nth-child(2) {
+    font-size: 0.5rem !important;
   }
 }
