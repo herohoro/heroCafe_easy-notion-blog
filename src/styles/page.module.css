@@ -6,7 +6,7 @@
 .mainContent {
   width: 100%;
 }
-.flexTagsMain{
+.flexTagsMain {
   width: 100%;
   justify-content: center;
   display: flex;
@@ -48,7 +48,7 @@
 }
 .moreSearch {
   margin: 0 1em 1.25rem 0;
-  width:45%;
+  width: 45%;
   display: inline-block;
   font-size: 1em;
   color: var(--fg);
@@ -118,10 +118,10 @@
     font-weight: bold;
   }
 }
-@media (max-width:480px){
+@media (max-width: 480px) {
   .tagMain,
-  .moreSearch{
-    max-width:45%;
+  .moreSearch {
+    max-width: 45%;
     padding: 0 0.8em;
   }
   .tagMain p,
