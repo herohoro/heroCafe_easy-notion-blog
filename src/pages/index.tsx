@@ -14,7 +14,6 @@ import SecStyles from '../styles/sec-notion.module.css'
 import { getPosts, getRankedPosts, getAllTags } from '../lib/notion/client'
 import { getAllSecPosts } from '../lib/sec-notion/client'
 
-
 export async function getStaticProps() {
   const posts = await getPosts()
   const rankedPosts = await getRankedPosts()
@@ -26,20 +25,18 @@ export async function getStaticProps() {
       posts,
       rankedPosts,
       tags,
-      secPosts
+      secPosts,
     },
     revalidate: 60,
   }
 }
 
-const RenderPage = ({ rankedPosts = [], tags = [],secPosts=[] }) => (
+const RenderPage = ({ rankedPosts = [], tags = [], secPosts = [] }) => (
   <div className={styles.container}>
     <DocumentHead />
     <div className={styles.mainContent}>
       <div className={styles.flexTagsMain}>
-        
-
-        {tags.map(tag => {
+        {tags.map((tag) => {
           if (
             tag === '04_パワーアップ計画' ||
             tag === '02_ブログ改造日記' ||
@@ -47,7 +44,6 @@ const RenderPage = ({ rankedPosts = [], tags = [],secPosts=[] }) => (
             tag === '03_作業ページ改造'
           ) {
             return (
-              
               <div className={styles.tagMain}>
                 <Link href="/blog/tag/[tag]" as={getTagLink(tag)} passHref>
                   <p>{tag}</p>
@@ -64,7 +60,7 @@ const RenderPage = ({ rankedPosts = [], tags = [],secPosts=[] }) => (
             <p> 🔍　to Blog List </p>
           </Link>
         </div> */}
-      </div> 
+      </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Image
           src="/hero-room.jpg"
@@ -90,26 +86,28 @@ const RenderPage = ({ rankedPosts = [], tags = [],secPosts=[] }) => (
         </p>
       </div>
       <div className={SecStyles.grid}>
-        <h3>
-          \ 他のサイトへの記事投稿 /
-        </h3>
+        <h3>\ 他のサイトへの記事投稿 /</h3>
         <p>
           たまに気が向くと投稿することがあるので良かったらのぞいてみてください＼(^o^)／
         </p>
-        {secPosts.map(secPost => {
-          return(
+        {secPosts.map((secPost) => {
+          return (
             <div className={SecStyles.card} key={secPost.title}>
-            <div >
-              <div className={`${secPost.siteCollor}`}>
-                <p>{secPost.site}</p>
+              <div>
+                <div className={`${secPost.siteCollor}`}>
+                  <p>{secPost.site}</p>
+                </div>
               </div>
+              <h3>{secPost.date}</h3>
+              <Link href={secPost.URL} passHref>
+                <p>📝 {secPost.title}</p>
+              </Link>
+              <p>
+                &#128537; {secPost.description ? secPost.description : null}
+              </p>
+              <hr />
+              <p>last edit : {getEditTimeStr(secPost.last_edit)}</p>
             </div>
-            <h3>{secPost.date}</h3>
-            <Link href={secPost.URL} passHref><p>📝 {secPost.title}</p></Link>
-            <p>&#128537; {(secPost.description)?(secPost.description):null}</p>
-            <hr/>
-            <p>last edit : {getEditTimeStr(secPost.last_edit)}</p>
-          </div>
           )
         })}
       </div>

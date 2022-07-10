@@ -21,7 +21,7 @@ export const getDateStr = (date: string) => {
   const d = ('00' + dt.getDate()).slice(-2)
   return y + '-' + m + '-' + d
 }
-export const getEditTimeStr = last_edited_time => {
+export const getEditTimeStr = (last_edited_time) => {
   const dt = new Date(last_edited_time)
   const y = dt.getFullYear()
   const m = ('00' + (dt.getMonth() + 1)).slice(-2)

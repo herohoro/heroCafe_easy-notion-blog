@@ -1,5 +1,5 @@
 import React from 'react'
-import useSWR from "swr"
+import useSWR from 'swr'
 import axios from 'axios'
 
 import { NEXT_PUBLIC_URL } from '../../lib/notion/server-constants'
@@ -21,7 +21,7 @@ import {
   ClosePhrase,
   IndexList,
   NewPostList,
-  RssFeed
+  RssFeed,
 } from '../../components/blog-parts'
 import SocialButtons from '../../components/social-buttons'
 import styles from '../../styles/blog.module.css'
@@ -83,7 +83,7 @@ export async function getStaticProps({ params: { slug } }) {
 export async function getStaticPaths() {
   const posts = await getAllPosts()
   return {
-    paths: posts.map(post => getBlogLink(post.Slug)),
+    paths: posts.map((post) => getBlogLink(post.Slug)),
     fallback: 'blocking',
   }
 }
@@ -100,10 +100,14 @@ const fetchBlocks = async (slug: string): Promise<Array<Block>> => {
 const includeExpiredImage = (blocks: Array<Block>): boolean => {
   const now = Date.now()
 
-  return blocks.some(block => {
+  return blocks.some((block) => {
     if (block.Type === 'image') {
       const image = block.Image
-      if (image.File && image.File.ExpiryTime && Date.parse(image.File.ExpiryTime) < now) {
+      if (
+        image.File &&
+        image.File.ExpiryTime &&
+        Date.parse(image.File.ExpiryTime) < now
+      ) {
         return true
       }
     }
@@ -121,7 +125,11 @@ const RenderPost = ({
   tags = [],
   fallback,
 }) => {
-  const { data: blocks, error } = useSWR(includeExpiredImage(fallback[slug]) && slug, fetchBlocks, { fallbackData: fallback[slug] })
+  const { data: blocks, error } = useSWR(
+    includeExpiredImage(fallback[slug]) && slug,
+    fetchBlocks,
+    { fallbackData: fallback[slug] }
+  )
 
   if (error || !blocks) {
     return <PostsNotFound />
@@ -163,7 +171,7 @@ const RenderPost = ({
                   id={post.Slug}
                   like={post.Like}
                 />
-              )}  
+              )}
             </footer>
             <p>
               ▼　この記事に興味があったら同じタグから関連記事をのぞいてみてね
@@ -195,7 +203,6 @@ const RenderPost = ({
         </div>
       </div>
       <div className={styles.endContent}>
-        
         <div className={styles.endSection}>
           <BlogPostLink
             heading="Posts in the same tag"
