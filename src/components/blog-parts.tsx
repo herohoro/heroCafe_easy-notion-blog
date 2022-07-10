@@ -88,7 +88,7 @@ export const PostTagsSlug = ({ post }) => (
   <div className={styles.postTagsSlug}>
     {post.Tags &&
       post.Tags.length > 0 &&
-      post.Tags.map(tag => (
+      post.Tags.map((tag) => (
         <Link href="/blog/tag/[tag]" as={getTagLink(tag)} key={tag} passHref>
           <a>{tag}</a>
         </Link>
@@ -122,9 +122,7 @@ export const PostBody = ({ blocks }) => (
 export const IndexList = ({ blocks, heading }) => (
   <div className={styles.indexList}>
     <h3>{heading}</h3>
-    {wrapListItems(blocks).map((block, i) => (
-      <ContentIndex block={block} key={`post-body-${i}`} />
-    ))}
+    <NotionBlocks blocks={blocks} />
   </div>
 )
 export const ClosePhrase = () => (
@@ -235,10 +233,10 @@ export const TwitterTimeline = () => (
     ></script>
   </div>
 )
-export const RssFeed = ()=>(
+export const RssFeed = () => (
   <div>
     <h3>新着記事を通知したい？？</h3>
-    <hr/>
+    <hr />
     <p>RSSリーダーにatomのリンクを登録すると通知が行くよ🐌</p>
     <code>https://herohoro.com/atom</code>
     <p>やってみてね(*´ω`*)(*´ω`*)</p>
@@ -316,7 +314,7 @@ const PostLinkListThumnail = ({ posts }) => {
   if (!posts || posts.length === 0) return null
   return (
     <div>
-      {posts.map(post => {
+      {posts.map((post) => {
         return (
           <div key={post.Slug} className={styles.flexWraper}>
             <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
@@ -358,7 +356,7 @@ export const TagLinkNoList = ({ tags }) => {
 
   return (
     <div>
-      {tags.map(tag => {
+      {tags.map((tag) => {
         return (
           <div className={styles.tagSub} key={tag}>
             <Link href="/blog/tag/[tag]" as={getTagLink(tag)} passHref>
