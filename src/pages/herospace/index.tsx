@@ -58,7 +58,7 @@ const RenderPostsSpace = ({
               {secMessages.map((secMessage) => {
                 return (
                   <div className={SecStyles.fukiCard} key={secMessage.title}>
-                    <p style={{ textAlign: 'center', fontSize: '1.5rem' }}>
+                    <p style={{ whiteSpace: 'pre', fontSize: '1.5rem' }}>
                       {' '}
                       {secMessage.description ? secMessage.description : null}
                     </p>
