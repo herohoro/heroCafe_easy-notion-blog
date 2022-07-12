@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { Post } from '../lib/notion/interfaces'
 import NotionBlocks from './notion-block'
+import MokujiBlocks from './mokuji-block'
 import {
   getBeforeLink,
   getBlogLink,
@@ -121,7 +122,7 @@ export const PostBody = ({ blocks }) => (
 export const IndexList = ({ blocks, heading }) => (
   <div className={styles.indexList}>
     <h3>{heading}</h3>
-    <NotionBlocks blocks={blocks} />
+    <MokujiBlocks blocks={blocks} />
   </div>
 )
 export const ClosePhrase = () => (
