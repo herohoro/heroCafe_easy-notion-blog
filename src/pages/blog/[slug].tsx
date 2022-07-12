@@ -19,7 +19,7 @@ import {
   PostsNotFound,
   TwitterTimeline,
   ClosePhrase,
-  IndexList,
+  // IndexList,
   NewPostList,
   RssFeed,
 } from '../../components/blog-parts'
@@ -199,7 +199,7 @@ const RenderPost = ({
             enableThumnail={true}
           />
           <TwitterTimeline />
-          <IndexList heading="★ MOKUJI ★" blocks={blocks} />
+          {/* <IndexList heading="★ MOKUJI ★" blocks={blocks} /> */}
         </div>
       </div>
       <div className={styles.endContent}>
