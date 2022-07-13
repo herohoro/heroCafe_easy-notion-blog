@@ -79,23 +79,21 @@ const RenderPostsSpace = ({
               {secPosts.map((secPost) => {
                 return (
                   <div className={SecStyles.card} key={secPost.title}>
+                    <div>
+                      <div className={`${secPost.siteCollor}`}>
+                        <p>{secPost.site}</p>
+                      </div>
+                    </div>
+                    <h3>{secPost.date} ~</h3>
                     <Link href={secPost.URL} passHref>
-                      <>
-                        <div>
-                          <div className={`${secPost.siteCollor}`}>
-                            <p>{secPost.site}</p>
-                          </div>
-                        </div>
-                        <h3>{secPost.date} ~</h3>
-                        <p>📝 {secPost.title}</p>
-                        <p>
-                          &#128537;{' '}
-                          {secPost.description ? secPost.description : null}
-                        </p>
-                        <hr />
-                        <p>last edit : {getEditTimeStr(secPost.last_edit)}</p>
-                      </>
+                      <a>📝 {secPost.title}</a>
                     </Link>
+                    <p>
+                      &#128537;{' '}
+                      {secPost.description ? secPost.description : null}
+                    </p>
+                    <hr />
+                    <p>last edit : {getEditTimeStr(secPost.last_edit)}</p>
                   </div>
                 )
               })}
