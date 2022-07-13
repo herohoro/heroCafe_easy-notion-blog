@@ -106,15 +106,24 @@ const RenderPostsSpace = ({
             // frameborder="0"
           ></iframe>
           <p>▼　25分のタイマーにどうぞ〜</p>
-
-          <iframe
-            src="https://www.youtube.com/embed/videoseries?list=PLUq06vyynuEUdRd1lu3ncpfTSjbogScmR"
-            width="50%"
-            height="300"
-            // frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            // allowfullscreen
-          ></iframe>
+          <div className={SecStyles.clockTimer}>
+            <iframe
+              src="https://www.youtube.com/embed/videoseries?list=PLUq06vyynuEUdRd1lu3ncpfTSjbogScmR"
+              width="50%"
+              height="300"
+              // frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              // allowfullscreen
+            ></iframe>
+            <div className={SecStyles.pclock}>
+              <iframe
+                src="https://p5-blog.vercel.app/clock/index.html"
+                width="40%"
+                height="200"
+                scrolling="no"
+              ></iframe>
+            </div>
+          </div>
 
           <p>▼　日々の振り返りで特に残しておきたいのをPick Up!!</p>
           <iframe
