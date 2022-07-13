@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getPostBySlug, incrementLikes } from '../../lib/notion/client'
 
 const ApiBlogSlug = async function (req: NextApiRequest, res: NextApiResponse) {
-  res.setHeader('Content-Type', 'application/json')
+  // res.setHeader('Content-Type', 'application/json')
   if (req.method !== 'PUT') {
     res.statusCode = 400
     res.end()
