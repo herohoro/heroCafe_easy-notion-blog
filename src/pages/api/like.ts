@@ -1,11 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import {
-  getPostBySlug,
-  incrementLikes,
-} from '../../lib/notion/client'
+import { getPostBySlug, incrementLikes } from '../../lib/notion/client'
 
-const ApiBlogSlug = async function(req: NextApiRequest, res: NextApiResponse) {
+const ApiBlogSlug = async function (req: NextApiRequest, res: NextApiResponse) {
+  res.setHeader('Content-Type', 'application/json')
   if (req.method !== 'PUT') {
     res.statusCode = 400
     res.end()
@@ -21,7 +19,7 @@ const ApiBlogSlug = async function(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    getPostBySlug(slug as string).then(post => {
+    getPostBySlug(slug as string).then((post) => {
       if (!post) {
         throw new Error(`post not found. slug: ${slug}`)
       }
