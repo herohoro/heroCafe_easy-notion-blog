@@ -30,6 +30,7 @@
 .fukiCard {
   position: relative;
   display: inline-block;
+  width: 80%;
 }
 .card,
 .fukiCard {
