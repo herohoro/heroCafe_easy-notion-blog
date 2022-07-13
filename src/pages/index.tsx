@@ -85,11 +85,14 @@ const RenderPage = ({ rankedPosts = [], tags = [], secPosts = [] }) => (
           notionに書き溜めた記録をブログっぽく公開していきながらポートフォリオも兼ねて発展させていきたいなーと思っています＼(^o^)／よろしくねー
         </p>
       </div>
-      <iframe
-        src="https://p5-blog.vercel.app/%E3%83%89%E3%83%83%E3%83%88/index.html"
-        width="100%"
-        height="200"
-      ></iframe>
+      <div className={SecStyles.pcode}>
+        <iframe
+          src="https://p5-blog.vercel.app/%E3%83%89%E3%83%83%E3%83%88/index.html"
+          width="100%"
+          height="100%"
+          scrolling="no"
+        ></iframe>
+      </div>
       <div className={SecStyles.grid}>
         <h3>\ 他のサイトへの記事投稿 /</h3>
         <p>
