@@ -74,7 +74,7 @@ const RenderPage = ({ rankedPosts = [], tags = [], secPosts = [] }) => (
         <p>
           わたしはへろほろと申します。
           <br />
-          便利なアイテムが好きで、notion歴もかれこれ半年程になりました。
+          便利なアイテムが好きで、notion歴もかれこれ1年程になりました。
           <br />
           エンジニアではありませんが、プログラミングは趣味でやっています。
           <br />
@@ -85,6 +85,11 @@ const RenderPage = ({ rankedPosts = [], tags = [], secPosts = [] }) => (
           notionに書き溜めた記録をブログっぽく公開していきながらポートフォリオも兼ねて発展させていきたいなーと思っています＼(^o^)／よろしくねー
         </p>
       </div>
+      <iframe
+        src="https://p5-blog.vercel.app/%E3%83%89%E3%83%83%E3%83%88/index.html"
+        width="100%"
+        height="200"
+      ></iframe>
       <div className={SecStyles.grid}>
         <h3>\ 他のサイトへの記事投稿 /</h3>
         <p>
@@ -111,12 +116,6 @@ const RenderPage = ({ rankedPosts = [], tags = [], secPosts = [] }) => (
           )
         })}
       </div>
-
-      {/* <iframe
-        src="https://dev.herohoro.com/posting"
-        width="100%"
-        height="600"
-      ></iframe> */}
     </div>
 
     <div className={styles.subContent}>
