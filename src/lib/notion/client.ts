@@ -577,7 +577,7 @@ export async function incrementLikes(post: Post) {
       Like: (post.Like || 0) + 1,
     },
   })
-  //アルパカ先生による確認指示
+
   console.log(result)
 
   if (!result) {
