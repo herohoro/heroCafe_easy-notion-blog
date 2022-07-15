@@ -73,7 +73,7 @@ const RenderPostsSpace = ({
             <p>
               24:00頃Twitterで課題に取り組む様子をつぶやきだします＼(^o^)／
               <br />
-              カードをクリックするとTwitterのスレッドへ飛ぶのでのぞいてみてね。
+              カードのタイトルをクリックするとTwitterのスレッドへ飛ぶのでのぞいてみてね。
             </p>
             <div className={SecStyles.grid}>
               {secPosts.map((secPost) => {
