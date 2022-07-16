@@ -578,8 +578,6 @@ export async function incrementLikes(post: Post) {
     },
   })
 
-  console.log(result)
-
   if (!result) {
     return null
   }
