@@ -6,6 +6,7 @@ const Code = dynamic(() => import('./notion-blocks/code'))
 const Embed = dynamic(() => import('./notion-blocks/embed'))
 const Bookmark = dynamic(() => import('./notion-blocks/bookmark'))
 const Video = dynamic(() => import('./notion-blocks/video'))
+const Equation = dynamic(() => import('./notion-blocks/equation'))
 
 import styles from '../styles/notion-block.module.css'
 
@@ -305,6 +306,8 @@ const NotionBlock = ({ block }) => {
     return <Embed block={block} />
   } else if (block.Type === 'bookmark' || block.Type === 'link_preview') {
     return <Bookmark block={block} />
+  } else if (block.Type === 'equation') {
+    return <Equation block={block} />
   } else if (block.Type === 'divider') {
     return <hr className={styles.divider} />
   } else if (block.Type === 'table') {
