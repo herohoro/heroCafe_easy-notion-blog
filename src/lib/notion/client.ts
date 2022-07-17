@@ -15,6 +15,7 @@ import {
   Embed,
   Video,
   Bookmark,
+  Equation,
   LinkPreview,
   Table,
   TableRow,
@@ -493,6 +494,13 @@ export async function getAllBlocksByBlockId(blockId: string) {
           }
 
           block.Bookmark = bookmark
+          break
+        case 'equation':
+          const equation: Equation = {
+            Expression: item.equation.expression,
+          }
+
+          block.Equation = equation
           break
         case 'link_preview':
           const linkPreview: LinkPreview = {

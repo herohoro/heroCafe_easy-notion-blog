@@ -29,6 +29,7 @@ export interface Block {
   Embed?: Embed
   Video?: Video
   Bookmark?: Bookmark
+  Equation?: Equation
   LinkPreview?: LinkPreview
   Table?: Table
   TableRow?: TableRow
@@ -112,6 +113,10 @@ export interface Embed {
 
 export interface Bookmark {
   Url: string
+}
+
+export interface Equation {
+  Expression: string
 }
 
 export interface LinkPreview {
