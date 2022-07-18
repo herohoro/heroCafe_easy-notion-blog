@@ -89,6 +89,7 @@
 .mainContent p {
   width: 70%;
   margin: auto;
+  min-height: 1.8rem;
 }
 
 @media (min-width: 1024px) {
