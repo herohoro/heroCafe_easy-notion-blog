@@ -14,8 +14,8 @@
   --geist-foreground: #000;
 
   --geist-success: rgb(15, 95, 244);
-  --bg-cleanness:rgba(88,73,51,0.6);
-  --fg-cleanness:rgb(255, 255, 255);
+  --bg-cleanness: rgba(88, 73, 51, 0.6);
+  --fg-cleanness: rgb(255, 255, 255);
   --radius: 4px;
 
   --font-sans: -apple-system, 'Zen Maru Gothic', 'Yomogi', 'Kiwi Maru',
@@ -269,6 +269,8 @@ ul {
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.8rem;
+  white-space: pre-wrap;
+  min-height: 1.8rem;
 }
 pre {
   margin: 0;
@@ -393,30 +395,30 @@ footer span a {
 
 /* sec-notion */
 
-.gray{
+.gray {
   background-color: lightgrey;
 }
- .brown{
+.brown {
   background-color: tan;
 }
-.orange{
+.orange {
   background-color: lightsalmon;
 }
-.yellow{
+.yellow {
   background-color: rgb(251, 251, 166);
 }
-.green{
+.green {
   background-color: #8fc5aa;
 }
-.blue{
+.blue {
   background-color: lightblue;
 }
-.purple{
+.purple {
   background-color: #c5aeda;
 }
-.pink{
+.pink {
   background-color: #e49ca5;
 }
-.red{
+.red {
   background-color: #ff7070;
 }
