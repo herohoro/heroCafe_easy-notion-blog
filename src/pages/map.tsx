@@ -9,7 +9,7 @@ import {
 } from '../components/blog-parts'
 
 import styles from '../styles/page.module.css'
-import SecStyles from '../styles/sec-notion.module.css'
+
 import {
   getPosts,
   getRankedPosts,
