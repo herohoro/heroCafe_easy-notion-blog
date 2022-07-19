@@ -4,7 +4,7 @@ import { BlockMath } from 'react-katex'
 const Equation = ({ block }) => {
   const equation = block.Equation.Expression
   return (
-    <div>
+    <div style={{ overflowX: 'auto' }}>
       <BlockMath math={equation} />
     </div>
   )
