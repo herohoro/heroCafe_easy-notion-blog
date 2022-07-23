@@ -6,12 +6,18 @@ const Code = dynamic(() => import('./notion-blocks/code'))
 const Embed = dynamic(() => import('./notion-blocks/embed'))
 const Bookmark = dynamic(() => import('./notion-blocks/bookmark'))
 const Video = dynamic(() => import('./notion-blocks/video'))
-const Equation = dynamic(() => import('./notion-blocks/equation'))
+const InlineEquation = dynamic(() => import('./notion-blocks/inline-equation'))
+const BlockEquation = dynamic(() => import('./notion-blocks/block-equation'))
 
 import styles from '../styles/notion-block.module.css'
 
 const RichText = ({ richText }) => {
-  let element = richText.Text.Content
+  let element
+  if (richText.Text) {
+    element = richText.Text.Content
+  } else if (richText.Equation) {
+    element = <InlineEquation equation={richText.Equation} />
+  }
 
   if (richText.Annotation.Bold) {
     element = <b>{element}</b>
@@ -300,6 +306,8 @@ const NotionBlock = ({ block }) => {
     return <Code block={block} />
   } else if (block.Type === 'quote') {
     return <Quote block={block} />
+  } else if (block.Type === 'equation') {
+    return <BlockEquation block={block} />
   } else if (block.Type === 'callout') {
     return <Callout block={block} />
   } else if (block.Type === 'embed') {
@@ -307,7 +315,7 @@ const NotionBlock = ({ block }) => {
   } else if (block.Type === 'bookmark' || block.Type === 'link_preview') {
     return <Bookmark block={block} />
   } else if (block.Type === 'equation') {
-    return <Equation block={block} />
+    return <BlockEquation block={block} />
   } else if (block.Type === 'divider') {
     return <hr className={styles.divider} />
   } else if (block.Type === 'table') {
