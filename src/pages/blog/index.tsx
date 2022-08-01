@@ -2,6 +2,7 @@ import DocumentHead from '../../components/document-head'
 import {
   BlogPostLink,
   BlogTagLink,
+  BlogCategoryLink,
   NextPageLink,
   NoContents,
   PostDate,
@@ -19,16 +20,18 @@ import {
   getFirstPost,
   getRankedPosts,
   getAllTags,
+  getAllCategorys,
 } from '../../lib/notion/client'
 import * as imageCache from '../../lib/notion/image-cache'
 import Image from 'next/image'
 
 export async function getStaticProps() {
-  const [posts, firstPost, rankedPosts, tags] = await Promise.all([
+  const [posts, firstPost, rankedPosts, tags, categorys] = await Promise.all([
     getPosts(),
     getFirstPost(),
     getRankedPosts(),
     getAllTags(),
+    getAllCategorys(),
   ])
 
   posts.forEach((p) => p.OGImage && imageCache.store(p.PageId, p.OGImage))
@@ -39,6 +42,7 @@ export async function getStaticProps() {
       firstPost,
       rankedPosts,
       tags,
+      categorys,
     },
     revalidate: 60,
   }
@@ -48,6 +52,7 @@ const RenderPosts = ({
   firstPost,
   rankedPosts = [],
   tags = [],
+  categorys = [],
 }) => {
   return (
     <div className={styles.container}>
@@ -87,6 +92,7 @@ const RenderPosts = ({
 
         <div className={styles.subContent}>
           <RssFeed />
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <TwitterTimeline />
@@ -97,6 +103,7 @@ const RenderPosts = ({
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
         </div>
         <div className={styles.endSection}>
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <TwitterTimeline />
         </div>
         <div className={styles.endSection}>

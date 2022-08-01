@@ -9,6 +9,7 @@ import { Block } from '../../lib/notion/interfaces'
 import {
   BlogPostLink,
   BlogTagLink,
+  BlogCategoryLink,
   NoContents,
   PostBody,
   PostDate,
@@ -33,6 +34,7 @@ import {
   getPostBySlug,
   getPostsByTag,
   getAllTags,
+  getAllCategorys,
   getAllBlocksByBlockId,
 } from '../../lib/notion/client'
 
@@ -49,19 +51,15 @@ export async function getStaticProps({ params: { slug } }) {
     }
   }
 
-  const [
-    blocks,
-    rankedPosts,
-    recentPosts,
-    tags,
-    sameTagPosts,
-  ] = await Promise.all([
-    getAllBlocksByBlockId(post.PageId),
-    getRankedPosts(),
-    getPosts(5),
-    getAllTags(),
-    getPostsByTag(post.Tags[0], 6),
-  ])
+  const [blocks, rankedPosts, recentPosts, tags, sameTagPosts, categorys] =
+    await Promise.all([
+      getAllBlocksByBlockId(post.PageId),
+      getRankedPosts(),
+      getPosts(5),
+      getAllTags(),
+      getPostsByTag(post.Tags[0], 6),
+      getAllCategorys(),
+    ])
 
   const fallback = {}
   fallback[slug] = blocks
@@ -75,6 +73,7 @@ export async function getStaticProps({ params: { slug } }) {
       tags,
       sameTagPosts: sameTagPosts.filter((p: Post) => p.Slug !== post.Slug),
       fallback,
+      categorys,
     },
     revalidate: 60,
   }
@@ -124,6 +123,7 @@ const RenderPost = ({
   sameTagPosts = [],
   tags = [],
   fallback,
+  categorys = [],
 }) => {
   const { data: blocks, error } = useSWR(
     includeExpiredImage(fallback[slug]) && slug,
@@ -182,6 +182,7 @@ const RenderPost = ({
 
         <div className={styles.subContent}>
           <RssFeed />
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <BlogPostLink
             heading="Posts in the same tag"
             posts={sameTagPosts}
@@ -218,6 +219,7 @@ const RenderPost = ({
             enableThumnail={true}
           />
           <div className={styles.inlineCenter}>
+            <BlogCategoryLink heading="Category List" categorys={categorys} />
             <NewPostList />
           </div>
         </div>

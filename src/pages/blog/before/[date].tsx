@@ -7,6 +7,7 @@ import DocumentHead from '../../../components/document-head'
 import {
   BlogPostLink,
   BlogTagLink,
+  BlogCategoryLink,
   NoContents,
   PostDate,
   PostExcerpt,
@@ -28,6 +29,7 @@ import {
   getPostsBefore,
   getFirstPost,
   getAllTags,
+  getAllCategorys,
 } from '../../../lib/notion/client'
 
 export async function getStaticProps({ params: { date } }) {
@@ -35,11 +37,12 @@ export async function getStaticProps({ params: { date } }) {
     return { notFound: true }
   }
 
-  const [posts, firstPost, rankedPosts, tags] = await Promise.all([
+  const [posts, firstPost, rankedPosts, tags, categorys] = await Promise.all([
     getPostsBefore(date, NUMBER_OF_POSTS_PER_PAGE),
     getFirstPost(),
     getRankedPosts(),
     getAllTags(),
+    getAllCategorys(),
   ])
 
   posts.forEach((p) => p.OGImage && imageCache.store(p.PageId, p.OGImage))
@@ -51,6 +54,7 @@ export async function getStaticProps({ params: { date } }) {
       firstPost,
       rankedPosts,
       tags,
+      categorys,
     },
     revalidate: 3600,
   }
@@ -73,6 +77,7 @@ const RenderPostsBeforeDate = ({
   rankedPosts = [],
   tags = [],
   redirect,
+  categorys = [],
 }) => {
   const router = useRouter()
 
@@ -155,6 +160,7 @@ const RenderPostsBeforeDate = ({
         </div>
         <div className={styles.subContent}>
           <RssFeed />
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <TwitterTimeline />

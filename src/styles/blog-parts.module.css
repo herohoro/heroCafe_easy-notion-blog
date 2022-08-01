@@ -328,11 +328,53 @@
 .blogPostLink > h3 {
   display: block;
 }
-.categoryList > li > a {
+.categoryNoList {
   display: block;
+  /* margin: 0 0 0.5rem 1em; */
+  /* background-color: #a897ac7e; */
+  /* padding: 0 0.5em; */
+  /* text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); */
+
+  margin: 0 0.7em 0.7rem 0;
+  width: 100%;
+  /* display: inline-block; */
+  font-size: 1em;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+  color: var(--fg);
+  text-shadow: 0 0 5px white;
+  padding: 10px;
+  background: -webkit-repeating-linear-gradient(
+    -45deg,
+    white white 3px,
+    #fc8b534b 3px,
+    #fc8b534b 7px
+  );
+  background: repeating-linear-gradient(
+    -45deg,
+    white,
+    white 3px,
+    #fc8b534b 3px,
+    #fc8b534b 7px /* #f7eb98 */
+  );
 }
+.categoryNoList:hover {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.categoryNoList > a {
+  font-weight: bold;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  display: block;
+  background: rgba(251, 251, 251, 0.656);
+}
+.categoryNoList > a:hover {
+  color: var(--hero-hover-fg);
+}
+
 .linkButton {
   display: block;
+  font-weight: bold;
+  text-shadow: 0 2px 5px rgba(248, 246, 157, 0.744);
 }
 @media (max-width: 600px) {
   .postTitle {

@@ -327,7 +327,7 @@ export const BlogCategoryLink = ({ heading, categorys }) => (
     <h3>{heading}</h3>
     <hr />
     <NoContents contents={categorys} />
-    <CategoryLinkList categorys={categorys} />
+    <CategoryLinkNoList categorys={categorys} />
   </div>
 )
 
@@ -419,14 +419,14 @@ export const TagLinkList = ({ tags }) => {
   )
 }
 
-export const CategoryLinkList = ({ categorys }) => {
+export const CategoryLinkNoList = ({ categorys }) => {
   if (!categorys || categorys.length === 0) return null
 
   return (
-    <ul className={styles.categoryList}>
+    <div>
       {categorys.map((category: string) => {
         return (
-          <li key={category}>
+          <div key={category} className={styles.categoryNoList}>
             <Link
               href="/blog/category/[category]"
               as={getCategoryLink(category)}
@@ -434,10 +434,10 @@ export const CategoryLinkList = ({ categorys }) => {
             >
               <a>{category}</a>
             </Link>
-          </li>
+          </div>
         )
       })}
-    </ul>
+    </div>
   )
 }
 
