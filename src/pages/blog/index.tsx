@@ -7,10 +7,11 @@ import {
   PostDate,
   PostExcerpt,
   PostTags,
+  PostCategory,
   PostTitle,
   PostThumbnail,
   TwitterTimeline,
-  RssFeed
+  RssFeed,
 } from '../../components/blog-parts'
 import styles from '../../styles/blog.module.css'
 import {
@@ -30,7 +31,7 @@ export async function getStaticProps() {
     getAllTags(),
   ])
 
-  posts.forEach(p => p.OGImage && imageCache.store(p.PageId, p.OGImage))
+  posts.forEach((p) => p.OGImage && imageCache.store(p.PageId, p.OGImage))
 
   return {
     props: {
@@ -65,10 +66,11 @@ const RenderPosts = ({
           </div>
           <NoContents contents={posts} />
           <div className={styles.mainGallery}>
-            {posts.map(post => {
+            {posts.map((post) => {
               return (
                 <div className={styles.post} key={post.Slug}>
                   <PostDate post={post} />
+                  <PostCategory post={post} />
                   <PostTitle post={post} />
                   <PostThumbnail post={post} />
 
@@ -84,7 +86,7 @@ const RenderPosts = ({
         </div>
 
         <div className={styles.subContent}>
-          <RssFeed/>
+          <RssFeed />
           <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <TwitterTimeline />

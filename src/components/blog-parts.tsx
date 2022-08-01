@@ -107,7 +107,11 @@ export const PostTags = ({ post }) => (
       ))}
   </div>
 )
-
+export const PostCategory = ({ post }) => (
+  <div className={`${post.CategoryColor}`}>
+    <p>{post.Category ? post.Category : ''}</p>
+  </div>
+)
 export const PostExcerpt = ({ post }) => (
   <div className={styles.postExcerpt}>
     <p>{post.Excerpt ? post.Excerpt : ''}</p>
