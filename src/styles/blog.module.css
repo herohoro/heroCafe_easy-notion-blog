@@ -102,7 +102,15 @@
   border-radius: 10px;
   background: #fefdfb;
 }
-
+.post > div:nth-child(2) {
+  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+}
+.post > div:nth-child(2) > p {
+  /* padding-left: 20px; */
+  line-height: 1.5;
+  text-align: center;
+  margin-bottom: 10px;
+}
 .post :global(p),
 .postSlug :global(p) {
   margin: 0.3rem 0;
@@ -167,7 +175,7 @@
 @media (min-width: 1024px) {
   .flexWraper {
     display: flex;
-    justify-content: center
+    justify-content: center;
   }
   .mainContent {
     width: 70%;
@@ -183,13 +191,13 @@
     width: 33%;
     padding: 0 3%;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     /* justify-content: space-between; */
     -webkit-flex-direction: column;
     align-items: center;
   }
-  .subContent > div{
-    width:100%;
+  .subContent > div {
+    width: 100%;
   }
   .postSlug {
     padding: 2% 5%;
