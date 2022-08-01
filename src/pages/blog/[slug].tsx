@@ -16,6 +16,7 @@ import {
   PostEditTimeStr,
   PostTitleSlug,
   PostTagsSlug,
+  PostCategorySlug,
   // PostThumbnailSlug,
   PostsNotFound,
   TwitterTimeline,
@@ -148,7 +149,11 @@ const RenderPost = ({
       <div className={styles.flexWraper}>
         <div className={styles.mainContent}>
           <div className={styles.postSlug}>
-            <PostDate post={post} />
+            <div>
+              <PostDate post={post} />
+              <PostCategorySlug post={post} />
+            </div>
+
             <PostTitleSlug post={post} enableLink={false} />
             {/* <PostThumbnailSlug post={post} /> */}
             <PostTagsSlug post={post} />

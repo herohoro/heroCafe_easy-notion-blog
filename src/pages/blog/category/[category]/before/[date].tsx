@@ -11,6 +11,7 @@ import {
   PostDate,
   PostExcerpt,
   PostTags,
+  PostCategory,
   PostTitle,
   PostsNotFound,
   PostThumbnail,
@@ -115,6 +116,7 @@ const RenderPostsByCategoryBeforeDate = ({
               return (
                 <div className={styles.post} key={post.Slug}>
                   <PostDate post={post} />
+                  <PostCategory post={post} />
                   <PostTitle post={post} />
                   <PostThumbnail post={post} />
                   <PostTags post={post} />

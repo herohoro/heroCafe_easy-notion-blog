@@ -370,7 +370,16 @@
 .categoryNoList > a:hover {
   color: var(--hero-hover-fg);
 }
-
+.categoryText:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+.categoryText {
+  text-align: end;
+  display: block;
+  padding-right: 10px;
+  color: var(--fg) !important;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
 .linkButton {
   display: block;
   font-weight: bold;

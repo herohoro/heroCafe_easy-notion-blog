@@ -102,11 +102,11 @@ export const PostCategorySlug = ({ post }) => (
     {post.Category && post.Category.length > 0 && (
       <Link
         href="/blog/category/[category]"
-        as={getCategoryLink(post.category)}
-        key={post.category}
+        as={getCategoryLink(post.Category)}
+        key={post.Category}
         passHref
       >
-        <a>{post.category}</a>
+        <a className={styles.categoryText}>{post.Category}</a>
       </Link>
     )}
   </div>
