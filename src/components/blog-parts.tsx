@@ -10,7 +10,9 @@ import {
   getDateStr,
   getEditTimeStr,
   getTagLink,
+  getCategoryLink,
   getTagBeforeLink,
+  getCategoryBeforeLink,
 } from '../lib/blog-helpers'
 import styles from '../styles/blog-parts.module.css'
 
@@ -95,6 +97,20 @@ export const PostTagsSlug = ({ post }) => (
       ))}
   </div>
 )
+export const PostCategorySlug = ({ post }) => (
+  <div className={`${post.CategoryColor}`}>
+    {post.Category && post.Category.length > 0 && (
+      <Link
+        href="/blog/category/[category]"
+        as={getCategoryLink(post.Category)}
+        key={post.Category}
+        passHref
+      >
+        <a className={styles.categoryText}>{post.Category}</a>
+      </Link>
+    )}
+  </div>
+)
 
 export const PostTags = ({ post }) => (
   <div className={styles.postTags}>
@@ -107,7 +123,18 @@ export const PostTags = ({ post }) => (
       ))}
   </div>
 )
-
+export const PostCategory = ({ post }) => (
+  <div className={`${post.CategoryColor}`}>
+    <Link
+      href="/blog/category/[category]"
+      as={getCategoryLink(post.Category)}
+      key={post.Category}
+      passHref
+    >
+      <a className={styles.linkButton}>{post.Category ? post.Category : ''}</a>
+    </Link>
+  </div>
+)
 export const PostExcerpt = ({ post }) => (
   <div className={styles.postExcerpt}>
     <p>{post.Excerpt ? post.Excerpt : ''}</p>
@@ -156,6 +183,37 @@ export const NextPageLink = ({ firstPost, posts, tag = '' }) => {
         as={
           tag
             ? getTagBeforeLink(tag, lastPost.Date)
+            : getBeforeLink(lastPost.Date)
+        }
+        passHref
+      >
+        <a className={styles.nextPageLink}>Next page ＞</a>
+      </Link>
+    </div>
+  )
+}
+
+export const NextPageLinkCategory = ({ firstPost, posts, category = '' }) => {
+  if (!firstPost) return null
+  if (posts.length === 0) return null
+
+  const lastPost = posts[posts.length - 1]
+
+  if (firstPost.Date === lastPost.Date) return null
+
+  return (
+    <div className={styles.nextContainer}>
+      <hr />
+
+      <Link
+        href={
+          category
+            ? '/blog/category/[category]/before/[date]'
+            : '/blog/before/[date]'
+        }
+        as={
+          category
+            ? getCategoryBeforeLink(category, lastPost.Date)
             : getBeforeLink(lastPost.Date)
         }
         passHref
@@ -264,6 +322,15 @@ export const BlogTagLink = ({ heading, tags, enableList = false }) => (
   </div>
 )
 
+export const BlogCategoryLink = ({ heading, categorys }) => (
+  <div className={styles.blogTagLink}>
+    <h3>{heading}</h3>
+    <hr />
+    <NoContents contents={categorys} />
+    <CategoryLinkNoList categorys={categorys} />
+  </div>
+)
+
 export const IndexBlogTagLink = ({ heading, tags }) => (
   <div className={styles.IndexblogTagLink}>
     <h3>{heading}</h3>
@@ -280,13 +347,13 @@ export const IndexBlogTagLink = ({ heading, tags }) => (
 //     <div className={styles.IndexblogTagLink} >
 //       <h3>{heading}</h3>
 //       <div>
-//     {tags.map(tag => {
+//     {tags.map(category => {
 //       return(
 
-//     <div key={tag}>
+//     <div key={category}>
 //     <NoContents contents={tags} />
-//     <Link  href="/blog/tag/[tag]" as={getTagLink(tag)} passHref >
-//       <a >{tag}</a>
+//     <Link  href="/blog/category/[category]" as={getTagLink(category)} passHref >
+//       <a >{category}</a>
 //      </Link>
 //      </div>
 //   )})}</div>
@@ -351,6 +418,29 @@ export const TagLinkList = ({ tags }) => {
     </ul>
   )
 }
+
+export const CategoryLinkNoList = ({ categorys }) => {
+  if (!categorys || categorys.length === 0) return null
+
+  return (
+    <div>
+      {categorys.map((category: string) => {
+        return (
+          <div key={category} className={styles.categoryNoList}>
+            <Link
+              href="/blog/category/[category]"
+              as={getCategoryLink(category)}
+              passHref
+            >
+              <a>{category}</a>
+            </Link>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export const TagLinkNoList = ({ tags }) => {
   if (!tags || tags.length === 0) return null
 

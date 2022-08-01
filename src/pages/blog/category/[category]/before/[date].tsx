@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-
-import { NUMBER_OF_POSTS_PER_PAGE } from '../../../lib/notion/server-constants'
-import DocumentHead from '../../../components/document-head'
+import { getBeforeLink } from '../../../../../lib/blog-helpers'
+import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../../lib/notion/server-constants'
+import DocumentHead from '../../../../../components/document-head'
 import {
   BlogPostLink,
-  BlogTagLink,
   BlogCategoryLink,
   NoContents,
   PostDate,
@@ -17,35 +16,47 @@ import {
   PostsNotFound,
   PostThumbnail,
   TwitterTimeline,
-  RssFeed,
-} from '../../../components/blog-parts'
-import stylesParts from '../../../styles/blog-parts.module.css'
-import styles from '../../../styles/blog.module.css'
-import { getBeforeLink } from '../../../lib/blog-helpers'
-import * as imageCache from '../../../lib/notion/image-cache'
+  //   NextPageLinkCategory,
+} from '../../../../../components/blog-parts'
+
 import {
   getPosts,
   getRankedPosts,
-  getPostsBefore,
-  getFirstPost,
-  getAllTags,
+  getPostsByCategoryBefore,
+  getFirstPostByCategory,
   getAllCategorys,
-} from '../../../lib/notion/client'
+} from '../../../../../lib/notion/client'
 
-export async function getStaticProps({ params: { date } }) {
+import stylesParts from '../../../../../styles/blog-parts.module.css'
+import styles from '../../../../../styles/blog.module.css'
+
+export async function getStaticProps({ params: { category, date } }) {
   if (!Date.parse(date) || !/\d{4}-\d{2}-\d{2}/.test(date)) {
     return { notFound: true }
   }
 
-  const [posts, firstPost, rankedPosts, tags, categorys] = await Promise.all([
-    getPostsBefore(date, NUMBER_OF_POSTS_PER_PAGE),
-    getFirstPost(),
+  const posts = await getPostsByCategoryBefore(
+    category,
+    date,
+    NUMBER_OF_POSTS_PER_PAGE
+  )
+
+  if (posts.length === 0) {
+    console.log(`Failed to find posts for tag: ${category}`)
+    return {
+      props: {
+        redirect: '/blog',
+      },
+      revalidate: 30,
+    }
+  }
+
+  const [firstPost, rankedPosts, recentPosts, categorys] = await Promise.all([
+    getFirstPostByCategory(category),
     getRankedPosts(),
-    getAllTags(),
+    getPosts(5),
     getAllCategorys(),
   ])
-
-  posts.forEach((p) => p.OGImage && imageCache.store(p.PageId, p.OGImage))
 
   return {
     props: {
@@ -53,36 +64,35 @@ export async function getStaticProps({ params: { date } }) {
       posts,
       firstPost,
       rankedPosts,
-      tags,
+      recentPosts,
       categorys,
+      category,
     },
     revalidate: 3600,
   }
 }
 
 export async function getStaticPaths() {
-  const posts = await getPosts()
-  const path = getBeforeLink(posts[posts.length - 1].Date)
-
   return {
-    paths: [path],
+    paths: [],
     fallback: 'blocking',
   }
 }
 
-const RenderPostsBeforeDate = ({
+const RenderPostsByCategoryBeforeDate = ({
   date,
   posts = [],
   firstPost,
   rankedPosts = [],
-  tags = [],
-  redirect,
+  recentPosts = [],
   categorys = [],
+  category,
+  redirect,
 }) => {
   const router = useRouter()
 
   useEffect(() => {
-    if (redirect && !posts) {
+    if (redirect && posts.length === 0) {
       router.replace(redirect)
     }
   }, [router, redirect, posts])
@@ -93,13 +103,12 @@ const RenderPostsBeforeDate = ({
 
   return (
     <div className={styles.container}>
+      <DocumentHead description={`Posts in ${category} before ${date}`} />
       <div className={styles.flexWraper}>
         <div className={styles.mainContent}>
-          <DocumentHead description={`Post before ${date}`} />
           <header className={styles.mainTop}>
-            <h2>Posts before {date}</h2>
+            <h2>{category}</h2>
           </header>
-
           <div className={styles.mainGallery}>
             <NoContents contents={posts} />
 
@@ -116,9 +125,12 @@ const RenderPostsBeforeDate = ({
               )
             })}
           </div>
-
           <footer>
-            {/* <NextPageLink firstPost={firstPost} posts={posts} /> */}
+            {/* <NextPageLinkCategory
+              firstPost={firstPost}
+              posts={posts}
+              category={category}
+            /> */}
             {!!firstPost &&
               posts.length > 0 &&
               firstPost.Date !== posts[posts.length - 1].Date && (
@@ -158,11 +170,11 @@ const RenderPostsBeforeDate = ({
               )}
           </footer>
         </div>
+
         <div className={styles.subContent}>
-          <RssFeed />
           <BlogCategoryLink heading="Category List" categorys={categorys} />
-          <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
+          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
           <TwitterTimeline />
         </div>
       </div>
@@ -171,14 +183,15 @@ const RenderPostsBeforeDate = ({
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
         </div>
         <div className={styles.endSection}>
-          <TwitterTimeline />
+          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
         </div>
         <div className={styles.endSection}>
-          <BlogTagLink heading="Tag List" tags={tags} />
+          <BlogCategoryLink heading="Tag List" categorys={categorys} />
+          <TwitterTimeline />
         </div>
       </div>
     </div>
   )
 }
 
-export default RenderPostsBeforeDate
+export default RenderPostsByCategoryBeforeDate

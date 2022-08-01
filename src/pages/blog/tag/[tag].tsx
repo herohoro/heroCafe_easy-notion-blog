@@ -4,17 +4,19 @@ import { NUMBER_OF_POSTS_PER_PAGE } from '../../../lib/notion/server-constants'
 import DocumentHead from '../../../components/document-head'
 import {
   BlogPostLink,
+  BlogCategoryLink,
   NextPageLink,
   BlogTagLink,
   NoContents,
   PostDate,
   PostExcerpt,
   PostTags,
+  PostCategory,
   PostTitle,
   PostsNotFound,
   PostThumbnail,
   TwitterTimeline,
-  RssFeed
+  RssFeed,
 } from '../../../components/blog-parts'
 import styles from '../../../styles/blog.module.css'
 import { getTagLink } from '../../../lib/blog-helpers'
@@ -25,18 +27,21 @@ import {
   getPostsByTag,
   getFirstPostByTag,
   getAllTags,
+  getAllCategorys,
 } from '../../../lib/notion/client'
 import * as imageCache from '../../../lib/notion/image-cache'
 
 export async function getStaticProps({ params: { tag } }) {
   const posts = await getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE)
 
-  const [firstPost, rankedPosts, recentPosts, tags] = await Promise.all([
-    getFirstPostByTag(tag),
-    getRankedPosts(),
-    getPosts(5),
-    getAllTags(),
-  ])
+  const [firstPost, rankedPosts, recentPosts, tags, categorys] =
+    await Promise.all([
+      getFirstPostByTag(tag),
+      getRankedPosts(),
+      getPosts(5),
+      getAllTags(),
+      getAllCategorys(),
+    ])
 
   if (posts.length === 0) {
     console.log(`Failed to find posts for tag: ${tag}`)
@@ -48,7 +53,7 @@ export async function getStaticProps({ params: { tag } }) {
     }
   }
 
-  posts.forEach(p => p.OGImage && imageCache.store(p.PageId, p.OGImage))
+  posts.forEach((p) => p.OGImage && imageCache.store(p.PageId, p.OGImage))
 
   return {
     props: {
@@ -58,6 +63,7 @@ export async function getStaticProps({ params: { tag } }) {
       recentPosts,
       tags,
       tag,
+      categorys,
     },
     revalidate: 60,
   }
@@ -67,7 +73,7 @@ export async function getStaticPaths() {
   const tags = await getAllTags()
 
   return {
-    paths: tags.map(tag => getTagLink(tag)),
+    paths: tags.map((tag) => getTagLink(tag)),
     fallback: 'blocking',
   }
 }
@@ -80,6 +86,7 @@ const RenderPostsByTags = ({
   recentPosts = [],
   tags = [],
   redirect,
+  categorys = [],
 }) => {
   const router = useRouter()
 
@@ -104,10 +111,11 @@ const RenderPostsByTags = ({
           <div className={styles.mainGallery}>
             <NoContents contents={posts} />
 
-            {posts.map(post => {
+            {posts.map((post) => {
               return (
                 <div className={styles.post} key={post.Slug}>
                   <PostDate post={post} />
+                  <PostCategory post={post} />
                   <PostTitle post={post} />
                   <PostThumbnail post={post} />
                   <PostTags post={post} />
@@ -146,7 +154,8 @@ const RenderPostsByTags = ({
         </div>
 
         <div className={styles.subContent}>
-          <RssFeed/>
+          <RssFeed />
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <BlogPostLink heading="Latest Posts" posts={recentPosts} />

@@ -1,8 +1,17 @@
 import DocumentHead from '../../components/document-head'
 import Link from 'next/link'
-import { BlogTagLink, TwitterTimeline } from '../../components/blog-parts'
+import {
+  BlogTagLink,
+  BlogCategoryLink,
+  TwitterTimeline,
+} from '../../components/blog-parts'
 import styles from '../../styles/blog.module.css'
-import { getPosts, getFirstPost, getAllTags } from '../../lib/notion/client'
+import {
+  getPosts,
+  getFirstPost,
+  getAllTags,
+  getAllCategorys,
+} from '../../lib/notion/client'
 import { getEditTimeStr } from '../../lib/blog-helpers'
 import SecStyles from '../../styles/sec-notion.module.css'
 import {
@@ -15,6 +24,7 @@ export async function getStaticProps() {
   const posts = await getPosts()
   const firstPost = await getFirstPost()
   const tags = await getAllTags()
+  const categorys = await getAllCategorys()
   const secPosts = await getAllSecShinyaPosts()
   const secMessages = await getSecShinyaMessage()
 
@@ -25,6 +35,7 @@ export async function getStaticProps() {
       tags,
       secPosts,
       secMessages,
+      categorys,
     },
     revalidate: 60,
   }
@@ -37,6 +48,7 @@ const RenderPostsSpace = ({
   tags = [],
   secPosts = [],
   secMessages = [],
+  categorys = [],
 }) => {
   return (
     <div className={styles.container}>
@@ -135,8 +147,8 @@ const RenderPostsSpace = ({
         </div>
 
         <div className={styles.subContent}>
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <BlogTagLink heading="Tag List" tags={tags} />
-
           <TwitterTimeline />
         </div>
       </div>
