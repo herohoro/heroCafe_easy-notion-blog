@@ -9,6 +9,8 @@ export interface Post {
   OGImage: string
   Rank: number
   Like: number
+  Category: string
+  CategoryColor: string
 }
 
 export interface Block {

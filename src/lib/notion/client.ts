@@ -657,6 +657,8 @@ function _buildPost(data) {
       prop.OGImage.files.length > 0 ? prop.OGImage.files[0].file.url : null,
     Rank: prop.Rank.number,
     Like: prop.Like.number,
+    Category: prop.Category.select.name,
+    CategoryColor: prop.Category.select.color,
   }
 
   return post
