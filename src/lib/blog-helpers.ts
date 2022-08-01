@@ -6,12 +6,20 @@ export const getTagLink = (tag: string) => {
   return `/blog/tag/${encodeURIComponent(tag)}`
 }
 
+export const getCategoryLink = (category: string) => {
+  return `/blog/category/${encodeURIComponent(category)}`
+}
+
 export const getBeforeLink = (date: string) => {
   return `/blog/before/${date}`
 }
 
 export const getTagBeforeLink = (tag: string, date: string) => {
   return `/blog/tag/${encodeURIComponent(tag)}/before/${date}`
+}
+
+export const getCategoryBeforeLink = (category: string, date: string) => {
+  return `/blog/category/${encodeURIComponent(category)}/before/${date}`
 }
 
 export const getDateStr = (date: string) => {

@@ -6,41 +6,42 @@ import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../../lib/notion/server-const
 import DocumentHead from '../../../../../components/document-head'
 import {
   BlogPostLink,
-  BlogTagLink,
-  NextPageLink,
+  BlogCategoryLink,
   NoContents,
   PostDate,
   PostExcerpt,
   PostTags,
-  PostCategory,
   PostTitle,
   PostsNotFound,
   PostThumbnail,
-  //   ReadMoreLink,
   TwitterTimeline,
+  NextPageLinkCategory,
 } from '../../../../../components/blog-parts'
-// import styles from '../../../../../styles/blog.module.css'
 
 import {
   getPosts,
   getRankedPosts,
-  getPostsByTagBefore,
-  getFirstPostByTag,
-  getAllTags,
+  getPostsByCategoryBefore,
+  getFirstPostByCategory,
+  getAllCategorys,
 } from '../../../../../lib/notion/client'
 
 import stylesParts from '../../../../../styles/blog-parts.module.css'
 import styles from '../../../../../styles/blog.module.css'
 
-export async function getStaticProps({ params: { tag, date } }) {
+export async function getStaticProps({ params: { category, date } }) {
   if (!Date.parse(date) || !/\d{4}-\d{2}-\d{2}/.test(date)) {
     return { notFound: true }
   }
 
-  const posts = await getPostsByTagBefore(tag, date, NUMBER_OF_POSTS_PER_PAGE)
+  const posts = await getPostsByCategoryBefore(
+    category,
+    date,
+    NUMBER_OF_POSTS_PER_PAGE
+  )
 
   if (posts.length === 0) {
-    console.log(`Failed to find posts for tag: ${tag}`)
+    console.log(`Failed to find posts for tag: ${category}`)
     return {
       props: {
         redirect: '/blog',
@@ -49,11 +50,11 @@ export async function getStaticProps({ params: { tag, date } }) {
     }
   }
 
-  const [firstPost, rankedPosts, recentPosts, tags] = await Promise.all([
-    getFirstPostByTag(tag),
+  const [firstPost, rankedPosts, recentPosts, categorys] = await Promise.all([
+    getFirstPostByCategory(category),
     getRankedPosts(),
     getPosts(5),
-    getAllTags(),
+    getAllCategorys(),
   ])
 
   return {
@@ -63,8 +64,8 @@ export async function getStaticProps({ params: { tag, date } }) {
       firstPost,
       rankedPosts,
       recentPosts,
-      tags,
-      tag,
+      categorys,
+      category,
     },
     revalidate: 3600,
   }
@@ -77,14 +78,14 @@ export async function getStaticPaths() {
   }
 }
 
-const RenderPostsByTagBeforeDate = ({
+const RenderPostsByCategoryBeforeDate = ({
   date,
   posts = [],
   firstPost,
   rankedPosts = [],
   recentPosts = [],
-  tags = [],
-  tag,
+  categorys = [],
+  category,
   redirect,
 }) => {
   const router = useRouter()
@@ -101,11 +102,11 @@ const RenderPostsByTagBeforeDate = ({
 
   return (
     <div className={styles.container}>
-      <DocumentHead description={`Posts in ${tag} before ${date}`} />
+      <DocumentHead description={`Posts in ${category} before ${date}`} />
       <div className={styles.flexWraper}>
         <div className={styles.mainContent}>
           <header className={styles.mainTop}>
-            <h2>{tag}</h2>
+            <h2>{category}</h2>
           </header>
           <div className={styles.mainGallery}>
             <NoContents contents={posts} />
@@ -114,7 +115,6 @@ const RenderPostsByTagBeforeDate = ({
               return (
                 <div className={styles.post} key={post.Slug}>
                   <PostDate post={post} />
-                  <PostCategory post={post} />
                   <PostTitle post={post} />
                   <PostThumbnail post={post} />
                   <PostTags post={post} />
@@ -124,7 +124,11 @@ const RenderPostsByTagBeforeDate = ({
             })}
           </div>
           <footer>
-            {/* <NextPageLink firstPost={firstPost} posts={posts} tag={tag} /> */}
+            {/* <NextPageLinkCategory
+              firstPost={firstPost}
+              posts={posts}
+              category={category}
+            /> */}
             {!!firstPost &&
               posts.length > 0 &&
               firstPost.Date !== posts[posts.length - 1].Date && (
@@ -148,30 +152,6 @@ const RenderPostsByTagBeforeDate = ({
                   </div>
                 </div>
               )}
-
-            {/* {!!firstPost &&
-              posts.length > 0 &&
-              firstPost.Date !== posts[posts.length - 1].Date && (
-                <div className={stylesParts.nextContainer}>
-                  <hr />
-                  <div className={stylesParts.buttonSubContainer}>
-                    <a
-                      className={stylesParts.backButton}
-                      onClick={() => router.back()}
-                    >
-                      {' '}
-                      ＜ Back{' '}
-                    </a>
-                    <Link
-                      href="/blog/before/[date]"
-                      as={getBeforeLink(posts[posts.length - 1].Date)}
-                      passHref
-                    >
-                      <a className={stylesParts.nextButton}>Next ＞</a>
-                    </Link>
-                  </div>
-                </div>
-              )} */}
 
             {!!firstPost &&
               posts.length > 0 &&
@@ -190,10 +170,7 @@ const RenderPostsByTagBeforeDate = ({
         </div>
 
         <div className={styles.subContent}>
-          {/* <BlogPostLink heading="Recommended" posts={rankedPosts} />
-          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
-          <BlogTagLink heading="Categories" tags={tags} /> */}
-          <BlogTagLink heading="Tag List" tags={tags} />
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <BlogPostLink heading="Latest Posts" posts={recentPosts} />
           <TwitterTimeline />
@@ -207,7 +184,7 @@ const RenderPostsByTagBeforeDate = ({
           <BlogPostLink heading="Latest Posts" posts={recentPosts} />
         </div>
         <div className={styles.endSection}>
-          <BlogTagLink heading="Tag List" tags={tags} />
+          <BlogCategoryLink heading="Tag List" categorys={categorys} />
           <TwitterTimeline />
         </div>
       </div>
@@ -215,4 +192,4 @@ const RenderPostsByTagBeforeDate = ({
   )
 }
 
-export default RenderPostsByTagBeforeDate
+export default RenderPostsByCategoryBeforeDate

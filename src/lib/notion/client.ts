@@ -272,6 +272,44 @@ export async function getPostsByTag(tag: string, pageSize = 100) {
     .map((item) => _buildPost(item))
 }
 
+export async function getPostsByCategory(category: string, pageSize = 100) {
+  if (blogIndexCache.exists()) {
+    const allPosts = await getAllPosts()
+    return (
+      allPosts
+        // .filter((post) => post.Category.includes(category))
+        .filter((post) => post.Category === category)
+        .slice(0, pageSize)
+    )
+  }
+
+  const params = {
+    database_id: DATABASE_ID,
+    filter: _buildFilter([
+      {
+        property: 'Category',
+        select: {
+          equals: category,
+        },
+      },
+    ]),
+    sorts: [
+      {
+        property: 'Date',
+        timestamp: 'created_time',
+        direction: 'descending',
+      },
+    ],
+    page_size: pageSize,
+  }
+
+  const data = await client.databases.query(params)
+
+  return data.results
+    .filter((item) => _validPost(item))
+    .map((item) => _buildPost(item))
+}
+
 export async function getPostsByTagBefore(
   tag: string,
   date: string,
@@ -319,6 +357,56 @@ export async function getPostsByTagBefore(
     .map((item) => _buildPost(item))
 }
 
+export async function getPostsByCategoryBefore(
+  category: string,
+  date: string,
+  pageSize = 100
+) {
+  if (blogIndexCache.exists()) {
+    const allPosts = await getAllPosts()
+    return allPosts
+      .filter((post) => {
+        return (
+          post.Category.includes(category) &&
+          new Date(post.Date) < new Date(date)
+        )
+      })
+      .slice(0, pageSize)
+  }
+
+  const params = {
+    database_id: DATABASE_ID,
+    filter: _buildFilter([
+      {
+        property: 'Category',
+        select: {
+          equals: category,
+        },
+      },
+      {
+        property: 'Date',
+        date: {
+          before: date,
+        },
+      },
+    ]),
+    sorts: [
+      {
+        property: 'Date',
+        timestamp: 'created_time',
+        direction: 'descending',
+      },
+    ],
+    page_size: pageSize,
+  }
+
+  const data = await client.databases.query(params)
+
+  return data.results
+    .filter((item) => _validPost(item))
+    .map((item) => _buildPost(item))
+}
+
 export async function getFirstPostByTag(tag: string) {
   if (blogIndexCache.exists()) {
     const allPosts = await getAllPosts()
@@ -333,6 +421,48 @@ export async function getFirstPostByTag(tag: string) {
         property: 'Tags',
         multi_select: {
           contains: tag,
+        },
+      },
+    ]),
+    sorts: [
+      {
+        property: 'Date',
+        timestamp: 'created_time',
+        direction: 'ascending',
+      },
+    ],
+    page_size: 1,
+  }
+
+  const data = await client.databases.query(params)
+
+  if (!data.results.length) {
+    return null
+  }
+
+  if (!_validPost(data.results[0])) {
+    return null
+  }
+
+  return _buildPost(data.results[0])
+}
+
+export async function getFirstPostByCategory(category: string) {
+  if (blogIndexCache.exists()) {
+    const allPosts = await getAllPosts()
+    const sameCategoryPosts = allPosts.filter((post) =>
+      post.Category.includes(category)
+    )
+    return sameCategoryPosts[sameCategoryPosts.length - 1]
+  }
+
+  const params = {
+    database_id: DATABASE_ID,
+    filter: _buildFilter([
+      {
+        property: 'Category',
+        select: {
+          equals: category,
         },
       },
     ]),
@@ -574,6 +704,19 @@ export async function getAllTags() {
     database_id: DATABASE_ID,
   })
   return data.properties.Tags.multi_select.options
+    .map((option) => option.name)
+    .sort()
+}
+export async function getAllCategorys() {
+  if (blogIndexCache.exists()) {
+    const allPosts = await getAllPosts()
+    return [...new Set(allPosts.flatMap((post) => post.Category))].sort()
+  }
+
+  const data = await client.databases.retrieve({
+    database_id: DATABASE_ID,
+  })
+  return data.properties.Category.select.options
     .map((option) => option.name)
     .sort()
 }

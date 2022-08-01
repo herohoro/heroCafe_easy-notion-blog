@@ -285,7 +285,7 @@
   position: sticky;
   position: -webkit-sticky;
   right: auto;
-  bottom:10px;
+  bottom: 10px;
   /* z-index: 1; */
 }
 .indexList a:hover {
@@ -328,7 +328,12 @@
 .blogPostLink > h3 {
   display: block;
 }
-
+.categoryList > li > a {
+  display: block;
+}
+.linkButton {
+  display: block;
+}
 @media (max-width: 600px) {
   .postTitle {
     font-size: 1.2rem;
@@ -405,7 +410,6 @@
     background: #333;
   }
 
-  
   .thumbnail {
     width: 23vw;
     height: calc(23vw * 0.53);
