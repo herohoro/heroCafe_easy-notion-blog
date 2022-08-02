@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
-import { getBeforeLink } from '../../../../../lib/blog-helpers'
+
 import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../../lib/notion/server-constants'
 import DocumentHead from '../../../../../components/document-head'
 import {

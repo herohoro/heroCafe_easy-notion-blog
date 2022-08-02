@@ -57,7 +57,7 @@ const RenderPage = ({
             return (
               <div className={styles.tagMain}>
                 <Link href="/blog/tag/[tag]" as={getTagLink(tag)} passHref>
-                  <p>easy-notion-blog's {tag}</p>
+                  <p>easy-notion-blog&apos; s {tag}</p>
                 </Link>
               </div>
             )
