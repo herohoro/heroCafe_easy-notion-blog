@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
-import { getBeforeLink } from '../../../../../lib/blog-helpers'
 import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../../lib/notion/server-constants'
 import DocumentHead from '../../../../../components/document-head'
 import {
@@ -16,7 +14,8 @@ import {
   PostsNotFound,
   PostThumbnail,
   TwitterTimeline,
-  //   NextPageLinkCategory,
+  NextBackPageLinkCategory,
+  BackPageLink,
 } from '../../../../../components/blog-parts'
 
 import {
@@ -27,7 +26,6 @@ import {
   getAllCategorys,
 } from '../../../../../lib/notion/client'
 
-import stylesParts from '../../../../../styles/blog-parts.module.css'
 import styles from '../../../../../styles/blog.module.css'
 
 export async function getStaticProps({ params: { category, date } }) {
@@ -125,49 +123,14 @@ const RenderPostsByCategoryBeforeDate = ({
               )
             })}
           </div>
+
           <footer>
-            {/* <NextPageLinkCategory
+            <NextBackPageLinkCategory
               firstPost={firstPost}
               posts={posts}
               category={category}
-            /> */}
-            {!!firstPost &&
-              posts.length > 0 &&
-              firstPost.Date !== posts[posts.length - 1].Date && (
-                <div className={stylesParts.nextContainer}>
-                  <hr />
-                  <div className={stylesParts.buttonSubContainer}>
-                    <a
-                      className={stylesParts.backButton}
-                      onClick={() => router.back()}
-                    >
-                      {' '}
-                      ＜ Back{' '}
-                    </a>
-                    <Link
-                      href="/blog/before/[date]"
-                      as={getBeforeLink(posts[posts.length - 1].Date)}
-                      passHref
-                    >
-                      <a className={stylesParts.nextButton}>Next ＞</a>
-                    </Link>
-                  </div>
-                </div>
-              )}
-
-            {!!firstPost &&
-              posts.length > 0 &&
-              firstPost.Date == posts[posts.length - 1].Date && (
-                <div className={stylesParts.nextContainer}>
-                  <hr />
-                  <a
-                    className={stylesParts.backButton}
-                    onClick={() => router.back()}
-                  >
-                    ＜ Back
-                  </a>
-                </div>
-              )}
+            />
+            <BackPageLink firstPost={firstPost} posts={posts} />
           </footer>
         </div>
 
