@@ -6,6 +6,7 @@ import {
   BlogPostLink,
   BlogTagLink,
   TwitterTimeline,
+  BlogCategoryLink,
 } from '../components/blog-parts'
 
 import styles from '../styles/page.module.css'
@@ -15,6 +16,7 @@ import {
   getRankedPosts,
   getAllTags,
   getAllBlocksByBlockId,
+  getAllCategorys,
 } from '../lib/notion/client'
 
 import { MAP_PAGE_ID } from '../lib/notion/server-constants'
@@ -26,6 +28,7 @@ export async function getStaticProps() {
   const posts = await getPosts()
   const rankedPosts = await getRankedPosts()
   const tags = await getAllTags()
+  const categorys = await getAllCategorys()
 
   return {
     props: {
@@ -33,27 +36,28 @@ export async function getStaticProps() {
       posts,
       rankedPosts,
       tags,
+      categorys,
     },
     revalidate: 60,
   }
 }
 
-const RenderPage = ({ blocks, rankedPosts = [], tags = [] }) => (
+const RenderPage = ({
+  blocks,
+  rankedPosts = [],
+  tags = [],
+  categorys = [],
+}) => (
   <div className={styles.container}>
     <DocumentHead />
     <div className={styles.mainContent}>
       <div className={styles.flexTagsMain}>
         {tags.map((tag) => {
-          if (
-            tag === '04_パワーアップ計画' ||
-            tag === '02_ブログ改造日記' ||
-            tag === '01_よくある質問' ||
-            tag === '03_作業ページ改造'
-          ) {
+          if (tag === 'README' || tag === 'Q&A') {
             return (
               <div className={styles.tagMain}>
                 <Link href="/blog/tag/[tag]" as={getTagLink(tag)} passHref>
-                  <p>{tag}</p>
+                  <p>easy-notion-blog&apos; s {tag}</p>
                 </Link>
               </div>
             )
@@ -61,6 +65,7 @@ const RenderPage = ({ blocks, rankedPosts = [], tags = [] }) => (
             return null
           }
         })}
+
         {/* 奇数だからお休み */}
         {/* <div className={styles.moreSearch}>
           <Link href="/blog" passHref>
@@ -81,6 +86,7 @@ const RenderPage = ({ blocks, rankedPosts = [], tags = [] }) => (
     </div>
 
     <div className={styles.subContent}>
+      <BlogCategoryLink heading="Category List" categorys={categorys} />
       <h3>Setup</h3>
       <hr />
       <ul>
