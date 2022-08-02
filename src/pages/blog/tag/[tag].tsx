@@ -126,30 +126,6 @@ const RenderPostsByTags = ({
           </div>
           <footer>
             <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
-
-            {/* {!!firstPost &&
-              posts.length > 0 &&
-              firstPost.Date !== posts[posts.length - 1].Date && (
-                <div className={stylesParts.nextContainer}>
-                  <hr />
-                  <div className={stylesParts.buttonSubContainer}>
-                    <a
-                      className={stylesParts.backButton}
-                      onClick={() => router.back()}
-                    >
-                      {' '}
-                      ＜ Back{' '}
-                    </a>
-                    <Link
-                      href="/blog/before/[date]"
-                      as={getBeforeLink(posts[posts.length - 1].Date)}
-                      passHref
-                    >
-                      <a className={stylesParts.nextButton}>Next ＞</a>
-                    </Link>
-                  </div>
-                </div>
-              )} */}
           </footer>
         </div>
 
@@ -167,6 +143,7 @@ const RenderPostsByTags = ({
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
         </div>
         <div className={styles.endSection}>
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <BlogPostLink heading="Latest Posts" posts={recentPosts} />
         </div>
         <div className={styles.endSection}>

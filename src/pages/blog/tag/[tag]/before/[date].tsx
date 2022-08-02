@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
-import { getBeforeLink } from '../../../../../lib/blog-helpers'
+
 import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../../lib/notion/server-constants'
 import DocumentHead from '../../../../../components/document-head'
 import {
   BlogPostLink,
   BlogTagLink,
   BlogCategoryLink,
-  // NextPageLink,
+  NextBackPageLinkTags,
+  BackPageLink,
   NoContents,
   PostDate,
   PostExcerpt,
@@ -31,7 +31,6 @@ import {
   getAllCategorys,
 } from '../../../../../lib/notion/client'
 
-import stylesParts from '../../../../../styles/blog-parts.module.css'
 import styles from '../../../../../styles/blog.module.css'
 
 export async function getStaticProps({ params: { tag, date } }) {
@@ -129,76 +128,18 @@ const RenderPostsByTagBeforeDate = ({
               )
             })}
           </div>
+
           <footer>
-            {/* <NextPageLink firstPost={firstPost} posts={posts} tag={tag} /> */}
-            {!!firstPost &&
-              posts.length > 0 &&
-              firstPost.Date !== posts[posts.length - 1].Date && (
-                <div className={stylesParts.nextContainer}>
-                  <hr />
-                  <div className={stylesParts.buttonSubContainer}>
-                    <a
-                      className={stylesParts.backButton}
-                      onClick={() => router.back()}
-                    >
-                      {' '}
-                      ＜ Back{' '}
-                    </a>
-                    <Link
-                      href="/blog/before/[date]"
-                      as={getBeforeLink(posts[posts.length - 1].Date)}
-                      passHref
-                    >
-                      <a className={stylesParts.nextButton}>Next ＞</a>
-                    </Link>
-                  </div>
-                </div>
-              )}
-
-            {/* {!!firstPost &&
-              posts.length > 0 &&
-              firstPost.Date !== posts[posts.length - 1].Date && (
-                <div className={stylesParts.nextContainer}>
-                  <hr />
-                  <div className={stylesParts.buttonSubContainer}>
-                    <a
-                      className={stylesParts.backButton}
-                      onClick={() => router.back()}
-                    >
-                      {' '}
-                      ＜ Back{' '}
-                    </a>
-                    <Link
-                      href="/blog/before/[date]"
-                      as={getBeforeLink(posts[posts.length - 1].Date)}
-                      passHref
-                    >
-                      <a className={stylesParts.nextButton}>Next ＞</a>
-                    </Link>
-                  </div>
-                </div>
-              )} */}
-
-            {!!firstPost &&
-              posts.length > 0 &&
-              firstPost.Date == posts[posts.length - 1].Date && (
-                <div className={stylesParts.nextContainer}>
-                  <hr />
-                  <a
-                    className={stylesParts.backButton}
-                    onClick={() => router.back()}
-                  >
-                    ＜ Back
-                  </a>
-                </div>
-              )}
+            <NextBackPageLinkTags
+              firstPost={firstPost}
+              posts={posts}
+              tag={tag}
+            />
+            <BackPageLink firstPost={firstPost} posts={posts} />
           </footer>
         </div>
 
         <div className={styles.subContent}>
-          {/* <BlogPostLink heading="Recommended" posts={rankedPosts} />
-          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
-          <BlogTagLink heading="Categories" tags={tags} /> */}
           <BlogCategoryLink heading="Category List" categorys={categorys} />
           <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
@@ -211,6 +152,7 @@ const RenderPostsByTagBeforeDate = ({
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
         </div>
         <div className={styles.endSection}>
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <BlogPostLink heading="Latest Posts" posts={recentPosts} />
         </div>
         <div className={styles.endSection}>
