@@ -31,7 +31,6 @@ import {
   getAllCategorys,
 } from '../../../../../lib/notion/client'
 
-import stylesParts from '../../../../../styles/blog-parts.module.css'
 import styles from '../../../../../styles/blog.module.css'
 
 export async function getStaticProps({ params: { tag, date } }) {
