@@ -87,21 +87,6 @@ const RenderPage = ({
 
     <div className={styles.subContent}>
       <BlogCategoryLink heading="Category List" categorys={categorys} />
-      <h3>Setup</h3>
-      <hr />
-      <ul>
-        <li>
-          <Link href="https://sparkling-cinnamon-3f9.notion.site/herohoro-48ff806d05484215b51b9dc79df15357">
-            このブログを便利に使う方法⭐
-          </Link>
-        </li>
-        <li>
-          <Link href="https://herohoro.com/blog/tag/easy-notion-blog_%E4%BA%8B%E5%A7%8B%E3%82%81">
-            easy-notion-blog導入⭐
-          </Link>
-        </li>
-      </ul>
-
       <BlogTagLink heading="Tag List" tags={tags} />
       <h3>Prolile</h3>
       <hr />

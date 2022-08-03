@@ -171,6 +171,7 @@ const RenderPostsBeforeDate = ({
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
         </div>
         <div className={styles.endSection}>
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
           <TwitterTimeline />
         </div>
         <div className={styles.endSection}>
