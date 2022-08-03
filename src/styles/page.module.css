@@ -9,13 +9,15 @@
 .flexTagsMain {
   width: 100%;
   justify-content: center;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  display: grid;
+  /* flex-wrap: wrap; */
+  /* align-items: center; */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 .tagMain {
   margin: 0 0.7em 0.7rem 0;
-  width: 45%;
+  width: 100%;
   display: inline-block;
   font-size: 1em;
   box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
@@ -111,6 +113,9 @@
   }
 }
 @media (max-width: 600px) {
+  .flexTagsMain {
+    grid-template-columns: repeat(1, 1fr);
+  }
   .tagMain,
   .moreSearch {
     min-width: 40%;
@@ -120,22 +125,17 @@
   }
   .tagMain p,
   .moreSearch p {
-    font-size: 0.8em;
+    font-size: 1em;
     font-weight: bold;
+    line-height: 1.5;
+    padding: 0;
   }
 }
 @media (max-width: 480px) {
   .tagMain,
   .moreSearch {
-    max-width: 45%;
+    min-width: 100%;
     padding: 0 0.8em;
-  }
-  .tagMain p,
-  .moreSearch p {
-    font-size: 0.5em;
-    font-weight: bold;
-    line-height: 1;
-    padding: 10px;
   }
 }
 
