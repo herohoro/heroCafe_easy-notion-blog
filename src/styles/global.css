@@ -250,31 +250,36 @@ footer span a {
 }
 
 /* sec-notion */
-
+.default {
+  background-color: rgb(138, 136, 136);
+}
+.default > p {
+  color: snow;
+}
 .gray {
   background-color: lightgrey;
 }
 .brown {
-  background-color: tan;
+  background-color: rgba(234, 201, 154, 0.791);
 }
 .orange {
-  background-color: lightsalmon;
+  background-color: rgba(255, 166, 0, 0.793);
 }
 .yellow {
   background-color: rgb(251, 251, 166);
 }
 .green {
-  background-color: #8fc5aa;
+  background-color: #a0ddbfcc;
 }
 .blue {
-  background-color: lightblue;
+  background-color: rgb(188, 224, 235);
 }
 .purple {
-  background-color: #c5aeda;
+  background-color: #d9c0f1;
 }
 .pink {
-  background-color: #e7b2b8;
+  background-color: #f3a3aeb5;
 }
 .red {
-  background-color: #f58a8a;
+  background-color: #f09a9a;
 }
