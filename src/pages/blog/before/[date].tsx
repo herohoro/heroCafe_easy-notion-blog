@@ -95,9 +95,9 @@ const RenderPostsBeforeDate = ({
     <div className={styles.container}>
       <div className={styles.flexWraper}>
         <div className={styles.mainContent}>
-          <DocumentHead description={`Post before ${date}`} />
+          <DocumentHead description={`Post before ${date.split('T')[0]}`} />
           <header className={styles.mainTop}>
-            <h2>Posts before {date}</h2>
+            <h2>Posts before {date.split('T')[0]}</h2>
           </header>
 
           <div className={styles.mainGallery}>
