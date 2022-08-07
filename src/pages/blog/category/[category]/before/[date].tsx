@@ -14,7 +14,7 @@ import {
   PostsNotFound,
   PostThumbnail,
   TwitterTimeline,
-  NextBackPageLinkCategory,
+  NextBackPageLink,
   BackPageLink,
 } from '../../../../../components/blog-parts'
 
@@ -125,7 +125,7 @@ const RenderPostsByCategoryBeforeDate = ({
           </div>
 
           <footer>
-            <NextBackPageLinkCategory
+            <NextBackPageLink
               firstPost={firstPost}
               posts={posts}
               category={category}

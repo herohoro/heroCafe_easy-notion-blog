@@ -166,34 +166,7 @@ export const ReadMoreLink = ({ post }) => (
   </div>
 )
 
-export const NextPageLink = ({ firstPost, posts, tag = '' }) => {
-  if (!firstPost) return null
-  if (posts.length === 0) return null
-
-  const lastPost = posts[posts.length - 1]
-
-  if (firstPost.Date === lastPost.Date) return null
-
-  return (
-    <div className={styles.nextContainer}>
-      <hr />
-
-      <Link
-        href={tag ? '/blog/tag/[tag]/before/[date]' : '/blog/before/[date]'}
-        as={
-          tag
-            ? getTagBeforeLink(tag, lastPost.Date)
-            : getBeforeLink(lastPost.Date)
-        }
-        passHref
-      >
-        <a className={styles.nextPageLink}>Next page ＞</a>
-      </Link>
-    </div>
-  )
-}
-
-export const NextPageLinkCategory = ({ firstPost, posts, category = '' }) => {
+export const NextPageLink = ({ firstPost, posts, tag = '', category = '' }) => {
   if (!firstPost) return null
   if (posts.length === 0) return null
 
@@ -207,12 +180,16 @@ export const NextPageLinkCategory = ({ firstPost, posts, category = '' }) => {
 
       <Link
         href={
-          category
+          tag
+            ? '/blog/tag/[tag]/before/[date]'
+            : category
             ? '/blog/category/[category]/before/[date]'
             : '/blog/before/[date]'
         }
         as={
-          category
+          tag
+            ? getTagBeforeLink(tag, lastPost.Date)
+            : category
             ? getCategoryBeforeLink(category, lastPost.Date)
             : getBeforeLink(lastPost.Date)
         }
@@ -224,42 +201,10 @@ export const NextPageLinkCategory = ({ firstPost, posts, category = '' }) => {
   )
 }
 
-export const NextBackPageLinkTags = ({ firstPost, posts, tag = '' }) => {
-  const router = useRouter()
-  if (!firstPost) return null
-  if (posts.length === 0) return null
-
-  const lastPost = posts[posts.length - 1]
-
-  if (firstPost.Date === lastPost.Date) return null
-
-  return (
-    <div className={styles.nextContainer}>
-      <hr />
-      <div className={styles.buttonSubContainer}>
-        <a className={styles.backButton} onClick={() => router.back()}>
-          {' '}
-          ＜ Back{' '}
-        </a>
-        <Link
-          href={tag ? '/blog/tag/[tag]/before/[date]' : '/blog/before/[date]'}
-          as={
-            tag
-              ? getTagBeforeLink(tag, lastPost.Date)
-              : getBeforeLink(lastPost.Date)
-          }
-          passHref
-        >
-          <a className={styles.nextPageLink}>Next ＞</a>
-        </Link>
-      </div>
-    </div>
-  )
-}
-
-export const NextBackPageLinkCategory = ({
+export const NextBackPageLink = ({
   firstPost,
   posts,
+  tag = '',
   category = '',
 }) => {
   const router = useRouter()
@@ -280,12 +225,16 @@ export const NextBackPageLinkCategory = ({
         </a>
         <Link
           href={
-            category
+            tag
+              ? '/blog/tag/[tag]/before/[date]'
+              : category
               ? '/blog/category/[category]/before/[date]'
               : '/blog/before/[date]'
           }
           as={
-            category
+            tag
+              ? getTagBeforeLink(tag, lastPost.Date)
+              : category
               ? getCategoryBeforeLink(category, lastPost.Date)
               : getBeforeLink(lastPost.Date)
           }

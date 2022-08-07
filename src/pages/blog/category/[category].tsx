@@ -15,7 +15,8 @@ import {
   PostThumbnail,
   TwitterTimeline,
   RssFeed,
-  NextPageLinkCategory,
+  // NextPageLinkCategory,
+  NextPageLink,
 } from '../../../components/blog-parts'
 import styles from '../../../styles/blog.module.css'
 import { getCategoryLink } from '../../../lib/blog-helpers'
@@ -123,7 +124,7 @@ const RenderPostsByCategorys = ({
             })}
           </div>
           <footer>
-            <NextPageLinkCategory
+            <NextPageLink
               firstPost={firstPost}
               posts={posts}
               category={category}

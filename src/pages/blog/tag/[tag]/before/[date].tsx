@@ -7,7 +7,7 @@ import {
   BlogPostLink,
   BlogTagLink,
   BlogCategoryLink,
-  NextBackPageLinkTags,
+  NextBackPageLink,
   BackPageLink,
   NoContents,
   PostDate,
@@ -130,11 +130,7 @@ const RenderPostsByTagBeforeDate = ({
           </div>
 
           <footer>
-            <NextBackPageLinkTags
-              firstPost={firstPost}
-              posts={posts}
-              tag={tag}
-            />
+            <NextBackPageLink firstPost={firstPost} posts={posts} tag={tag} />
             <BackPageLink firstPost={firstPost} posts={posts} />
           </footer>
         </div>
