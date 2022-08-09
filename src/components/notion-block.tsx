@@ -314,8 +314,6 @@ const NotionBlock = ({ block }) => {
     return <Embed block={block} />
   } else if (block.Type === 'bookmark' || block.Type === 'link_preview') {
     return <Bookmark block={block} />
-  } else if (block.Type === 'equation') {
-    return <BlockEquation block={block} />
   } else if (block.Type === 'divider') {
     return <hr className={styles.divider} />
   } else if (block.Type === 'table') {

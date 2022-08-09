@@ -15,7 +15,9 @@
 .image > div:first-child {
   text-align: center;
 }
-
+.equation {
+  overflow-x: scroll;
+}
 .code {
   display: block;
   width: 100%;
@@ -112,15 +114,15 @@
 .callout div:first-child {
   margin-right: 0.7rem;
 }
-.divider{
-  background:url(/divider-icon.png);
+.divider {
+  background: url(/divider-icon.png);
   height: 15px;
   width: 50%;
   margin: 15px auto;
   border: none; /* 一旦線を解除 */
-  background-position:center;  
-  background-size:contain;
-  background-repeat: space;    
+  background-position: center;
+  background-size: contain;
+  background-repeat: space;
 }
 
 .table {
@@ -136,37 +138,37 @@
   margin: 20px auto;
   font-size: 0.9rem;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(97, 87, 17, 0.5); 
+  box-shadow: 0 2px 5px rgba(97, 87, 17, 0.5);
 }
-.linkPreview:hover{
-  width:75%;
+.linkPreview:hover {
+  width: 75%;
 }
-.linkPreview > div{
-  width:90%;
+.linkPreview > div {
+  width: 90%;
   display: block;
 }
-.MylinkPreview{
-  width:70%;
+.MylinkPreview {
+  width: 70%;
   align-items: center;
   border-color: rgb(140, 134, 118);
   margin: 20px auto;
   background-color: pink;
   text-align: center;
   border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(97, 87, 17, 0.5); 
+  box-shadow: 0 2px 5px rgba(97, 87, 17, 0.5);
 }
-.MylinkPreview p{
+.MylinkPreview p {
   color: rgb(7, 6, 6);
   /* text-shadow: 0 2px 5px rgba(221, 221, 221, 0.5); */
 }
-.MylinkPreview p::after{
-  content:"....🐌";
+.MylinkPreview p::after {
+  content: '....🐌';
 }
-.MylinkPreview:hover{
+.MylinkPreview:hover {
   background-color: #f1f1f1;
-  width:75%;
+  width: 75%;
 }
-.MylinkPreview p:hover{
+.MylinkPreview p:hover {
   font-size: 1.2rem;
 }
 @media (max-width: 1400px) {
@@ -177,12 +179,11 @@
 @media (max-width: 865px) {
   .linkPreview {
     max-height: 240px;
-    
   }
 }
-@media (max-width:600px){
-  .linkPreview{
-    width:100%;
+@media (max-width: 600px) {
+  .linkPreview {
+    width: 100%;
   }
 }
 .linkPreview h3 {
