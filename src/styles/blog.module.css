@@ -7,7 +7,12 @@
 .mainContent {
   width: 100%;
 }
-
+.twoColums {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 .mainTop {
   width: 100%;
   display: block;
