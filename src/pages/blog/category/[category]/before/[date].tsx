@@ -4,6 +4,7 @@ import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../../lib/notion/server-const
 import DocumentHead from '../../../../../components/document-head'
 import {
   BlogPostLink,
+  BlogTagLink,
   BlogCategoryLink,
   NoContents,
   PostDate,
@@ -24,6 +25,7 @@ import {
   getRankedPosts,
   getPostsByCategoryBefore,
   getFirstPostByCategory,
+  getAllTags,
   getAllCategorys,
 } from '../../../../../lib/notion/client'
 
@@ -50,12 +52,14 @@ export async function getStaticProps({ params: { category, date } }) {
     }
   }
 
-  const [firstPost, rankedPosts, recentPosts, categorys] = await Promise.all([
-    getFirstPostByCategory(category),
-    getRankedPosts(),
-    getPosts(5),
-    getAllCategorys(),
-  ])
+  const [firstPost, rankedPosts, recentPosts, tags, categorys] =
+    await Promise.all([
+      getFirstPostByCategory(category),
+      getRankedPosts(),
+      getPosts(5),
+      getAllTags(),
+      getAllCategorys(),
+    ])
 
   return {
     props: {
@@ -64,6 +68,7 @@ export async function getStaticProps({ params: { category, date } }) {
       firstPost,
       rankedPosts,
       recentPosts,
+      tags,
       categorys,
       category,
     },
@@ -84,6 +89,7 @@ const RenderPostsByCategoryBeforeDate = ({
   firstPost,
   rankedPosts = [],
   recentPosts = [],
+  tags = [],
   categorys = [],
   category,
   redirect,
@@ -140,6 +146,7 @@ const RenderPostsByCategoryBeforeDate = ({
 
         <div className={styles.subContent}>
           <BlogCategoryLink heading="Category List" categorys={categorys} />
+          <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <BlogPostLink heading="Latest Posts" posts={recentPosts} />
           <TwitterTimeline />
