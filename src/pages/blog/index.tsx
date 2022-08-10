@@ -11,6 +11,7 @@ import {
   PostCategory,
   PostTitle,
   PostThumbnail,
+  PostLike,
   TwitterTimeline,
   RssFeed,
 } from '../../components/blog-parts'
@@ -74,7 +75,10 @@ const RenderPosts = ({
             {posts.map((post) => {
               return (
                 <div className={styles.post} key={post.Slug}>
-                  <PostDate post={post} />
+                  <div className={styles.twoColums}>
+                    <PostDate post={post} />
+                    <PostLike post={post} />
+                  </div>
                   <PostCategory post={post} />
                   <PostTitle post={post} />
                   <PostThumbnail post={post} />
