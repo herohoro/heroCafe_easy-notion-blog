@@ -11,6 +11,7 @@ export interface Post {
   Like: number
   Category: string
   CategoryColor: string
+  LikeRank: number
 }
 
 export interface Block {
