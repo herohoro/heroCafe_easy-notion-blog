@@ -71,6 +71,15 @@ export const PostTitle = ({ post, enableLink = true }) => {
     </h3>
   )
 }
+export const PostLike = ({ post }) => {
+  return (
+    <div className={styles.postLike}>
+      <div className={styles.postLikeCount}>
+        &#x1f496; {post.Like === null ? 0 : post.Like}{' '}
+      </div>
+    </div>
+  )
+}
 export const PostTitleSlug = ({ post, enableLink = true }) => {
   const postTitle = post.Title ? post.Title : ''
 
