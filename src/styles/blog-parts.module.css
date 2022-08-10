@@ -5,6 +5,11 @@
   box-shadow: 0 0 8px rgb(196, 195, 195);
   border-radius: 10px;
 }
+
+.postLike {
+  margin: 0.3rem 1rem 0;
+}
+
 .newPostList p:hover {
   color: var(--hero-hover-fg);
 }
@@ -521,5 +526,8 @@
   .thumbnail img {
     width: 75vw;
     height: calc(75vw * 0.53);
+  }
+  .postLike {
+    margin: 0;
   }
 }

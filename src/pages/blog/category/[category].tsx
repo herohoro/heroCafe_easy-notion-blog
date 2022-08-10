@@ -4,6 +4,7 @@ import { NUMBER_OF_POSTS_PER_PAGE } from '../../../lib/notion/server-constants'
 import DocumentHead from '../../../components/document-head'
 import {
   BlogPostLink,
+  BlogTagLink,
   BlogCategoryLink,
   NoContents,
   PostDate,
@@ -13,6 +14,7 @@ import {
   PostTitle,
   PostsNotFound,
   PostThumbnail,
+  PostLike,
   TwitterTimeline,
   RssFeed,
   // NextPageLinkCategory,
@@ -26,6 +28,7 @@ import {
   getRankedPosts,
   getPostsByCategory,
   getFirstPostByCategory,
+  getAllTags,
   getAllCategorys,
 } from '../../../lib/notion/client'
 import * as imageCache from '../../../lib/notion/image-cache'
@@ -33,12 +36,14 @@ import * as imageCache from '../../../lib/notion/image-cache'
 export async function getStaticProps({ params: { category } }) {
   const posts = await getPostsByCategory(category, NUMBER_OF_POSTS_PER_PAGE)
 
-  const [firstPost, rankedPosts, recentPosts, categorys] = await Promise.all([
-    getFirstPostByCategory(category),
-    getRankedPosts(),
-    getPosts(5),
-    getAllCategorys(),
-  ])
+  const [firstPost, rankedPosts, recentPosts, tags, categorys] =
+    await Promise.all([
+      getFirstPostByCategory(category),
+      getRankedPosts(),
+      getPosts(5),
+      getAllTags(),
+      getAllCategorys(),
+    ])
 
   if (posts.length === 0) {
     console.log(`Failed to find posts for category: ${category}`)
@@ -58,6 +63,7 @@ export async function getStaticProps({ params: { category } }) {
       firstPost,
       rankedPosts,
       recentPosts,
+      tags,
       categorys,
       category,
     },
@@ -84,6 +90,7 @@ const RenderPostsByCategorys = ({
   firstPost,
   rankedPosts = [],
   recentPosts = [],
+  tags = [],
   categorys = [],
   redirect,
 }) => {
@@ -113,7 +120,10 @@ const RenderPostsByCategorys = ({
             {posts.map((post) => {
               return (
                 <div className={styles.post} key={post.Slug}>
-                  <PostDate post={post} />
+                  <div className={styles.twoColums}>
+                    <PostDate post={post} />
+                    <PostLike post={post} />
+                  </div>
                   <PostCategory post={post} />
                   <PostTitle post={post} />
                   <PostThumbnail post={post} />
@@ -159,6 +169,7 @@ const RenderPostsByCategorys = ({
         <div className={styles.subContent}>
           <RssFeed />
           <BlogCategoryLink heading="Category List" categorys={categorys} />
+          <BlogTagLink heading="Tag List" tags={tags} />
           <BlogPostLink heading="Recommended" posts={rankedPosts} />
           <BlogPostLink heading="Latest Posts" posts={recentPosts} />
           <TwitterTimeline />
