@@ -416,6 +416,7 @@ export const PostLinkList = ({ posts }) => {
             <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
               <a>{post.Title}</a>
             </Link>
+            <span> &#x1f91f; {post.LikeRank}</span>
           </li>
         )
       })}
@@ -437,9 +438,12 @@ const PostLinkListThumnail = ({ posts }) => {
                 alt="thumbnail"
               />
             </Link>
-            <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
-              <a>{post.Title}</a>
-            </Link>
+            <div>
+              <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
+                <a>{post.Title}</a>
+              </Link>
+              <span> &#x1f91f; {post.LikeRank}</span>
+            </div>
           </div>
         )
       })}
