@@ -95,16 +95,16 @@ export async function getAllPosts() {
     .filter((item) => _validPost(item))
     .map((item) => _buildPost(item))
 }
-
+//Rank列→LikeRank列に変更
 export async function getRankedPosts(pageSize = 10) {
   if (blogIndexCache.exists()) {
     const allPosts = await getAllPosts()
     return allPosts
-      .filter((post) => !!post.Rank)
+      .filter((post) => !!post.LikeRank)
       .sort((a, b) => {
-        if (a.Rank > b.Rank) {
+        if (a.LikeRank > b.LikeRank) {
           return -1
-        } else if (a.Rank === b.Rank) {
+        } else if (a.LikeRank === b.LikeRank) {
           return 0
         }
         return 1
@@ -116,7 +116,7 @@ export async function getRankedPosts(pageSize = 10) {
     database_id: DATABASE_ID,
     filter: _buildFilter([
       {
-        property: 'Rank',
+        property: 'LikeRank',
         number: {
           is_not_empty: true,
         },
@@ -124,7 +124,7 @@ export async function getRankedPosts(pageSize = 10) {
     ]),
     sorts: [
       {
-        property: 'Rank',
+        property: 'LikeRank',
         direction: 'descending',
       },
     ],
@@ -802,8 +802,8 @@ function _buildPost(data) {
     Like: prop.Like.number,
     Category: prop.Category.select.name,
     CategoryColor: prop.Category.select.color,
+    LikeRank: prop.LikeRank.formula.number,
   }
-
   return post
 }
 
