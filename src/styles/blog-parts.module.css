@@ -7,7 +7,10 @@
 }
 
 .postLike {
-  margin: 0.3rem 1rem 0;
+  margin: 0.8rem 1rem 0;
+}
+.postLikeCount > span {
+  margin: 0 0 0 0.5rem;
 }
 
 .newPostList p:hover {
