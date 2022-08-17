@@ -54,7 +54,7 @@ const Bookmark = ({ block }) => {
           <div>
             <div>
               <img
-                src={`http://www.google.com/s2/favicons?domain=${url.hostname}`}
+                src={`https://www.google.com/s2/favicons?domain=${url.hostname}`}
                 alt="title"
                 loading="lazy"
                 decoding="async"
