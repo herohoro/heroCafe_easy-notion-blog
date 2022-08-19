@@ -101,10 +101,10 @@
     align-items: flex-start;
   }
   .mainContent {
-    width: 100%;
+    width: 65%;
   }
   .subContent {
-    width: 60%;
+    width: 35%;
     padding: 0 3%;
   }
   .tagMain {
