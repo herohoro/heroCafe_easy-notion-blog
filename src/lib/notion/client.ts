@@ -22,6 +22,7 @@ import {
   Table,
   TableRow,
   TableCell,
+  Toggle,
   ColumnList,
   Column,
   RichText,
@@ -529,6 +530,8 @@ export async function getAllBlocksByBlockId(blockId: string) {
       block.NumberedListItem.Children = await getAllBlocksByBlockId(block.Id)
     } else if (block.Type === 'synced_block') {
       block.SyncedBlock.Children = await _getSyncedBlockChildren(block)
+    } else if (block.Type === 'toggle') {
+      block.Toggle.Children = await getAllBlocksByBlockId(block.Id)
     }
   }
 
@@ -667,6 +670,15 @@ function _buildBlock(item) {
       }
 
       block.SyncedBlock = syncedBlock
+      break
+    case 'toggle':
+      const toggle: Toggle = {
+        RichTexts: item[item.type].rich_text.map(_buildRichText),
+        Color: item[item.type].color,
+        Children: [],
+      }
+
+      block.Toggle = toggle
       break
     case 'embed':
       const embed: Embed = {
