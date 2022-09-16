@@ -141,7 +141,14 @@
   flex: 1 1 180px;
   width: 180px;
 }
-
+@media (max-width: 640px) {
+  .columnList {
+    display: block;
+  }
+  .columnList > div {
+    width: 100%;
+  }
+}
 .bookmark {
   display: flex;
   overflow: hidden;
