@@ -23,6 +23,9 @@ describe('DocumentHead', () => {
 
     it('renders the component', () => {
       expect(() => {
+        const defaultImageURL =
+          mockNextPublicURL.mockReturnValue('http://localhost') +
+          '/hero-room.jpg'
         render(<DocumentHead />)
       }).not.toThrow()
     })

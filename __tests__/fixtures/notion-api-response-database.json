@@ -53,6 +53,25 @@
         "format": "number"
       }
     },
+    "Like": {
+      "id": "%5CEUU",
+      "type": "number",
+      "number": {}
+    },
+    "LikeRank": {
+      "id": "OXKj",
+      "type": "formula",
+      "formula": { "type": "number", "number": 10 }
+    },
+    "Category": {
+      "id": "n%3EMM",
+      "type": "select",
+      "select": {
+        "id": "24bcd6f4-fd5f-45f8-b76e-178c862a1ffe",
+        "name": "Learning",
+        "color": "blue"
+      }
+    },
     "Slug": {
       "id": "~Bl%60",
       "name": "Slug",

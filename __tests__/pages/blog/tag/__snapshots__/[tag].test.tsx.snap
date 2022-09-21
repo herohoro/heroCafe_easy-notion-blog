@@ -6,206 +6,537 @@ exports[`RenderPostsByTags renders the page unchanged 1`] = `
     class="container"
   >
     <div
-      class="mainContent"
+      class="flexWraper"
     >
-      <header>
-        <h2>
-          Diary
-        </h2>
-      </header>
       <div
-        class="post"
+        class="mainContent"
       >
-        <div
-          class="postDate"
+        <header
+          class="mainTop"
         >
-          2021-11-06
-        </div>
-        <div
-          class="postTags"
-        >
-          <a
-            href="/blog/tag/Diary"
-          >
+          <h2>
             Diary
-          </a>
-        </div>
-        <h3
-          class="postTitle"
-        >
-          <a
-            href="/blog/ihatov"
-          >
-            あのイーハトーヴォのすきとおった風
-          </a>
-        </h3>
+          </h2>
+        </header>
         <div
-          class="postExcerpt"
+          class="mainGallery"
         >
-          <p>
-            あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
-          </p>
-        </div>
-        <div
-          class="readMoreLink"
-        >
-          <a
-            class="readMore"
-            href="/blog/ihatov"
+          <div
+            class="post"
           >
-            Read more
-          </a>
+            <div
+              class="twoColums"
+            >
+              <div
+                class="postDate"
+              >
+                📅  
+                2021-11-06
+              </div>
+              <div
+                class="postLike"
+              >
+                <div
+                  class="postLikeCount"
+                >
+                  <svg
+                    height="20"
+                    viewBox="0 0 512 512"
+                    width="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M380.63,32.196C302.639,33.698,264.47,88.893,256,139.075c-8.47-50.182-46.638-105.378-124.63-106.879 C59.462,30.814,0,86.128,0,187.076c0,129.588,146.582,189.45,246.817,286.25c3.489,3.371,2.668,3.284,2.668,3.284 c1.647,2.031,4.014,3.208,6.504,3.208v0.011c0,0,0.006,0,0.011,0c0,0,0.006,0,0.011,0v-0.011c2.489,0,4.856-1.177,6.503-3.208 c0,0-0.821,0.086,2.669-3.284C365.418,376.526,512,316.664,512,187.076C512,86.128,452.538,30.814,380.63,32.196z"
+                      fill="rgb(223, 86, 86)"
+                    />
+                  </svg>
+                  <span>
+                    0
+                     
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blue"
+            >
+              <a
+                class="linkButton"
+                href="/blog/category/Learning"
+              >
+                Learning
+              </a>
+            </div>
+            <h3
+              class="postTitle"
+            >
+              <a
+                href="/blog/ihatov"
+              >
+                あのイーハトーヴォのすきとおった風
+              </a>
+            </h3>
+            <div
+              class="thumbnail"
+            >
+              <img
+                alt="thumbnail"
+                height="160"
+                href="/blog/ihatov"
+                src="/notion_images/ed0090ef-628c-4cfd-a8ea-1a5326855f8a.png"
+                width="300"
+              />
+            </div>
+            <div
+              class="postTags"
+            >
+              <a
+                href="/blog/tag/Diary"
+              >
+                Diary
+              </a>
+            </div>
+            <div
+              class="postExcerpt"
+            >
+              <p>
+                あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
+              </p>
+            </div>
+          </div>
+          <div
+            class="post"
+          >
+            <div
+              class="twoColums"
+            >
+              <div
+                class="postDate"
+              >
+                📅  
+                2021-11-03
+              </div>
+              <div
+                class="postLike"
+              >
+                <div
+                  class="postLikeCount"
+                >
+                  <svg
+                    height="20"
+                    viewBox="0 0 512 512"
+                    width="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M380.63,32.196C302.639,33.698,264.47,88.893,256,139.075c-8.47-50.182-46.638-105.378-124.63-106.879 C59.462,30.814,0,86.128,0,187.076c0,129.588,146.582,189.45,246.817,286.25c3.489,3.371,2.668,3.284,2.668,3.284 c1.647,2.031,4.014,3.208,6.504,3.208v0.011c0,0,0.006,0,0.011,0c0,0,0.006,0,0.011,0v-0.011c2.489,0,4.856-1.177,6.503-3.208 c0,0-0.821,0.086,2.669-3.284C365.418,376.526,512,316.664,512,187.076C512,86.128,452.538,30.814,380.63,32.196z"
+                      fill="rgb(223, 86, 86)"
+                    />
+                  </svg>
+                  <span>
+                    0
+                     
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blue"
+            >
+              <a
+                class="linkButton"
+                href="/blog/category/Learning"
+              >
+                Learning
+              </a>
+            </div>
+            <h3
+              class="postTitle"
+            >
+              <a
+                href="/blog/supported-blocks"
+              >
+                Supported blocks
+              </a>
+            </h3>
+            <div
+              class="thumbnail"
+            >
+              <img
+                alt="thumbnail"
+                height="160"
+                href="/blog/supported-blocks"
+                src="/notion_images/ed0090ef-628c-4cfd-a8ea-1a5326855f8a.png"
+                width="300"
+              />
+            </div>
+            <div
+              class="postTags"
+            >
+              <a
+                href="/blog/tag/Diary"
+              >
+                Diary
+              </a>
+            </div>
+            <div
+              class="postExcerpt"
+            >
+              <p>
+                Supported blocks in easy-notion-blog
+              </p>
+            </div>
+          </div>
+          <div
+            class="post"
+          >
+            <div
+              class="twoColums"
+            >
+              <div
+                class="postDate"
+              >
+                📅  
+                2021-11-01
+              </div>
+              <div
+                class="postLike"
+              >
+                <div
+                  class="postLikeCount"
+                >
+                  <svg
+                    height="20"
+                    viewBox="0 0 512 512"
+                    width="20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M380.63,32.196C302.639,33.698,264.47,88.893,256,139.075c-8.47-50.182-46.638-105.378-124.63-106.879 C59.462,30.814,0,86.128,0,187.076c0,129.588,146.582,189.45,246.817,286.25c3.489,3.371,2.668,3.284,2.668,3.284 c1.647,2.031,4.014,3.208,6.504,3.208v0.011c0,0,0.006,0,0.011,0c0,0,0.006,0,0.011,0v-0.011c2.489,0,4.856-1.177,6.503-3.208 c0,0-0.821,0.086,2.669-3.284C365.418,376.526,512,316.664,512,187.076C512,86.128,452.538,30.814,380.63,32.196z"
+                      fill="rgb(223, 86, 86)"
+                    />
+                  </svg>
+                  <span>
+                    0
+                     
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="blue"
+            >
+              <a
+                class="linkButton"
+                href="/blog/category/Learning"
+              >
+                Learning
+              </a>
+            </div>
+            <h3
+              class="postTitle"
+            >
+              <a
+                href="/blog/my-first-post"
+              >
+                My 1st post
+              </a>
+            </h3>
+            <div
+              class="thumbnail"
+            >
+              <img
+                alt="thumbnail"
+                height="160"
+                href="/blog/my-first-post"
+                src="/notion_images/ed0090ef-628c-4cfd-a8ea-1a5326855f8a.png"
+                width="300"
+              />
+            </div>
+            <div
+              class="postTags"
+            >
+              <a
+                href="/blog/tag/Diary"
+              >
+                Diary
+              </a>
+            </div>
+            <div
+              class="postExcerpt"
+            >
+              <p>
+                This is an excerpt.
+              </p>
+            </div>
+          </div>
         </div>
+        <footer />
       </div>
       <div
-        class="post"
+        class="subContent"
       >
-        <div
-          class="postDate"
-        >
-          2021-11-03
-        </div>
-        <div
-          class="postTags"
-        >
-          <a
-            href="/blog/tag/Diary"
-          >
-            Diary
-          </a>
-        </div>
-        <h3
-          class="postTitle"
-        >
-          <a
-            href="/blog/supported-blocks"
-          >
-            Supported blocks
-          </a>
-        </h3>
-        <div
-          class="postExcerpt"
-        >
+        <div>
+          <h3>
+            新着記事を通知したい？？
+          </h3>
+          <hr />
           <p>
-            Supported blocks in easy-notion-blog
+            RSSリーダーにatomのリンクを登録すると通知が行くよ🐌
+          </p>
+          <code>
+            https://herohoro.com/atom
+          </code>
+          <p>
+            やってみてね(*´ω\`*)(*´ω\`*)
           </p>
         </div>
         <div
-          class="readMoreLink"
+          class="blogTagLink"
         >
-          <a
-            class="readMore"
-            href="/blog/supported-blocks"
+          <h3>
+            Category List
+          </h3>
+          <hr />
+          <div
+            class="noContents"
           >
-            Read more
-          </a>
-        </div>
-      </div>
-      <div
-        class="post"
-      >
-        <div
-          class="postDate"
-        >
-          2021-11-01
+            There are no contents yet
+          </div>
         </div>
         <div
-          class="postTags"
+          class="blogTagLink"
         >
-          <a
-            href="/blog/tag/Diary"
-          >
-            Diary
-          </a>
+          <h3>
+            Tag List
+          </h3>
+          <hr />
+          <div>
+            <div
+              class="tagSub"
+            >
+              <p
+                href="/blog/tag/Diary"
+              >
+                Diary
+              </p>
+            </div>
+          </div>
         </div>
-        <h3
-          class="postTitle"
-        >
-          <a
-            href="/blog/my-first-post"
-          >
-            My 1st post
-          </a>
-        </h3>
         <div
-          class="postExcerpt"
+          class="blogPostLink"
         >
+          <h3>
+            Recommended
+          </h3>
+          <hr />
+          <ul>
+            <li>
+              <a
+                href="/blog/ihatov"
+              >
+                あのイーハトーヴォのすきとおった風
+              </a>
+              <span>
+                 🤟 
+                10
+              </span>
+            </li>
+            <li>
+              <a
+                href="/blog/supported-blocks"
+              >
+                Supported blocks
+              </a>
+              <span>
+                 🤟 
+                10
+              </span>
+            </li>
+            <li>
+              <a
+                href="/blog/my-first-post"
+              >
+                My 1st post
+              </a>
+              <span>
+                 🤟 
+                10
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div
+          class="blogPostLink"
+        >
+          <h3>
+            Latest Posts
+          </h3>
+          <hr />
+          <div
+            class="noContents"
+          >
+            There are no contents yet
+          </div>
+        </div>
+        <div
+          class="twitterTimeline"
+        >
+          <h3>
+            Twitter Timeline
+          </h3>
+          <hr />
           <p>
-            This is an excerpt.
+            フォロー大歓迎＼(^o^)／
           </p>
-        </div>
-        <div
-          class="readMoreLink"
-        >
           <a
-            class="readMore"
-            href="/blog/my-first-post"
+            class="twitter-timeline"
+            data-chrome="nofooter,transparent"
+            data-height="500"
+            data-lang="en"
+            data-theme="light"
+            data-width="500"
+            href="https://twitter.com/mineral_30?ref_src=twsrc%5Etfw"
           >
-            Read more
+            Tweets by mineral_30
           </a>
+           
+          <script
+            async=""
+            src="https://platform.twitter.com/widgets.js"
+          />
         </div>
       </div>
     </div>
     <div
-      class="subContent"
+      class="endContent"
     >
       <div
-        class="blogPostLink"
+        class="endSection"
       >
-        <h3>
-          Recommended
-        </h3>
-        <ul>
-          <li>
-            <a
-              href="/blog/ihatov"
-            >
-              あのイーハトーヴォのすきとおった風
-            </a>
-          </li>
-          <li>
-            <a
-              href="/blog/supported-blocks"
-            >
-              Supported blocks
-            </a>
-          </li>
-          <li>
-            <a
-              href="/blog/my-first-post"
-            >
-              My 1st post
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div
-        class="blogPostLink"
-      >
-        <h3>
-          Latest Posts
-        </h3>
         <div
-          class="noContents"
+          class="blogPostLink"
         >
-          There are no contents yet
+          <h3>
+            Recommended
+          </h3>
+          <hr />
+          <ul>
+            <li>
+              <a
+                href="/blog/ihatov"
+              >
+                あのイーハトーヴォのすきとおった風
+              </a>
+              <span>
+                 🤟 
+                10
+              </span>
+            </li>
+            <li>
+              <a
+                href="/blog/supported-blocks"
+              >
+                Supported blocks
+              </a>
+              <span>
+                 🤟 
+                10
+              </span>
+            </li>
+            <li>
+              <a
+                href="/blog/my-first-post"
+              >
+                My 1st post
+              </a>
+              <span>
+                 🤟 
+                10
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
       <div
-        class="blogTagLink"
+        class="endSection"
       >
-        <h3>
-          Categories
-        </h3>
-        <ul>
-          <li>
-            <a
-              href="/blog/tag/Diary"
+        <div
+          class="blogTagLink"
+        >
+          <h3>
+            Category List
+          </h3>
+          <hr />
+          <div
+            class="noContents"
+          >
+            There are no contents yet
+          </div>
+        </div>
+        <div
+          class="blogPostLink"
+        >
+          <h3>
+            Latest Posts
+          </h3>
+          <hr />
+          <div
+            class="noContents"
+          >
+            There are no contents yet
+          </div>
+        </div>
+      </div>
+      <div
+        class="endSection"
+      >
+        <div
+          class="blogTagLink"
+        >
+          <h3>
+            Tag List
+          </h3>
+          <hr />
+          <div>
+            <div
+              class="tagSub"
             >
-              Diary
-            </a>
-          </li>
-        </ul>
+              <p
+                href="/blog/tag/Diary"
+              >
+                Diary
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="twitterTimeline"
+        >
+          <h3>
+            Twitter Timeline
+          </h3>
+          <hr />
+          <p>
+            フォロー大歓迎＼(^o^)／
+          </p>
+          <a
+            class="twitter-timeline"
+            data-chrome="nofooter,transparent"
+            data-height="500"
+            data-lang="en"
+            data-theme="light"
+            data-width="500"
+            href="https://twitter.com/mineral_30?ref_src=twsrc%5Etfw"
+          >
+            Tweets by mineral_30
+          </a>
+           
+          <script
+            async=""
+            src="https://platform.twitter.com/widgets.js"
+          />
+        </div>
       </div>
     </div>
   </div>

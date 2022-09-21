@@ -72,6 +72,21 @@
           "type": "number",
           "number": 3
         },
+        "Like": { "id": "Ai%60L", "type": "number", "number": null },
+        "LikeRank": {
+          "id": "Ai%60L",
+          "type": "formula",
+          "formula": { "type": "number", "number": 10 }
+        },
+        "Category": {
+          "id": "Ai%60L",
+          "type": "select",
+          "select": {
+            "id": "24bcd6f4-fd5f-45f8-b76e-178c862a1ffe",
+            "name": "Learning",
+            "color": "blue"
+          }
+        },
         "Slug": {
           "id": "Ai%60L",
           "type": "rich_text",
@@ -192,6 +207,21 @@
           "type": "number",
           "number": 2
         },
+        "Like": { "id": "Ai%60L", "type": "number", "number": null },
+        "LikeRank": {
+          "id": "Ai%60L",
+          "type": "formula",
+          "formula": { "type": "number", "number": 10 }
+        },
+        "Category": {
+          "id": "Ai%60L",
+          "type": "select",
+          "select": {
+            "id": "24bcd6f4-fd5f-45f8-b76e-178c862a1ffe",
+            "name": "Learning",
+            "color": "blue"
+          }
+        },
         "Slug": {
           "id": "Ai%60L",
           "type": "rich_text",
@@ -311,6 +341,21 @@
           "id": "Ai%60L",
           "type": "number",
           "number": 1
+        },
+        "Like": { "id": "Ai%60L", "type": "number", "number": null },
+        "LikeRank": {
+          "id": "Ai%60L",
+          "type": "formula",
+          "formula": { "type": "number", "number": 10 }
+        },
+        "Category": {
+          "id": "Ai%60L",
+          "type": "select",
+          "select": {
+            "id": "24bcd6f4-fd5f-45f8-b76e-178c862a1ffe",
+            "name": "Learning",
+            "color": "blue"
+          }
         },
         "Slug": {
           "id": "Ai%60L",
