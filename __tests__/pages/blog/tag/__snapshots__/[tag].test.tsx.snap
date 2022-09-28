@@ -391,7 +391,7 @@ exports[`RenderPostsByTags renders the page unchanged 1`] = `
           </p>
           <a
             class="twitter-timeline"
-            data-chrome="nofooter,transparent"
+            data-chrome="nofooter,transparent,noheader"
             data-height="500"
             data-lang="en"
             data-theme="light"
@@ -522,7 +522,7 @@ exports[`RenderPostsByTags renders the page unchanged 1`] = `
           </p>
           <a
             class="twitter-timeline"
-            data-chrome="nofooter,transparent"
+            data-chrome="nofooter,transparent,noheader"
             data-height="500"
             data-lang="en"
             data-theme="light"
