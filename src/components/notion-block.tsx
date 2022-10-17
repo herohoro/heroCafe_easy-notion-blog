@@ -104,11 +104,7 @@ const Heading3 = ({ block }) => <Heading heading={block.Heading3} level={3} />
 
 const Heading = ({ heading, level = 1 }) => {
   const tag = `h${level + 3}`
-  const id = heading.RichTexts.map(
-    (richText: interfaces.RichText) => richText.Text.Content
-  )
-    .join()
-    .trim()
+  const id = buildHeadingId(heading)
   const htag = React.createElement(
     tag,
     { className: colorClass(heading.Color) },
@@ -121,6 +117,53 @@ const Heading = ({ heading, level = 1 }) => {
     <a href={`#${id}`} id={id}>
       {htag}
     </a>
+  )
+}
+
+const buildHeadingId = (heading) =>
+  heading.RichTexts.map(
+    (richText: interfaces.RichText) => richText.Text.Content
+  )
+    .join()
+    .trim()
+
+const TableOfContents = ({ block, blocks }) => {
+  const headings = blocks.filter(
+    (b: interfaces.Block) =>
+      b.Type === 'heading_1' || b.Type === 'heading_2' || b.Type === 'heading_3'
+  )
+  return (
+    <div className={styles.tableOfContents}>
+      {headings.map((headingBlock: interfaces.Block) => {
+        const heading =
+          headingBlock.Heading1 ||
+          headingBlock.Heading2 ||
+          headingBlock.Heading3
+
+        let indentClass = ''
+        if (headingBlock.Type === 'heading_2') {
+          indentClass = 'indent-1'
+        } else if (headingBlock.Type === 'heading_3') {
+          indentClass = 'indent-2'
+        }
+
+        return (
+          <a
+            href={`#${buildHeadingId(heading)}`}
+            className={`${colorClass(block.TableOfContents.Color)} ${
+              styles[indentClass]
+            }`}
+            key={headingBlock.Id}
+          >
+            <div key={headingBlock.Id}>
+              {heading.RichTexts.map(
+                (richText: interfaces.RichText) => richText.PlainText
+              ).join('')}
+            </div>
+          </a>
+        )
+      })}
+    </div>
   )
 }
 
@@ -205,12 +248,12 @@ const Table = ({ block }) => (
   </div>
 )
 
-const ColumnList = ({ block }) => (
+const ColumnList = ({ block, blocks }) => (
   <div className={styles.columnList}>
     {block.ColumnList.Columns.map((column: interfaces.Column) => (
       <div key={column.Id}>
         {column.Children.map((b: interfaces.Block) => (
-          <NotionBlock block={b} key={b.Id} />
+          <NotionBlock block={b} blocks={blocks} key={b.Id} />
         ))}
       </div>
     ))}
@@ -312,12 +355,14 @@ const ToDoItems = ({ blocks }) =>
     .map((listItem: interfaces.Block) => (
       <div key={`to-do-item-${listItem.Id}`}>
         <input type="checkbox" defaultChecked={listItem.ToDo.Checked} />
-        {listItem.ToDo.RichTexts.map((richText: interfaces.RichText, i: number) => (
-          <RichText
-            richText={richText}
-            key={`to-do-item-${listItem.Id}-${i}`}
-          />
-        ))}
+        {listItem.ToDo.RichTexts.map(
+          (richText: interfaces.RichText, i: number) => (
+            <RichText
+              richText={richText}
+              key={`to-do-item-${listItem.Id}-${i}`}
+            />
+          )
+        )}
         {listItem.HasChildren ? (
           <ul>
             <ToDoItems blocks={listItem.ToDo.Children} />
@@ -326,14 +371,18 @@ const ToDoItems = ({ blocks }) =>
       </div>
     ))
 
-const SyncedBlock = ({ block }) => <NotionBlocks blocks={block.SyncedBlock.Children} />
+const SyncedBlock = ({ block }) => (
+  <NotionBlocks blocks={block.SyncedBlock.Children} />
+)
 
 const Toggle = ({ block }) => (
   <details className={styles.toggle}>
     <summary>
-      {block.Toggle.RichTexts.map((richText: interfaces.RichText, i: number) => (
-        <RichText richText={richText} key={`summary-${block.Id}-${i}`} />
-      ))}
+      {block.Toggle.RichTexts.map(
+        (richText: interfaces.RichText, i: number) => (
+          <RichText richText={richText} key={`summary-${block.Id}-${i}`} />
+        )
+      )}
     </summary>
     <div>
       <NotionBlocks blocks={block.Toggle.Children} />
@@ -341,7 +390,7 @@ const Toggle = ({ block }) => (
   </details>
 )
 
-const NotionBlock = ({ block }) => {
+const NotionBlock = ({ block, blocks }) => {
   if (block.Type === 'paragraph') {
     return <Paragraph block={block} />
   } else if (block.Type === 'heading_1') {
@@ -350,6 +399,8 @@ const NotionBlock = ({ block }) => {
     return <Heading2 block={block} />
   } else if (block.Type === 'heading_3') {
     return <Heading3 block={block} />
+  } else if (block.Type === 'table_of_contents') {
+    return <TableOfContents block={block} blocks={blocks} />
   } else if (block.Type === 'image') {
     return <ImageBlock block={block} />
   } else if (block.Type === 'video') {
@@ -371,8 +422,12 @@ const NotionBlock = ({ block }) => {
   } else if (block.Type === 'table') {
     return <Table block={block} />
   } else if (block.Type === 'column_list') {
-    return <ColumnList block={block} />
-  } else if (block.Type === 'bulleted_list' || block.Type === 'numbered_list' || block.Type === 'to_do') {
+    return <ColumnList block={block} blocks={blocks} />
+  } else if (
+    block.Type === 'bulleted_list' ||
+    block.Type === 'numbered_list' ||
+    block.Type === 'to_do'
+  ) {
     return <List block={block} />
   } else if (block.Type === 'synced_block') {
     return <SyncedBlock block={block} />
@@ -386,7 +441,7 @@ const NotionBlock = ({ block }) => {
 const NotionBlocks = ({ blocks }) => (
   <>
     {wrapListItems(blocks).map((block: interfaces.Block, i: number) => (
-      <NotionBlock block={block} key={`block-${i}`} />
+      <NotionBlock block={block} blocks={blocks} key={`block-${i}`} />
     ))}
   </>
 )
@@ -397,7 +452,8 @@ const wrapListItems = (blocks: Array<interfaces.Block>) =>
     const isNumberedListItem = block.Type === 'numbered_list_item'
     const isToDo = block.Type === 'to_do'
 
-    if (!isBulletedListItem && !isNumberedListItem && !isToDo) return arr.concat(block)
+    if (!isBulletedListItem && !isNumberedListItem && !isToDo)
+      return arr.concat(block)
 
     let listType = ''
     if (isBulletedListItem) {
