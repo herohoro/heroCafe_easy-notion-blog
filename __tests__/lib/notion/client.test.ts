@@ -20,11 +20,11 @@ describe('getPosts', () => {
         'あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。',
       OGImage: null,
       Rank: 3,
-      EditTime: '2021-11-06',
-      Like: 1,
+      EditTime: '2022-02-05T07:03:00.000Z',
+      Like: null,
       Category: 'Learning',
       CategoryColor: 'blue',
-      LikeRank: 2,
+      LikeRank: 10,
     },
   ]
 
