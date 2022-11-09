@@ -74,7 +74,7 @@ export async function getStaticPaths() {
   console.log(category)
 
   return {
-    paths: category.map((category) => getCategoryLink(category)),,
+    paths: category.map((category) => getCategoryLink(category)),
     fallback: 'blocking',
   }
 }
