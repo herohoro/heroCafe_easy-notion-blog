@@ -23,7 +23,6 @@ import {
   getAllTags,
   getAllCategorys,
 } from '../../lib/notion/client'
-import * as imageCache from '../../lib/notion/image-cache'
 import Image from 'next/image'
 
 export async function getStaticProps() {
@@ -34,8 +33,6 @@ export async function getStaticProps() {
     getAllTags(),
     getAllCategorys(),
   ])
-
-  posts.forEach((p) => p.OGImage && imageCache.store(p.PageId, p.OGImage))
 
   return {
     props: {
