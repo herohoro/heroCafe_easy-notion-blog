@@ -23,7 +23,6 @@ import {
 } from '../../../components/blog-parts'
 import styles from '../../../styles/blog.module.css'
 import { getBeforeLink } from '../../../lib/blog-helpers'
-import * as imageCache from '../../../lib/notion/image-cache'
 import {
   getPosts,
   getRankedPosts,
@@ -45,8 +44,6 @@ export async function getStaticProps({ params: { date } }) {
     getAllTags(),
     getAllCategorys(),
   ])
-
-  posts.forEach((p) => p.OGImage && imageCache.store(p.PageId, p.OGImage))
 
   return {
     props: {
