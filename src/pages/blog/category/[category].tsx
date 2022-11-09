@@ -31,7 +31,6 @@ import {
   getAllTags,
   getAllCategorys,
 } from '../../../lib/notion/client'
-import * as imageCache from '../../../lib/notion/image-cache'
 
 export async function getStaticProps({ params: { category } }) {
   const posts = await getPostsByCategory(category, NUMBER_OF_POSTS_PER_PAGE)
@@ -55,8 +54,6 @@ export async function getStaticProps({ params: { category } }) {
     }
   }
 
-  posts.forEach((p) => p.OGImage && imageCache.store(p.PageId, p.OGImage))
-
   return {
     props: {
       posts,
@@ -76,10 +73,8 @@ export async function getStaticPaths() {
 
   console.log(category)
 
-  const path = await getCategoryLink(category)
-
   return {
-    paths: [path],
+    paths: category.map((category) => getCategoryLink(category)),,
     fallback: 'blocking',
   }
 }
