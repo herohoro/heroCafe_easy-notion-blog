@@ -143,7 +143,7 @@ const RenderPost = ({
         description={post.Excerpt}
         urlOgImage={
           NEXT_PUBLIC_URL &&
-          new URL(`/api/og-image?slug=${post.Slug}`, NEXT_PUBLIC_URL).toString()
+          new URL(`/api/og-image/${post.Slug}`, NEXT_PUBLIC_URL).toString()
         }
       />
       <div className={styles.flexWraper}>
