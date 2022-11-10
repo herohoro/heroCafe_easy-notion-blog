@@ -141,10 +141,10 @@ const RenderPost = ({
       <DocumentHead
         title={post.Title}
         description={post.Excerpt}
-        urlOgImage={new URL(
-          `/notion_images/${post.PageId}.png`,
-          NEXT_PUBLIC_URL
-        ).toString()}
+        urlOgImage={
+          NEXT_PUBLIC_URL &&
+          new URL(`/api/og-image?slug=${post.Slug}`, NEXT_PUBLIC_URL).toString()
+        }
       />
       <div className={styles.flexWraper}>
         <div className={styles.mainContent}>
