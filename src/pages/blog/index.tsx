@@ -80,7 +80,6 @@ const RenderPosts = ({
                   <PostCategory post={post} />
                   <PostTitle post={post} />
                   <PostThumbnail post={post} />
-
                   <PostTags post={post} />
                   <PostExcerpt post={post} />
                 </div>
