@@ -433,7 +433,7 @@ const PostLinkListThumnail = ({ posts }) => {
           <div key={post.Slug} className={styles.flexWraper}>
             <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
               <img
-                src={`/notion_images/${post.PageId}.png`}
+                src={post.OGImage}
                 width={143.54}
                 height={75}
                 alt="thumbnail"
