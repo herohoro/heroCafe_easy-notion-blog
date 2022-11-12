@@ -31,7 +31,6 @@ import {
   getAllTags,
   getAllCategorys,
 } from '../../../lib/notion/client'
-import * as imageCache from '../../../lib/notion/image-cache'
 
 export async function getStaticProps({ params: { category } }) {
   const posts = await getPostsByCategory(category, NUMBER_OF_POSTS_PER_PAGE)
@@ -54,7 +53,6 @@ export async function getStaticProps({ params: { category } }) {
       revalidate: 30,
     }
   }
-  posts.forEach((p) => p.OGImage && imageCache.store(p.PageId, p.OGImage))
 
   return {
     props: {
