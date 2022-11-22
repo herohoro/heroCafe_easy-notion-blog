@@ -46,7 +46,7 @@
   box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 }
 .card {
-  width: 45%;
+  width: 40%;
 }
 .card:hover,
 .card:focus,
@@ -98,6 +98,12 @@
     display: none;
   }
 }
+@media (min-width: 1024px) {
+  .card {
+    width: 40%;
+  }
+}
+
 @media (max-width: 700px) {
   .grid {
     width: 100%;
