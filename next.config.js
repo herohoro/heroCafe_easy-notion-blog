@@ -42,4 +42,8 @@ module.exports = {
   },
 
   outputFileTracing: false,
+
+  experimental: {
+    appDir: true,
+  },
 }
