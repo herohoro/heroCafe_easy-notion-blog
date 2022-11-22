@@ -23,8 +23,6 @@ const DocumentHead = ({
         name="description"
         content={description ? description : NEXT_PUBLIC_SITE_DESCRIPTION}
       />
-
-      {/* ## 最新版コード */}
       {NEXT_PUBLIC_URL ? (
         <meta
           property="og:url"
@@ -39,33 +37,17 @@ const DocumentHead = ({
         property="og:description"
         content={description ? description : NEXT_PUBLIC_SITE_DESCRIPTION}
       />
-      <meta property="og:type" content="article" />
-
       {urlOgImage ? (
         <meta property="og:image" content={urlOgImage} />
       ) : NEXT_PUBLIC_URL ? (
         <meta property="og:image" content={defaultImageURL.toString()} />
       ) : null}
-
       <meta name="twitter:card" content="summary_large_image" />
       {urlOgImage ? (
         <meta name="twitter:image" content={urlOgImage} />
       ) : NEXT_PUBLIC_URL ? (
         <meta name="twitter:image" content={defaultImageURL.toString()} />
       ) : null}
-
-      <meta name="twitter:site" content="@mineral_30" />
-      {/* カード大小をしたかったらONにする
-      <meta
-        name="twitter:card"
-        content={
-          pathname === '/blog/[slug]' && urlOgImage
-            ? 'summary_large_image'
-            : 'summary'
-        }
-      /> */}
-
-      {/* <link rel="canonical" href={currentURL.toString()} /> */}
       {NEXT_PUBLIC_URL ? (
         <link
           rel="canonical"
@@ -75,5 +57,4 @@ const DocumentHead = ({
     </>
   )
 }
-
 export default DocumentHead
