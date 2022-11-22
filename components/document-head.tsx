@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { NEXT_PUBLIC_URL } from '../lib/notion/server-constants'
-
-export const SITE_TITLE = 'herohoroブログ'
-export const SITE_DESCRIPTION =
-  '非エンジニアがeasy-notion-blogを通して勉強しながらスキルアップをしていくブログ'
+import {
+  NEXT_PUBLIC_URL,
+  NEXT_PUBLIC_SITE_TITLE,
+  NEXT_PUBLIC_SITE_DESCRIPTION,
+} from '../lib/notion/server-constants'
 
 const DocumentHead = ({ title = '', description = '', urlOgImage = '' }) => {
   const { asPath } = useRouter()
@@ -15,12 +15,16 @@ const DocumentHead = ({ title = '', description = '', urlOgImage = '' }) => {
 
   return (
     <Head>
-      <title>{title ? `${title} - ${SITE_TITLE}` : SITE_TITLE}</title>
+      <title>
+        {title
+          ? `${title} - ${NEXT_PUBLIC_SITE_TITLE}`
+          : NEXT_PUBLIC_SITE_TITLE}
+      </title>
       <meta
         name="description"
-        content={description ? description : SITE_DESCRIPTION}
+        content={description ? description : NEXT_PUBLIC_SITE_DESCRIPTION}
       />
-      
+
       {/* ## 最新版コード */}
       {NEXT_PUBLIC_URL ? (
         <meta
@@ -28,32 +32,28 @@ const DocumentHead = ({ title = '', description = '', urlOgImage = '' }) => {
           content={new URL(asPath, NEXT_PUBLIC_URL).toString()}
         />
       ) : null}
-      <meta property="og:title" content={title ? title : SITE_TITLE} />
+      <meta
+        property="og:title"
+        content={title ? title : NEXT_PUBLIC_SITE_TITLE}
+      />
       <meta
         property="og:description"
-        content={description ? description : SITE_DESCRIPTION}
+        content={description ? description : NEXT_PUBLIC_SITE_DESCRIPTION}
       />
-      <meta property='og:type' content='article' />
-      
+      <meta property="og:type" content="article" />
+
       {urlOgImage ? (
         <meta property="og:image" content={urlOgImage} />
       ) : NEXT_PUBLIC_URL ? (
-        <meta
-          property="og:image"
-          content={defaultImageURL.toString()}
-        />
+        <meta property="og:image" content={defaultImageURL.toString()} />
       ) : null}
 
-        <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:card" content="summary_large_image" />
       {urlOgImage ? (
         <meta name="twitter:image" content={urlOgImage} />
       ) : NEXT_PUBLIC_URL ? (
-        <meta
-          name="twitter:image"
-          content={defaultImageURL.toString()}
-        />
+        <meta name="twitter:image" content={defaultImageURL.toString()} />
       ) : null}
-      
 
       <meta name="twitter:site" content="@mineral_30" />
       {/* カード大小をしたかったらONにする
@@ -65,7 +65,6 @@ const DocumentHead = ({ title = '', description = '', urlOgImage = '' }) => {
             : 'summary'
         }
       /> */}
-      
 
       {/* <link rel="canonical" href={currentURL.toString()} /> */}
       {NEXT_PUBLIC_URL ? (
