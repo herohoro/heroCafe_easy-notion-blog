@@ -19,7 +19,7 @@ import {
   getAllCategorys,
 } from '../lib/notion/client'
 
-import { INDEX_PAGE_ID } from '../lib/notion/server-constants'
+import { INDEX_PAGE_ID } from '../app/server-constants'
 
 import NotionBlocks from '../components/notion-block'
 

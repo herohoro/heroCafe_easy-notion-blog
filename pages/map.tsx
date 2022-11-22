@@ -19,7 +19,7 @@ import {
   getAllCategorys,
 } from '../lib/notion/client'
 
-import { MAP_PAGE_ID } from '../lib/notion/server-constants'
+import { MAP_PAGE_ID } from '../app/server-constants'
 
 import NotionBlocks from '../components/notion-block'
 
