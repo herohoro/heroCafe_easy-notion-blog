@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { NEXT_PUBLIC_URL } from '../../server-constants'
 import { Post } from '../../../lib/notion/interfaces'
+import GoogleAnalytics from '../../../components/google-analytics'
 import {
   BlogPostLink,
   BlogTagLink,
@@ -65,95 +66,98 @@ const BlogSlugPage = async ({ params: { slug } }) => {
   )
 
   return (
-    <div className={styles.container}>
-      <div className={styles.flexWraper}>
-        <div className={styles.mainContent}>
-          <div className={styles.postSlug}>
-            <div>
-              <PostDate post={post} />
-              <PostCategorySlug post={post} />
+    <>
+      <GoogleAnalytics pageTitle={post.Title} />
+      <div className={styles.container}>
+        <div className={styles.flexWraper}>
+          <div className={styles.mainContent}>
+            <div className={styles.postSlug}>
+              <div>
+                <PostDate post={post} />
+                <PostCategorySlug post={post} />
+              </div>
+
+              <PostTitleSlug post={post} enableLink={false} />
+              {/* <PostThumbnailSlug post={post} /> */}
+              <PostTagsSlug post={post} />
+              <br />
+              <hr />
+              <PostEditTimeStr post={post} />
+
+              <NoContents contents={blocks} />
+              <PostBody blocks={blocks} />
+              <ClosePhrase />
+
+              <footer>
+                {NEXT_PUBLIC_URL && (
+                  <SocialButtons
+                    title={post.Title}
+                    url={new URL(
+                      getBlogLink(post.Slug),
+                      NEXT_PUBLIC_URL
+                    ).toString()}
+                    id={post.Slug}
+                    like={post.Like}
+                  />
+                )}
+              </footer>
+              <p>
+                ▼　この記事に興味があったら同じタグから関連記事をのぞいてみてね
+              </p>
+              <PostTagsSlug post={post} />
             </div>
-
-            <PostTitleSlug post={post} enableLink={false} />
-            {/* <PostThumbnailSlug post={post} /> */}
-            <PostTagsSlug post={post} />
-            <br />
-            <hr />
-            <PostEditTimeStr post={post} />
-
-            <NoContents contents={blocks} />
-            <PostBody blocks={blocks} />
-            <ClosePhrase />
-
-            <footer>
-              {NEXT_PUBLIC_URL && (
-                <SocialButtons
-                  title={post.Title}
-                  url={new URL(
-                    getBlogLink(post.Slug),
-                    NEXT_PUBLIC_URL
-                  ).toString()}
-                  id={post.Slug}
-                  like={post.Like}
-                />
-              )}
-            </footer>
-            <p>
-              ▼　この記事に興味があったら同じタグから関連記事をのぞいてみてね
-            </p>
-            <PostTagsSlug post={post} />
           </div>
-        </div>
 
-        <div className={styles.subContent}>
-          <RssFeed />
-          <BlogCategoryLink heading="Category List" categorys={categorys} />
-          <BlogPostLink
-            heading="Posts in the same tag"
-            posts={sameTagPosts}
-            enableThumnail={true}
-          />
-          <BlogTagLink heading="Tag List" tags={tags} />
-          <BlogPostLink
-            heading="Recommended"
-            posts={rankedPosts}
-            enableThumnail={true}
-          />
-          <BlogPostLink
-            heading="Latest posts"
-            posts={recentPosts}
-            enableThumnail={true}
-          />
-          <TwitterTimeline />
-          <IndexList heading="★ MOKUJI ★" blocks={blocks} />
-        </div>
-      </div>
-      <div className={styles.endContent}>
-        <div className={styles.endSection}>
-          <BlogPostLink
-            heading="Posts in the same tag"
-            posts={sameTagPosts}
-            enableThumnail={true}
-          />
-          <PostTagsSlug post={post} />
-        </div>
-        <div className={styles.endSection}>
-          <BlogPostLink
-            heading="Latest posts"
-            posts={recentPosts}
-            enableThumnail={true}
-          />
-          <div className={styles.inlineCenter}>
+          <div className={styles.subContent}>
+            <RssFeed />
             <BlogCategoryLink heading="Category List" categorys={categorys} />
-            <NewPostList />
+            <BlogPostLink
+              heading="Posts in the same tag"
+              posts={sameTagPosts}
+              enableThumnail={true}
+            />
+            <BlogTagLink heading="Tag List" tags={tags} />
+            <BlogPostLink
+              heading="Recommended"
+              posts={rankedPosts}
+              enableThumnail={true}
+            />
+            <BlogPostLink
+              heading="Latest posts"
+              posts={recentPosts}
+              enableThumnail={true}
+            />
+            <TwitterTimeline />
+            <IndexList heading="★ MOKUJI ★" blocks={blocks} />
           </div>
         </div>
-        <div className={styles.endSection}>
-          <BlogTagLink heading="Tag List" tags={tags} />
-          <TwitterTimeline />
+        <div className={styles.endContent}>
+          <div className={styles.endSection}>
+            <BlogPostLink
+              heading="Posts in the same tag"
+              posts={sameTagPosts}
+              enableThumnail={true}
+            />
+            <PostTagsSlug post={post} />
+          </div>
+          <div className={styles.endSection}>
+            <BlogPostLink
+              heading="Latest posts"
+              posts={recentPosts}
+              enableThumnail={true}
+            />
+            <div className={styles.inlineCenter}>
+              <BlogCategoryLink heading="Category List" categorys={categorys} />
+              <NewPostList />
+            </div>
+          </div>
+          <div className={styles.endSection}>
+            <BlogTagLink heading="Tag List" tags={tags} />
+            <TwitterTimeline />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

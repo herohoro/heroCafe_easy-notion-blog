@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getTagLink } from '../../lib/blog-helpers'
+import GoogleAnalytics from '../../components/google-analytics'
 import styles from '../styles/page.module.css'
 import {
   getRankedPosts,
@@ -28,6 +29,7 @@ const MapPage = async () => {
   ])
   return (
     <>
+      <GoogleAnalytics pageTitle="Map" />
       <div className={styles.container}>
         <div className={styles.mainContent}>
           <div className={styles.flexTagsMain}>

@@ -1,4 +1,5 @@
 import { NUMBER_OF_POSTS_PER_PAGE } from '../../app/server-constants'
+import GoogleAnalytics from '../../components/google-analytics'
 import {
   BlogPostLink,
   BlogTagLink,
@@ -37,63 +38,66 @@ const BlogPage = async () => {
   ])
 
   return (
-    <div className={styles.container}>
-      <div className={styles.flexWraper}>
-        <div className={styles.mainContent}>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Image
-              src="/study-hero.jpeg"
-              width={300}
-              height={200}
-              objectFit="contain"
-              alt=""
-            />
-          </div>
-          <NoContents contents={posts} />
-          <div className={styles.mainGallery}>
-            {posts.map((post) => {
-              return (
-                <div className={styles.post} key={post.Slug}>
-                  <div className={styles.twoColums}>
-                    <PostDate post={post} />
-                    <PostLike post={post} />
+    <>
+      <GoogleAnalytics pageTitle="Blog" />
+      <div className={styles.container}>
+        <div className={styles.flexWraper}>
+          <div className={styles.mainContent}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Image
+                src="/study-hero.jpeg"
+                width={300}
+                height={200}
+                objectFit="contain"
+                alt=""
+              />
+            </div>
+            <NoContents contents={posts} />
+            <div className={styles.mainGallery}>
+              {posts.map((post) => {
+                return (
+                  <div className={styles.post} key={post.Slug}>
+                    <div className={styles.twoColums}>
+                      <PostDate post={post} />
+                      <PostLike post={post} />
+                    </div>
+                    <PostCategory post={post} />
+                    <PostTitle post={post} />
+                    <PostThumbnail post={post} />
+                    <PostTags post={post} />
+                    <PostExcerpt post={post} />
                   </div>
-                  <PostCategory post={post} />
-                  <PostTitle post={post} />
-                  <PostThumbnail post={post} />
-                  <PostTags post={post} />
-                  <PostExcerpt post={post} />
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
+            <footer>
+              <NextPageLink firstPost={firstPost} posts={posts} />
+            </footer>
           </div>
-          <footer>
-            <NextPageLink firstPost={firstPost} posts={posts} />
-          </footer>
+
+          <div className={styles.subContent}>
+            <RssFeed />
+            <BlogCategoryLink heading="Category List" categorys={categorys} />
+            <BlogTagLink heading="Tag List" tags={tags} />
+            <BlogPostLink heading="Recommended" posts={rankedPosts} />
+            <TwitterTimeline />
+          </div>
         </div>
 
-        <div className={styles.subContent}>
-          <RssFeed />
-          <BlogCategoryLink heading="Category List" categorys={categorys} />
-          <BlogTagLink heading="Tag List" tags={tags} />
-          <BlogPostLink heading="Recommended" posts={rankedPosts} />
-          <TwitterTimeline />
+        <div className={styles.endContent}>
+          <div className={styles.endSection}>
+            <BlogPostLink heading="Recommended" posts={rankedPosts} />
+          </div>
+          <div className={styles.endSection}>
+            <BlogCategoryLink heading="Category List" categorys={categorys} />
+            <TwitterTimeline />
+          </div>
+          <div className={styles.endSection}>
+            <BlogTagLink heading="Tag List" tags={tags} />
+          </div>
         </div>
       </div>
-
-      <div className={styles.endContent}>
-        <div className={styles.endSection}>
-          <BlogPostLink heading="Recommended" posts={rankedPosts} />
-        </div>
-        <div className={styles.endSection}>
-          <BlogCategoryLink heading="Category List" categorys={categorys} />
-          <TwitterTimeline />
-        </div>
-        <div className={styles.endSection}>
-          <BlogTagLink heading="Tag List" tags={tags} />
-        </div>
-      </div>
-    </div>
+    </>
   )
 }
 
