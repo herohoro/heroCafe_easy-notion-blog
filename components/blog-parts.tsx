@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { Post } from '../lib/notion/interfaces'
 import NotionBlocks from './notion-block'
 import MokujiBlocks from './mokuji-block'
@@ -176,66 +175,6 @@ export const NextPageLink = ({ firstPost, posts, tag = '', category = '' }) => {
       >
         <div className={styles.nextPageLink}>Next page ＞</div>
       </Link>
-    </div>
-  )
-}
-
-export const NextBackPageLink = ({
-  firstPost,
-  posts,
-  tag = '',
-  category = '',
-}) => {
-  const router = useRouter()
-  if (!firstPost) return null
-  if (posts.length === 0) return null
-
-  const lastPost = posts[posts.length - 1]
-
-  if (firstPost.Date === lastPost.Date) return null
-
-  return (
-    <div className={styles.nextContainer}>
-      <hr />
-      <div className={styles.buttonSubContainer}>
-        <a className={styles.backButton} onClick={() => router.back()}>
-          {' '}
-          ＜ Back{' '}
-        </a>
-        <Link
-          href={
-            tag
-              ? getTagBeforeLink(tag, lastPost.Date)
-              : category
-              ? getCategoryBeforeLink(category, lastPost.Date)
-              : getBeforeLink(lastPost.Date)
-          }
-        >
-          <div className={styles.nextPageLink}>Next ＞</div>
-        </Link>
-      </div>
-    </div>
-  )
-}
-
-export const BackPageLink = ({ firstPost, posts }) => {
-  const router = useRouter()
-  if (!firstPost) return null
-  if (posts.length === 0) return null
-
-  const lastPost = posts[posts.length - 1]
-
-  if (firstPost.Date !== lastPost.Date) return null
-
-  return (
-    <div className={styles.nextContainer}>
-      <hr />
-      <div className={styles.buttonSubContainer}>
-        <a className={styles.backButton} onClick={() => router.back()}>
-          {' '}
-          ＜ Back{' '}
-        </a>
-      </div>
     </div>
   )
 }
