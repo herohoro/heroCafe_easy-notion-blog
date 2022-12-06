@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { getTagLink } from '../../lib/blog-helpers'
 import GoogleAnalytics from '../../components/google-analytics'
-import styles from '../styles/page.module.css'
+import styles from '../../styles/page.module.css'
 import {
   getRankedPosts,
   getAllTags,
@@ -86,14 +86,15 @@ const MapPage = async () => {
               objectFit="contain"
               alt=""
             />
-            <ul>
-              <li>勉強が趣味</li>
-              <li>教えるの好き</li>
-              <li>オンライン学習塾で５画面を操り指導(自称：職人)</li>
-              <li>元教員・介護士</li>
-              <li>家の中では無限大</li>
-            </ul>
           </div>
+          <ul>
+            <li>勉強が趣味</li>
+            <li>教えるの好き</li>
+            <li>オンライン学習塾で５画面を操り指導(自称：職人)</li>
+            <li>元教員・介護士</li>
+            <li>家の中では無限大</li>
+          </ul>
+
           <h3>Study TimeLine</h3>
           <hr />
           <iframe
