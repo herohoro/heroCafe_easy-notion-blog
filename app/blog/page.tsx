@@ -2,13 +2,18 @@ import { NUMBER_OF_POSTS_PER_PAGE } from '../../app/server-constants'
 import {
   BlogPostLink,
   BlogTagLink,
+  BlogCategoryLink,
   NextPageLink,
   NoContents,
   PostDate,
   PostExcerpt,
   PostTags,
+  PostCategory,
   PostTitle,
-  ReadMoreLink,
+  PostThumbnail,
+  PostLike,
+  TwitterTimeline,
+  RssFeed,
 } from '../../components/blog-parts'
 import styles from '../../styles/blog.module.css'
 import {
@@ -16,43 +21,77 @@ import {
   getFirstPost,
   getRankedPosts,
   getAllTags,
+  getAllCategorys,
 } from '../../lib/notion/client'
+import Image from 'next/image'
 
 export const revalidate = 60
 
 const BlogPage = async () => {
-  const [posts, firstPost, rankedPosts, tags] = await Promise.all([
+  const [posts, firstPost, rankedPosts, tags, categorys] = await Promise.all([
     getPosts(NUMBER_OF_POSTS_PER_PAGE),
     getFirstPost(),
     getRankedPosts(),
     getAllTags(),
+    getAllCategorys(),
   ])
 
   return (
     <div className={styles.container}>
-      <div className={styles.mainContent}>
-        <NoContents contents={posts} />
+      <div className={styles.flexWraper}>
+        <div className={styles.mainContent}>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Image
+              src="/study-hero.jpeg"
+              width={300}
+              height={200}
+              objectFit="contain"
+              alt=""
+            />
+          </div>
+          <NoContents contents={posts} />
+          <div className={styles.mainGallery}>
+            {posts.map((post) => {
+              return (
+                <div className={styles.post} key={post.Slug}>
+                  <div className={styles.twoColums}>
+                    <PostDate post={post} />
+                    <PostLike post={post} />
+                  </div>
+                  <PostCategory post={post} />
+                  <PostTitle post={post} />
+                  <PostThumbnail post={post} />
+                  <PostTags post={post} />
+                  <PostExcerpt post={post} />
+                </div>
+              )
+            })}
+          </div>
+          <footer>
+            <NextPageLink firstPost={firstPost} posts={posts} />
+          </footer>
+        </div>
 
-        {posts.map(post => {
-          return (
-            <div className={styles.post} key={post.Slug}>
-              <PostDate post={post} />
-              <PostTags post={post} />
-              <PostTitle post={post} />
-              <PostExcerpt post={post} />
-              <ReadMoreLink post={post} />
-            </div>
-          )
-        })}
-
-        <footer>
-          <NextPageLink firstPost={firstPost} posts={posts} />
-        </footer>
+        <div className={styles.subContent}>
+          <RssFeed />
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
+          <BlogTagLink heading="Tag List" tags={tags} />
+          <BlogPostLink heading="Recommended" posts={rankedPosts} />
+          <TwitterTimeline />
+        </div>
       </div>
 
-      <div className={styles.subContent}>
-        <BlogPostLink heading="Recommended" posts={rankedPosts} />
-        <BlogTagLink heading="Categories" tags={tags} />
+      <div className={styles.endContent}>
+        <div className={styles.endSection}>
+          <BlogPostLink heading="Recommended" posts={rankedPosts} />
+        </div>
+        <div className={styles.endSection}>
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
+          <TwitterTimeline />
+        </div>
+        <div className={styles.endSection}>
+          <BlogTagLink heading="Tag List" tags={tags} />
+        </div>
       </div>
     </div>
   )
