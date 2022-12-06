@@ -37,7 +37,7 @@ const MapPage = async () => {
               if (tag === 'README' || tag === 'Q&A') {
                 return (
                   <div className={styles.tagMain}>
-                    <Link href="/blog/tag/[tag]" as={getTagLink(tag)} passHref>
+                    <Link href={getTagLink(tag)}>
                       <p>easy-notion-blog&apos; s {tag}</p>
                     </Link>
                   </div>

@@ -14,9 +14,9 @@ import {
   PostThumbnail,
   PostLike,
   TwitterTimeline,
-  NextBackPageLink,
-  BackPageLink,
 } from '../../../../../../components/blog-parts'
+import { NextBackPageLink } from '../../../../../../components/nextbackpage'
+import { BackPageLink } from '../../../../../../components/backpage'
 import {
   getPosts,
   getRankedPosts,

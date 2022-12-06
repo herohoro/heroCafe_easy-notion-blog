@@ -5,8 +5,6 @@ import {
   BlogPostLink,
   BlogTagLink,
   BlogCategoryLink,
-  NextBackPageLink,
-  BackPageLink,
   NoContents,
   PostDate,
   PostExcerpt,
@@ -18,6 +16,8 @@ import {
   //   ReadMoreLink,
   TwitterTimeline,
 } from '../../../../../../components/blog-parts'
+import { NextBackPageLink } from '../../../../../../components/nextbackpage'
+import { BackPageLink } from '../../../../../../components/backpage'
 import {
   getPosts,
   getRankedPosts,

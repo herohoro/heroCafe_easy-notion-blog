@@ -13,8 +13,6 @@ import {
   BlogTagLink,
   BlogCategoryLink,
   NoContents,
-  NextBackPageLink,
-  BackPageLink,
   PostDate,
   PostExcerpt,
   PostTags,
@@ -25,6 +23,8 @@ import {
   TwitterTimeline,
   RssFeed,
 } from '../../../../components/blog-parts'
+import { NextBackPageLink } from '../../../../components/nextbackpage'
+import { BackPageLink } from '../../../../components/backpage'
 import styles from '../../../../styles/blog.module.css'
 
 export const revalidate = 3600
