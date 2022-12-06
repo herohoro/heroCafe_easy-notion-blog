@@ -62,7 +62,7 @@ const RootPage = async () => {
               src="/hero-room.jpg"
               width={300}
               height={300}
-              objectFit="contain"
+              style={{ objectFit: 'contain' }}
               alt=""
             />
           </div>
@@ -87,24 +87,24 @@ const RootPage = async () => {
               src="/profile.png"
               width={200}
               height={200}
-              objectFit="contain"
+              style={{ objectFit: 'contain' }}
               alt=""
             />
             <Image
               src="/notion-essentials-badge.png"
               width={80}
               height={80}
-              objectFit="contain"
+              style={{ objectFit: 'contain' }}
               alt=""
             />
-            <ul>
-              <li>勉強が趣味</li>
-              <li>教えるの好き</li>
-              <li>オンライン学習塾で５画面を操り指導(自称：職人)</li>
-              <li>元教員・介護士</li>
-              <li>家の中では無限大</li>
-            </ul>
           </div>
+          <ul>
+            <li>勉強が趣味</li>
+            <li>教えるの好き</li>
+            <li>オンライン学習塾で５画面を操り指導(自称：職人)</li>
+            <li>元教員・介護士</li>
+            <li>家の中では無限大</li>
+          </ul>
           <h3>Study TimeLine</h3>
           <hr />
           <iframe

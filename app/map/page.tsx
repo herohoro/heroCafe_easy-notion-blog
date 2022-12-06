@@ -59,7 +59,7 @@ const MapPage = async () => {
               src="/study-hero.jpeg"
               width={300}
               height={300}
-              objectFit="contain"
+              style={{ objectFit: 'contain' }}
               alt=""
             />
           </div>
@@ -76,14 +76,14 @@ const MapPage = async () => {
               src="/profile.png"
               width={200}
               height={200}
-              objectFit="contain"
+              style={{ objectFit: 'contain' }}
               alt=""
             />
             <Image
               src="/notion-essentials-badge.png"
               width={80}
               height={80}
-              objectFit="contain"
+              style={{ objectFit: 'contain' }}
               alt=""
             />
           </div>

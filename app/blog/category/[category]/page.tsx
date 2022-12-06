@@ -35,7 +35,7 @@ export async function generateStaticParams() {
   return categorys.map((category) => ({ category: category }))
 }
 
-const BlogTagPage = async ({ params: { category: encodedCategory } }) => {
+const BlogCategoryPage = async ({ params: { category: encodedCategory } }) => {
   const category = decodeURIComponent(encodedCategory)
 
   const posts = await getPostsByCategory(category, NUMBER_OF_POSTS_PER_PAGE)
@@ -117,4 +117,4 @@ const BlogTagPage = async ({ params: { category: encodedCategory } }) => {
   )
 }
 
-export default BlogTagPage
+export default BlogCategoryPage

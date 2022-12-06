@@ -97,7 +97,7 @@ export const PostCategorySlug = ({ post }) => (
   <div className={`${post.CategoryColor}`}>
     {post.Category && post.Category.length > 0 && (
       <Link href={getCategoryLink(post.Category)} key={post.Category}>
-        <a className={styles.categoryText}>{post.Category}</a>
+        <div className={styles.categoryText}>{post.Category}</div>
       </Link>
     )}
   </div>
@@ -117,7 +117,9 @@ export const PostTags = ({ post }) => (
 export const PostCategory = ({ post }) => (
   <div className={`${post.CategoryColor}`}>
     <Link href={getCategoryLink(post.Category)} key={post.Category}>
-      <a className={styles.linkButton}>{post.Category ? post.Category : ''}</a>
+      <div className={styles.linkButton}>
+        {post.Category ? post.Category : ''}
+      </div>
     </Link>
   </div>
 )

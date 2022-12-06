@@ -29,7 +29,7 @@ const Header = () => {
             src="/herohoro_title.png"
             width={400}
             height={100}
-            objectFit="contain"
+            style={{ objectFit: 'contain' }}
             alt={NEXT_PUBLIC_SITE_TITLE}
           />
         </Link>

@@ -40,7 +40,7 @@ const RenderPostsSpace = async () => {
                   src="/fukidashi.png"
                   width={100}
                   height={100}
-                  objectFit="contain"
+                  style={{ objectFit: 'contain' }}
                   alt=""
                 />
                 {secMessages.map((secMessage) => {
