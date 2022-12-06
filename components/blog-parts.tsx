@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { Post } from '../lib/notion/interfaces'
 import NotionBlocks from './notion-block'
 import MokujiBlocks from './mokuji-block'
@@ -34,14 +33,14 @@ export const PostEditTimeStr = ({ post }) => (
 )
 export const PostThumbnail = ({ post }) => (
   <div className={styles.thumbnail}>
-    <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
+    <Link href={getBlogLink(post.Slug)}>
       <img src={post.OGImage} width={300} height={160} alt="thumbnail" />
     </Link>
   </div>
 )
 export const PostThumbnailSlug = ({ post }) => (
   <div className={styles.thumbnailSlug}>
-    <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
+    <Link href={getBlogLink(post.Slug)}>
       <img src={post.OGImage} width={800} height={420} alt="thumbnail" />
     </Link>
   </div>
@@ -52,9 +51,7 @@ export const PostTitle = ({ post, enableLink = true }) => {
   return (
     <h3 className={styles.postTitle}>
       {enableLink ? (
-        <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
-          <a>{postTitle}</a>
-        </Link>
+        <Link href={getBlogLink(post.Slug)}>{postTitle}</Link>
       ) : (
         postTitle
       )}
@@ -78,9 +75,7 @@ export const PostTitleSlug = ({ post, enableLink = true }) => {
   return (
     <h2 className={styles.postTitleSlug}>
       {enableLink ? (
-        <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
-          <a>{postTitle}</a>
-        </Link>
+        <Link href={getBlogLink(post.Slug)}>{postTitle}</Link>
       ) : (
         postTitle
       )}
@@ -92,8 +87,8 @@ export const PostTagsSlug = ({ post }) => (
     {post.Tags &&
       post.Tags.length > 0 &&
       post.Tags.map((tag) => (
-        <Link href="/blog/tag/[tag]" as={getTagLink(tag)} key={tag} passHref>
-          <a>{tag}</a>
+        <Link href={getTagLink(tag)} key={tag}>
+          {tag}
         </Link>
       ))}
   </div>
@@ -101,13 +96,8 @@ export const PostTagsSlug = ({ post }) => (
 export const PostCategorySlug = ({ post }) => (
   <div className={`${post.CategoryColor}`}>
     {post.Category && post.Category.length > 0 && (
-      <Link
-        href="/blog/category/[category]"
-        as={getCategoryLink(post.Category)}
-        key={post.Category}
-        passHref
-      >
-        <a className={styles.categoryText}>{post.Category}</a>
+      <Link href={getCategoryLink(post.Category)} key={post.Category}>
+        <div className={styles.categoryText}>{post.Category}</div>
       </Link>
     )}
   </div>
@@ -118,21 +108,18 @@ export const PostTags = ({ post }) => (
     {post.Tags &&
       post.Tags.length > 0 &&
       post.Tags.map((tag: string) => (
-        <Link href="/blog/tag/[tag]" as={getTagLink(tag)} key={tag} passHref>
-          <a>{tag}</a>
+        <Link href={getTagLink(tag)} key={tag}>
+          {tag}
         </Link>
       ))}
   </div>
 )
 export const PostCategory = ({ post }) => (
   <div className={`${post.CategoryColor}`}>
-    <Link
-      href="/blog/category/[category]"
-      as={getCategoryLink(post.Category)}
-      key={post.Category}
-      passHref
-    >
-      <a className={styles.linkButton}>{post.Category ? post.Category : ''}</a>
+    <Link href={getCategoryLink(post.Category)} key={post.Category}>
+      <div className={styles.linkButton}>
+        {post.Category ? post.Category : ''}
+      </div>
     </Link>
   </div>
 )
@@ -161,8 +148,8 @@ export const ClosePhrase = () => (
 )
 export const ReadMoreLink = ({ post }) => (
   <div className={styles.readMoreLink}>
-    <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
-      <a className={styles.readMore}>Read more</a>
+    <Link href={getBlogLink(post.Slug)} className={styles.readMore}>
+      Read more
     </Link>
   </div>
 )
@@ -182,90 +169,14 @@ export const NextPageLink = ({ firstPost, posts, tag = '', category = '' }) => {
       <Link
         href={
           tag
-            ? '/blog/tag/[tag]/before/[date]'
-            : category
-            ? '/blog/category/[category]/before/[date]'
-            : '/blog/before/[date]'
-        }
-        as={
-          tag
             ? getTagBeforeLink(tag, lastPost.Date)
             : category
             ? getCategoryBeforeLink(category, lastPost.Date)
             : getBeforeLink(lastPost.Date)
         }
-        passHref
       >
-        <a className={styles.nextPageLink}>Next page ＞</a>
+        <div className={styles.nextPageLink}>Next page ＞</div>
       </Link>
-    </div>
-  )
-}
-
-export const NextBackPageLink = ({
-  firstPost,
-  posts,
-  tag = '',
-  category = '',
-}) => {
-  const router = useRouter()
-  if (!firstPost) return null
-  if (posts.length === 0) return null
-
-  const lastPost = posts[posts.length - 1]
-
-  if (firstPost.Date === lastPost.Date) return null
-
-  return (
-    <div className={styles.nextContainer}>
-      <hr />
-      <div className={styles.buttonSubContainer}>
-        <a className={styles.backButton} onClick={() => router.back()}>
-          {' '}
-          ＜ Back{' '}
-        </a>
-        <Link
-          href={
-            tag
-              ? '/blog/tag/[tag]/before/[date]'
-              : category
-              ? '/blog/category/[category]/before/[date]'
-              : '/blog/before/[date]'
-          }
-          as={
-            tag
-              ? getTagBeforeLink(tag, lastPost.Date)
-              : category
-              ? getCategoryBeforeLink(category, lastPost.Date)
-              : getBeforeLink(lastPost.Date)
-          }
-          passHref
-        >
-          <a className={styles.nextPageLink}>Next ＞</a>
-        </Link>
-      </div>
-    </div>
-  )
-}
-
-export const BackPageLink = ({ firstPost, posts }) => {
-  const router = useRouter()
-  if (!firstPost) return null
-  if (posts.length === 0) return null
-
-  const lastPost = posts[posts.length - 1]
-
-  if (firstPost.Date !== lastPost.Date) return null
-
-  return (
-    <div className={styles.nextContainer}>
-      <hr />
-      <div className={styles.buttonSubContainer}>
-        <a className={styles.backButton} onClick={() => router.back()}>
-          {' '}
-          ＜ Back{' '}
-        </a>
-      </div>
     </div>
   )
 }
@@ -309,7 +220,7 @@ export const NoContents = ({ contents }) => {
 }
 export const NewPostList = () => (
   <div className={styles.newPostList}>
-    <Link href="/blog" passHref>
+    <Link href="/blog">
       <p> 🔍　to Blog List </p>
     </Link>
   </div>
@@ -414,9 +325,7 @@ export const PostLinkList = ({ posts }) => {
       {posts.map((post: Post) => {
         return (
           <li key={post.Slug}>
-            <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
-              <a>{post.Title}</a>
-            </Link>
+            <Link href={getBlogLink(post.Slug)}>{post.Title}</Link>
             <span> &#x1f91f; {post.LikeRank}</span>
           </li>
         )
@@ -431,7 +340,7 @@ const PostLinkListThumnail = ({ posts }) => {
       {posts.map((post) => {
         return (
           <div key={post.Slug} className={styles.flexWraper}>
-            <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
+            <Link href={getBlogLink(post.Slug)}>
               <img
                 src={post.OGImage}
                 width={143.54}
@@ -440,7 +349,7 @@ const PostLinkListThumnail = ({ posts }) => {
               />
             </Link>
             <div>
-              <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
+              <Link href={getBlogLink(post.Slug)}>
                 <a>{post.Title}</a>
               </Link>
               <span> &#x1f91f; {post.LikeRank}</span>
@@ -459,9 +368,7 @@ export const TagLinkList = ({ tags }) => {
       {tags.map((tag: string) => {
         return (
           <li key={tag}>
-            <Link href="/blog/tag/[tag]" as={getTagLink(tag)} passHref>
-              <a>{tag}</a>
-            </Link>
+            <Link href={getTagLink(tag)}>{tag}</Link>
           </li>
         )
       })}
@@ -477,13 +384,7 @@ export const CategoryLinkNoList = ({ categorys }) => {
       {categorys.map((category: string) => {
         return (
           <div key={category} className={styles.categoryNoList}>
-            <Link
-              href="/blog/category/[category]"
-              as={getCategoryLink(category)}
-              passHref
-            >
-              <a>{category}</a>
-            </Link>
+            <Link href={getCategoryLink(category)}>{category}</Link>
           </div>
         )
       })}
@@ -499,7 +400,7 @@ export const TagLinkNoList = ({ tags }) => {
       {tags.map((tag) => {
         return (
           <div className={styles.tagSub} key={tag}>
-            <Link href="/blog/tag/[tag]" as={getTagLink(tag)} passHref>
+            <Link href={getTagLink(tag)}>
               <p>{tag}</p>
             </Link>
           </div>

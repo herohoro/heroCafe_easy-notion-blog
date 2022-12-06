@@ -1,7 +1,7 @@
 import {
   SEC_NOTION_API_SECRET,
   SEC_DATABASE_ID,
-} from '../notion/server-constants'
+} from '../../app/server-constants'
 import { Post } from './interfaces'
 
 const { Client } = require('@notionhq/client')

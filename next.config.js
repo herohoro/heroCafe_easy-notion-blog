@@ -3,7 +3,7 @@ const path = require('path')
 const {
   NOTION_API_SECRET,
   DATABASE_ID,
-} = require('./lib/notion/server-constants')
+} = require('./app/server-constants')
 
 const warnOrError =
   process.env.NODE_ENV !== 'production' || process.env.GITHUB_ACTIONS
@@ -42,4 +42,8 @@ module.exports = {
   },
 
   outputFileTracing: false,
+
+  experimental: {
+    appDir: true,
+  },
 }

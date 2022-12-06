@@ -1,7 +1,9 @@
+'use client'
+
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { NEXT_PUBLIC_SITE_TITLE } from '../lib/notion/server-constants'
+import { NEXT_PUBLIC_SITE_TITLE } from '../app/server-constants'
 import styles from '../styles/header.module.css'
 
 interface NavItem {
@@ -10,7 +12,7 @@ interface NavItem {
 }
 
 const Header = () => {
-  const { asPath } = useRouter()
+  const pathname = usePathname()
 
   const navItems: NavItem[] = [
     { label: 'Home', path: '/' },
@@ -22,12 +24,12 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <h1>
-        <Link href="/" passHref>
+        <Link href="/">
           <Image
             src="/herohoro_title.png"
             width={400}
             height={100}
-            objectFit="contain"
+            style={{ objectFit: 'contain' }}
             alt={NEXT_PUBLIC_SITE_TITLE}
           />
         </Link>
@@ -36,8 +38,8 @@ const Header = () => {
       <ul className={styles.naviContent}>
         {navItems.map(({ label, path }) => (
           <li key={label}>
-            <Link href={path} passHref>
-              <a className={asPath === path ? 'active' : null}>{label}</a>
+            <Link href={path} className={pathname === path ? 'active' : null}>
+              {label}
             </Link>
           </li>
         ))}
