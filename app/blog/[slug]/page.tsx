@@ -4,11 +4,20 @@ import { Post } from '../../../lib/notion/interfaces'
 import {
   BlogPostLink,
   BlogTagLink,
+  BlogCategoryLink,
   NoContents,
   PostBody,
   PostDate,
-  PostTags,
-  PostTitle,
+  PostEditTimeStr,
+  PostTitleSlug,
+  PostTagsSlug,
+  PostCategorySlug,
+  // PostThumbnailSlug,
+  TwitterTimeline,
+  ClosePhrase,
+  IndexList,
+  NewPostList,
+  RssFeed,
 } from '../../../components/blog-parts'
 import SocialButtons from '../../../components/social-buttons'
 import styles from '../../../styles/blog.module.css'
@@ -20,6 +29,7 @@ import {
   getPostBySlug,
   getPostsByTag,
   getAllTags,
+  getAllCategorys,
   getAllBlocksByBlockId,
 } from '../../../lib/notion/client'
 
@@ -28,7 +38,7 @@ export const dynamicParams = false
 
 export async function generateStaticParams() {
   const posts = await getAllPosts()
-  return posts.map(p => ({ slug: p.Slug }))
+  return posts.map((p) => ({ slug: p.Slug }))
 }
 
 const BlogSlugPage = async ({ params: { slug } }) => {
@@ -39,56 +49,108 @@ const BlogSlugPage = async ({ params: { slug } }) => {
     redirect('/blog')
   }
 
-  const [
-    blocks,
-    rankedPosts,
-    recentPosts,
-    tags,
-    sameTagPosts,
-  ] = await Promise.all([
-    getAllBlocksByBlockId(post.PageId),
-    getRankedPosts(),
-    getPosts(5),
-    getAllTags(),
-    getPostsByTag(post.Tags[0], 6),
-  ])
+  const [blocks, rankedPosts, recentPosts, tags, sameTagPosts, categorys] =
+    await Promise.all([
+      getAllBlocksByBlockId(post.PageId),
+      getRankedPosts(),
+      getPosts(5),
+      getAllTags(),
+      getPostsByTag(post.Tags[0], 6),
+      getAllCategorys(),
+    ])
 
-  const otherPostsHavingSameTag = sameTagPosts.filter((p: Post) => p.Slug !== post.Slug)
+  const otherPostsHavingSameTag = sameTagPosts.filter(
+    (p: Post) => p.Slug !== post.Slug
+  )
 
   return (
     <div className={styles.container}>
-      <div className={styles.mainContent}>
-        <div className={styles.post}>
-          <PostDate post={post} />
-          <PostTags post={post} />
-          <PostTitle post={post} enableLink={false} />
+      <div className={styles.flexWraper}>
+        <div className={styles.mainContent}>
+          <div className={styles.postSlug}>
+            <div>
+              <PostDate post={post} />
+              <PostCategorySlug post={post} />
+            </div>
 
-          <NoContents contents={blocks} />
-          <PostBody blocks={blocks} />
+            <PostTitleSlug post={post} enableLink={false} />
+            {/* <PostThumbnailSlug post={post} /> */}
+            <PostTagsSlug post={post} />
+            <br />
+            <hr />
+            <PostEditTimeStr post={post} />
 
-          <footer>
-            {NEXT_PUBLIC_URL && (
-              <SocialButtons
-                title={post.Title}
-                url={new URL(
-                  getBlogLink(post.Slug),
-                  NEXT_PUBLIC_URL
-                ).toString()}
-                id={post.Slug}
-              />
-            )}
-          </footer>
+            <NoContents contents={blocks} />
+            <PostBody blocks={blocks} />
+            <ClosePhrase />
+
+            <footer>
+              {NEXT_PUBLIC_URL && (
+                <SocialButtons
+                  title={post.Title}
+                  url={new URL(
+                    getBlogLink(post.Slug),
+                    NEXT_PUBLIC_URL
+                  ).toString()}
+                  id={post.Slug}
+                  like={post.Like}
+                />
+              )}
+            </footer>
+            <p>
+              ▼　この記事に興味があったら同じタグから関連記事をのぞいてみてね
+            </p>
+            <PostTagsSlug post={post} />
+          </div>
+        </div>
+
+        <div className={styles.subContent}>
+          <RssFeed />
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
+          <BlogPostLink
+            heading="Posts in the same tag"
+            posts={sameTagPosts}
+            enableThumnail={true}
+          />
+          <BlogTagLink heading="Tag List" tags={tags} />
+          <BlogPostLink
+            heading="Recommended"
+            posts={rankedPosts}
+            enableThumnail={true}
+          />
+          <BlogPostLink
+            heading="Latest posts"
+            posts={recentPosts}
+            enableThumnail={true}
+          />
+          <TwitterTimeline />
+          <IndexList heading="★ MOKUJI ★" blocks={blocks} />
         </div>
       </div>
-
-      <div className={styles.subContent}>
-        <BlogPostLink
-          heading="Posts in the same category"
-          posts={otherPostsHavingSameTag}
-        />
-        <BlogPostLink heading="Recommended" posts={rankedPosts} />
-        <BlogPostLink heading="Latest posts" posts={recentPosts} />
-        <BlogTagLink heading="Categories" tags={tags} />
+      <div className={styles.endContent}>
+        <div className={styles.endSection}>
+          <BlogPostLink
+            heading="Posts in the same tag"
+            posts={sameTagPosts}
+            enableThumnail={true}
+          />
+          <PostTagsSlug post={post} />
+        </div>
+        <div className={styles.endSection}>
+          <BlogPostLink
+            heading="Latest posts"
+            posts={recentPosts}
+            enableThumnail={true}
+          />
+          <div className={styles.inlineCenter}>
+            <BlogCategoryLink heading="Category List" categorys={categorys} />
+            <NewPostList />
+          </div>
+        </div>
+        <div className={styles.endSection}>
+          <BlogTagLink heading="Tag List" tags={tags} />
+          <TwitterTimeline />
+        </div>
       </div>
     </div>
   )
