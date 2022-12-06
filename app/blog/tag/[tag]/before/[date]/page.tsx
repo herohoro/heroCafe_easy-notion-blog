@@ -3,13 +3,19 @@ import { NUMBER_OF_POSTS_PER_PAGE } from '../../../../../../app/server-constants
 import {
   BlogPostLink,
   BlogTagLink,
-  NextPageLink,
+  BlogCategoryLink,
+  NextBackPageLink,
+  BackPageLink,
   NoContents,
   PostDate,
   PostExcerpt,
   PostTags,
+  PostCategory,
   PostTitle,
-  ReadMoreLink,
+  PostThumbnail,
+  PostLike,
+  //   ReadMoreLink,
+  TwitterTimeline,
 } from '../../../../../../components/blog-parts'
 import {
   getPosts,
@@ -17,12 +23,15 @@ import {
   getPostsByTagBefore,
   getFirstPostByTag,
   getAllTags,
+  getAllCategorys,
 } from '../../../../../../lib/notion/client'
 import styles from '../../../../../../styles/blog.module.css'
 
 export const revalidate = 3600
 
-const BlogTagBeforeDatePage = async ({ params: { tag: encodedTag, date: encodedDate } }) => {
+const BlogTagBeforeDatePage = async ({
+  params: { tag: encodedTag, date: encodedDate },
+}) => {
   const tag = decodeURIComponent(encodedTag)
   const date = decodeURIComponent(encodedDate)
 
@@ -30,44 +39,69 @@ const BlogTagBeforeDatePage = async ({ params: { tag: encodedTag, date: encodedD
     notFound()
   }
 
-  const [posts, firstPost, rankedPosts, recentPosts, tags] = await Promise.all([
-    getPostsByTagBefore(tag, date, NUMBER_OF_POSTS_PER_PAGE),
-    getFirstPostByTag(tag),
-    getRankedPosts(),
-    getPosts(5),
-    getAllTags(),
-  ])
+  const [posts, firstPost, rankedPosts, recentPosts, tags, categorys] =
+    await Promise.all([
+      getPostsByTagBefore(tag, date, NUMBER_OF_POSTS_PER_PAGE),
+      getFirstPostByTag(tag),
+      getRankedPosts(),
+      getPosts(5),
+      getAllTags(),
+      getAllCategorys(),
+    ])
 
   return (
     <div className={styles.container}>
-      <div className={styles.mainContent}>
-        <header>
-          <h2>{tag} before {date.split('T')[0]}</h2>
-        </header>
+      <div className={styles.flexWraper}>
+        <div className={styles.mainContent}>
+          <header className={styles.mainTop}>
+            <h2>{tag}</h2>
+          </header>
+          <div className={styles.mainGallery}>
+            <NoContents contents={posts} />
 
-        <NoContents contents={posts} />
+            {posts.map((post) => {
+              return (
+                <div className={styles.post} key={post.Slug}>
+                  <div className={styles.twoColums}>
+                    <PostDate post={post} />
+                    <PostLike post={post} />
+                  </div>
+                  <PostCategory post={post} />
+                  <PostTitle post={post} />
+                  <PostThumbnail post={post} />
+                  <PostTags post={post} />
+                  <PostExcerpt post={post} />
+                </div>
+              )
+            })}
+          </div>
 
-        {posts.map(post => {
-          return (
-            <div className={styles.post} key={post.Slug}>
-              <PostDate post={post} />
-              <PostTags post={post} />
-              <PostTitle post={post} />
-              <PostExcerpt post={post} />
-              <ReadMoreLink post={post} />
-            </div>
-          )
-        })}
+          <footer>
+            <NextBackPageLink firstPost={firstPost} posts={posts} tag={tag} />
+            <BackPageLink firstPost={firstPost} posts={posts} />
+          </footer>
+        </div>
 
-        <footer>
-          <NextPageLink firstPost={firstPost} posts={posts} tag={tag} />
-        </footer>
+        <div className={styles.subContent}>
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
+          <BlogTagLink heading="Tag List" tags={tags} />
+          <BlogPostLink heading="Recommended" posts={rankedPosts} />
+          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
+          <TwitterTimeline />
+        </div>
       </div>
-
-      <div className={styles.subContent}>
-        <BlogPostLink heading="Recommended" posts={rankedPosts} />
-        <BlogPostLink heading="Latest Posts" posts={recentPosts} />
-        <BlogTagLink heading="Categories" tags={tags} />
+      <div className={styles.endContent}>
+        <div className={styles.endSection}>
+          <BlogPostLink heading="Recommended" posts={rankedPosts} />
+        </div>
+        <div className={styles.endSection}>
+          <BlogCategoryLink heading="Category List" categorys={categorys} />
+          <BlogPostLink heading="Latest Posts" posts={recentPosts} />
+        </div>
+        <div className={styles.endSection}>
+          <BlogTagLink heading="Tag List" tags={tags} />
+          <TwitterTimeline />
+        </div>
       </div>
     </div>
   )
