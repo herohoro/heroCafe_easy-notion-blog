@@ -34,14 +34,14 @@ export const PostEditTimeStr = ({ post }) => (
 )
 export const PostThumbnail = ({ post }) => (
   <div className={styles.thumbnail}>
-    <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
+    <Link href={getBlogLink(post.Slug)}>
       <img src={post.OGImage} width={300} height={160} alt="thumbnail" />
     </Link>
   </div>
 )
 export const PostThumbnailSlug = ({ post }) => (
   <div className={styles.thumbnailSlug}>
-    <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
+    <Link href={getBlogLink(post.Slug)}>
       <img src={post.OGImage} width={800} height={420} alt="thumbnail" />
     </Link>
   </div>
@@ -76,9 +76,7 @@ export const PostTitleSlug = ({ post, enableLink = true }) => {
   return (
     <h2 className={styles.postTitleSlug}>
       {enableLink ? (
-        <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
-          <a>{postTitle}</a>
-        </Link>
+        <Link href={getBlogLink(post.Slug)}>{postTitle}</Link>
       ) : (
         postTitle
       )}
@@ -90,8 +88,8 @@ export const PostTagsSlug = ({ post }) => (
     {post.Tags &&
       post.Tags.length > 0 &&
       post.Tags.map((tag) => (
-        <Link href="/blog/tag/[tag]" as={getTagLink(tag)} key={tag} passHref>
-          <a>{tag}</a>
+        <Link href={getTagLink(tag)} key={tag}>
+          {tag}
         </Link>
       ))}
   </div>
@@ -99,12 +97,7 @@ export const PostTagsSlug = ({ post }) => (
 export const PostCategorySlug = ({ post }) => (
   <div className={`${post.CategoryColor}`}>
     {post.Category && post.Category.length > 0 && (
-      <Link
-        href="/blog/category/[category]"
-        as={getCategoryLink(post.Category)}
-        key={post.Category}
-        passHref
-      >
+      <Link href={getCategoryLink(post.Category)} key={post.Category}>
         <a className={styles.categoryText}>{post.Category}</a>
       </Link>
     )}
@@ -124,12 +117,7 @@ export const PostTags = ({ post }) => (
 )
 export const PostCategory = ({ post }) => (
   <div className={`${post.CategoryColor}`}>
-    <Link
-      href="/blog/category/[category]"
-      as={getCategoryLink(post.Category)}
-      key={post.Category}
-      passHref
-    >
+    <Link href={getCategoryLink(post.Category)} key={post.Category}>
       <a className={styles.linkButton}>{post.Category ? post.Category : ''}</a>
     </Link>
   </div>
@@ -217,21 +205,13 @@ export const NextBackPageLink = ({
         <Link
           href={
             tag
-              ? '/blog/tag/[tag]/before/[date]'
-              : category
-              ? '/blog/category/[category]/before/[date]'
-              : '/blog/before/[date]'
-          }
-          as={
-            tag
               ? getTagBeforeLink(tag, lastPost.Date)
               : category
               ? getCategoryBeforeLink(category, lastPost.Date)
               : getBeforeLink(lastPost.Date)
           }
-          passHref
         >
-          <a className={styles.nextPageLink}>Next ＞</a>
+          <div className={styles.nextPageLink}>Next ＞</div>
         </Link>
       </div>
     </div>
@@ -299,7 +279,7 @@ export const NoContents = ({ contents }) => {
 }
 export const NewPostList = () => (
   <div className={styles.newPostList}>
-    <Link href="/blog" passHref>
+    <Link href="/blog">
       <p> 🔍　to Blog List </p>
     </Link>
   </div>
@@ -419,7 +399,7 @@ const PostLinkListThumnail = ({ posts }) => {
       {posts.map((post) => {
         return (
           <div key={post.Slug} className={styles.flexWraper}>
-            <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
+            <Link href={getBlogLink(post.Slug)}>
               <img
                 src={post.OGImage}
                 width={143.54}
@@ -428,7 +408,7 @@ const PostLinkListThumnail = ({ posts }) => {
               />
             </Link>
             <div>
-              <Link href="/blog/[slug]" as={getBlogLink(post.Slug)} passHref>
+              <Link href={getBlogLink(post.Slug)}>
                 <a>{post.Title}</a>
               </Link>
               <span> &#x1f91f; {post.LikeRank}</span>
@@ -463,13 +443,7 @@ export const CategoryLinkNoList = ({ categorys }) => {
       {categorys.map((category: string) => {
         return (
           <div key={category} className={styles.categoryNoList}>
-            <Link
-              href="/blog/category/[category]"
-              as={getCategoryLink(category)}
-              passHref
-            >
-              <a>{category}</a>
-            </Link>
+            <Link href={getCategoryLink(category)}>{category}</Link>
           </div>
         )
       })}
@@ -485,9 +459,7 @@ export const TagLinkNoList = ({ tags }) => {
       {tags.map((tag) => {
         return (
           <div className={styles.tagSub} key={tag}>
-            <Link href="/blog/tag/[tag]" as={getTagLink(tag)} passHref>
-              <p>{tag}</p>
-            </Link>
+            <Link href={getTagLink(tag)}>{tag}</Link>
           </div>
         )
       })}
