@@ -400,7 +400,9 @@ export const TagLinkNoList = ({ tags }) => {
       {tags.map((tag) => {
         return (
           <div className={styles.tagSub} key={tag}>
-            <Link href={getTagLink(tag)}>{tag}</Link>
+            <Link href={getTagLink(tag)}>
+              <p>{tag}</p>
+            </Link>
           </div>
         )
       })}
