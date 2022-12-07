@@ -128,8 +128,11 @@
   white-space: pre-wrap;
 }
 .postSlug :global(video),
+.subContent :global(video),
 .postSlug :global(img),
-.postSlug :global(.asset-wrapper) {
+.subContent :global(img),
+.postSlug :global(.asset-wrapper),
+.subContent :global(.asset-wrapper) {
   max-width: 100%;
   display: inline-block;
   border: 3px groove #dddddd;
@@ -142,22 +145,27 @@
   color: var(--fg);
 }
 
-.post :global(.tweet) {
+.post :global(.tweet),
+.subContent :global(.tweet) {
   margin: 2rem auto;
   text-align: center;
 }
-.postSlug table {
+.postSlug table,
+.subContent table {
   margin: 1rem 0;
 }
-.postSlug ul {
+.postSlug ul,
+.subContent ul {
   font-size: 1rem;
   list-style-type: square;
 }
-.postSlug ol {
+.postSlug ol,
+.subContent ol {
   font-size: 1rem;
 }
 
-.postSlug p code {
+.postSlug p code,
+.subContent p code {
   color: #eb5757;
   padding: 0.25rem;
 }
