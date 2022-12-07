@@ -13,7 +13,6 @@ import {
   PostTitleSlug,
   PostTagsSlug,
   PostCategorySlug,
-  ClosePhrase,
   IndexList,
   NewPostList,
 } from '../../../components/blog-parts'
@@ -82,7 +81,6 @@ const BlogSlugPage = async ({ params: { slug } }) => {
 
               <NoContents contents={blocks} />
               <PostBody blocks={blocks} />
-              <ClosePhrase />
 
               <footer>
                 {NEXT_PUBLIC_URL && (
