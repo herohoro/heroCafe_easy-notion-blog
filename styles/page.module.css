@@ -28,11 +28,14 @@
   white-space: pre-wrap;
 }
 .mainContent :global(video),
+.subContent :global(video),
 .mainContent :global(img),
-.mainContent :global(.asset-wrapper) {
+.subContent :global(img),
+.mainContent :global(.asset-wrapper),
+.subContent :global(.asset-wrapper) {
   max-width: 100%;
   display: inline-block;
-  border: 3px groove #dddddd;
+  border: 3px groove #dddddd61;
   border-radius: 10px;
 }
 .mainContent :global(a) {
@@ -42,22 +45,27 @@
   color: var(--hero-hover-fg);
 }
 
-.mainContent :global(.tweet) {
+.mainContent :global(.tweet),
+.subContent :global(.tweet) {
   margin: 2rem auto;
   text-align: center;
 }
-.mainContent table {
+.mainContent table,
+.subContent table {
   margin: 1rem 0;
 }
-.mainContent ul {
+.mainContent ul,
+.subContent ul {
   font-size: 1rem;
   list-style-type: square;
 }
-.mainContent ol {
+.mainContent ol,
+.subContent ol {
   font-size: 1rem;
 }
 
-.mainContent p code {
+.mainContent p code,
+.subContent p code {
   color: #eb5757;
   padding: 0.25rem;
 }

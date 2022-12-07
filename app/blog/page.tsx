@@ -21,18 +21,23 @@ import {
   getRankedPosts,
   getAllTags,
   getAllCategorys,
+  getAllBlocksByBlockId,
 } from '../../lib/notion/client'
+import { PROFILE_PAGE_ID } from '../../app/server-constants'
+import NotionBlocks from '../../components/notion-block'
 
 export const revalidate = 60
 
 const BlogPage = async () => {
-  const [posts, firstPost, rankedPosts, tags, categorys] = await Promise.all([
-    getPosts(NUMBER_OF_POSTS_PER_PAGE),
-    getFirstPost(),
-    getRankedPosts(),
-    getAllTags(),
-    getAllCategorys(),
-  ])
+  const [profileblocks, posts, firstPost, rankedPosts, tags, categorys] =
+    await Promise.all([
+      getAllBlocksByBlockId(PROFILE_PAGE_ID),
+      getPosts(NUMBER_OF_POSTS_PER_PAGE),
+      getFirstPost(),
+      getRankedPosts(),
+      getAllTags(),
+      getAllCategorys(),
+    ])
 
   return (
     <>
@@ -64,6 +69,11 @@ const BlogPage = async () => {
           </div>
 
           <div className={styles.subContent}>
+            <div>
+              <h3>Prolile</h3>
+              <hr />
+              <NotionBlocks blocks={profileblocks} />
+            </div>
             <BlogCategoryLink heading="Category List" categorys={categorys} />
             <BlogTagLink heading="Tag List" tags={tags} />
             <BlogPostLink heading="Recommended" posts={rankedPosts} />

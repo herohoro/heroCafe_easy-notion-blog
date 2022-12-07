@@ -29,6 +29,8 @@ import {
   getAllCategorys,
   getAllBlocksByBlockId,
 } from '../../../lib/notion/client'
+import { PROFILE_PAGE_ID } from '../../../app/server-constants'
+import NotionBlocks from '../../../components/notion-block'
 
 export const revalidate = 30
 export const dynamicParams = false
@@ -46,15 +48,23 @@ const BlogSlugPage = async ({ params: { slug } }) => {
     redirect('/blog')
   }
 
-  const [blocks, rankedPosts, recentPosts, tags, sameTagPosts, categorys] =
-    await Promise.all([
-      getAllBlocksByBlockId(post.PageId),
-      getRankedPosts(),
-      getPosts(5),
-      getAllTags(),
-      getPostsByTag(post.Tags[0], 6),
-      getAllCategorys(),
-    ])
+  const [
+    profileblocks,
+    blocks,
+    rankedPosts,
+    recentPosts,
+    tags,
+    sameTagPosts,
+    categorys,
+  ] = await Promise.all([
+    getAllBlocksByBlockId(PROFILE_PAGE_ID),
+    getAllBlocksByBlockId(post.PageId),
+    getRankedPosts(),
+    getPosts(5),
+    getAllTags(),
+    getPostsByTag(post.Tags[0], 6),
+    getAllCategorys(),
+  ])
 
   const otherPostsHavingSameTag = sameTagPosts.filter(
     (p: Post) => p.Slug !== post.Slug
@@ -99,6 +109,11 @@ const BlogSlugPage = async ({ params: { slug } }) => {
           </div>
 
           <div className={styles.subContent}>
+            <div>
+              <h3>Prolile</h3>
+              <hr />
+              <NotionBlocks blocks={profileblocks} />
+            </div>
             <BlogCategoryLink heading="Category List" categorys={categorys} />
             <BlogPostLink
               heading="Posts in the same tag"
