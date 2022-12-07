@@ -14,8 +14,6 @@ import {
   PostTitle,
   PostThumbnail,
   PostLike,
-  TwitterTimeline,
-  RssFeed,
 } from '../../../../components/blog-parts'
 import styles from '../../../../styles/blog.module.css'
 import {
@@ -91,12 +89,10 @@ const BlogCategoryPage = async ({ params: { category: encodedCategory } }) => {
           </div>
 
           <div className={styles.subContent}>
-            <RssFeed />
             <BlogCategoryLink heading="Category List" categorys={categorys} />
             <BlogTagLink heading="Tag List" tags={tags} />
             <BlogPostLink heading="Recommended" posts={rankedPosts} />
             <BlogPostLink heading="Latest Posts" posts={recentPosts} />
-            <TwitterTimeline />
           </div>
         </div>
         <div className={styles.endContent}>
@@ -109,7 +105,6 @@ const BlogCategoryPage = async ({ params: { category: encodedCategory } }) => {
           </div>
           <div className={styles.endSection}>
             <BlogCategoryLink heading="Category List" categorys={categorys} />
-            <TwitterTimeline />
           </div>
         </div>
       </div>

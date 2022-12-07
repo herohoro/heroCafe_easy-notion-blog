@@ -34,17 +34,20 @@ export const PostEditTimeStr = ({ post }) => (
 export const PostThumbnail = ({ post }) => (
   <div className={styles.thumbnail}>
     <Link href={getBlogLink(post.Slug)}>
-      <img src={post.OGImage} width={300} height={160} alt="thumbnail" />
+      {post.OGImage ? (
+        <img
+          src={`/api/og-image/${post.Slug}`}
+          width={300}
+          height={160}
+          alt="thumbnail"
+        />
+      ) : (
+        <img src="/cafe-logo.jpg" width={300} height={160} alt="default" />
+      )}
     </Link>
   </div>
 )
-export const PostThumbnailSlug = ({ post }) => (
-  <div className={styles.thumbnailSlug}>
-    <Link href={getBlogLink(post.Slug)}>
-      <img src={post.OGImage} width={800} height={420} alt="thumbnail" />
-    </Link>
-  </div>
-)
+
 export const PostTitle = ({ post, enableLink = true }) => {
   const postTitle = post.Title ? post.Title : ''
 
@@ -140,12 +143,7 @@ export const IndexList = ({ blocks, heading }) => (
     <MokujiBlocks blocks={blocks} />
   </div>
 )
-export const ClosePhrase = () => (
-  <div>
-    <p>Twitterでは更新のお知らせを随時行っています</p>
-    <a href="https://twitter.com/mineral_30">興味ある方はLet&apos;sフォロー★</a>
-  </div>
-)
+
 export const ReadMoreLink = ({ post }) => (
   <div className={styles.readMoreLink}>
     <Link href={getBlogLink(post.Slug)} className={styles.readMore}>
@@ -248,15 +246,7 @@ export const TwitterTimeline = () => (
     ></script>
   </div>
 )
-export const RssFeed = () => (
-  <div>
-    <h3>新着記事を通知したい？？</h3>
-    <hr />
-    <p>RSSリーダーにatomのリンクを登録すると通知が行くよ🐌</p>
-    <code>https://herohoro.com/atom</code>
-    <p>やってみてね(*´ω`*)(*´ω`*)</p>
-  </div>
-)
+
 export const BlogPostLink = ({ heading, posts, enableThumnail = false }) => (
   <div className={styles.blogPostLink}>
     <h3>{heading}</h3>

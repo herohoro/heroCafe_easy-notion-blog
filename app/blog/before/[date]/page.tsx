@@ -20,8 +20,6 @@ import {
   PostTitle,
   PostThumbnail,
   PostLike,
-  TwitterTimeline,
-  RssFeed,
 } from '../../../../components/blog-parts'
 import { NextBackPageLink } from '../../../../components/nextbackpage'
 import { BackPageLink } from '../../../../components/backpage'
@@ -80,11 +78,9 @@ const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
             </footer>
           </div>
           <div className={styles.subContent}>
-            <RssFeed />
             <BlogCategoryLink heading="Category List" categorys={categorys} />
             <BlogTagLink heading="Tag List" tags={tags} />
             <BlogPostLink heading="Recommended" posts={rankedPosts} />
-            <TwitterTimeline />
           </div>
         </div>
         <div className={styles.endContent}>
@@ -93,7 +89,6 @@ const BlogBeforeDatePage = async ({ params: { date: encodedDate } }) => {
           </div>
           <div className={styles.endSection}>
             <BlogCategoryLink heading="Category List" categorys={categorys} />
-            <TwitterTimeline />
           </div>
           <div className={styles.endSection}>
             <BlogTagLink heading="Tag List" tags={tags} />
