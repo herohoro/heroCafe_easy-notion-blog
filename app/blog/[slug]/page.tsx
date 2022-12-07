@@ -131,8 +131,7 @@ const BlogSlugPage = async ({ params: { slug } }) => {
               posts={recentPosts}
               enableThumnail={true}
             />
-
-            <IndexList heading="★ MOKUJI ★" blocks={blocks} />
+            <IndexList heading="" blocks={blocks} />
           </div>
         </div>
         <div className={styles.endContent}>

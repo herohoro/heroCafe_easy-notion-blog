@@ -324,6 +324,7 @@ export const PostLinkList = ({ posts }) => {
     </ul>
   )
 }
+
 const PostLinkListThumnail = ({ posts }) => {
   if (!posts || posts.length === 0) return null
   return (
@@ -332,17 +333,24 @@ const PostLinkListThumnail = ({ posts }) => {
         return (
           <div key={post.Slug} className={styles.flexWraper}>
             <Link href={getBlogLink(post.Slug)}>
-              <img
-                src={post.OGImage}
-                width={143.54}
-                height={75}
-                alt="thumbnail"
-              />
+              {post.OGImage ? (
+                <img
+                  src={`/api/og-image/${post.Slug}`}
+                  width={143.54}
+                  height={75}
+                  alt="thumbnail"
+                />
+              ) : NEXT_PUBLIC_URL ? (
+                <img
+                  src="/cafelogo.jpg"
+                  width={143.54}
+                  height={75}
+                  alt="default"
+                />
+              ) : null}
             </Link>
             <div>
-              <Link href={getBlogLink(post.Slug)}>
-                <a>{post.Title}</a>
-              </Link>
+              <Link href={getBlogLink(post.Slug)}>{post.Title}</Link>
               <span> &#x1f91f; {post.LikeRank}</span>
             </div>
           </div>

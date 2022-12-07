@@ -25,7 +25,6 @@ const LikeButton = (props: Props) => {
 
   return (
     <button className={styles.likeButton} onClick={handleClick}>
-      <p>へろちゃんへsubmit 🚀</p>
       <Heart width={32} height={32} active={active} />
       <div className={styles.likeCount}>{count === null ? 0 : count} </div>
     </button>
