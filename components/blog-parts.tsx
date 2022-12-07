@@ -42,7 +42,7 @@ export const PostThumbnail = ({ post }) => (
           alt="thumbnail"
         />
       ) : (
-        <img src="/cafe-logo.jpg" width={300} height={160} alt="default" />
+        <img src="/cafelogo.jpg" width={300} height={160} alt="default" />
       )}
     </Link>
   </div>
