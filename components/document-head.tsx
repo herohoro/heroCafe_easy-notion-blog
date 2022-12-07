@@ -10,7 +10,7 @@ const DocumentHead = ({
   path = '',
   urlOgImage = '',
 }) => {
-  const defaultImageURL = new URL('/cafe-logo.jpg', NEXT_PUBLIC_URL)
+  const defaultImageURL = new URL('/cafelogo.jpg', NEXT_PUBLIC_URL)
   return (
     <>
       <title>
