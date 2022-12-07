@@ -13,12 +13,9 @@ import {
   PostTitleSlug,
   PostTagsSlug,
   PostCategorySlug,
-  // PostThumbnailSlug,
-  TwitterTimeline,
   ClosePhrase,
   IndexList,
   NewPostList,
-  RssFeed,
 } from '../../../components/blog-parts'
 import SocialButtons from '../../../components/social-buttons'
 import styles from '../../../styles/blog.module.css'
@@ -100,15 +97,10 @@ const BlogSlugPage = async ({ params: { slug } }) => {
                   />
                 )}
               </footer>
-              <p>
-                ▼　この記事に興味があったら同じタグから関連記事をのぞいてみてね
-              </p>
-              <PostTagsSlug post={post} />
             </div>
           </div>
 
           <div className={styles.subContent}>
-            <RssFeed />
             <BlogCategoryLink heading="Category List" categorys={categorys} />
             <BlogPostLink
               heading="Posts in the same tag"
@@ -126,7 +118,7 @@ const BlogSlugPage = async ({ params: { slug } }) => {
               posts={recentPosts}
               enableThumnail={true}
             />
-            <TwitterTimeline />
+
             <IndexList heading="★ MOKUJI ★" blocks={blocks} />
           </div>
         </div>
@@ -152,7 +144,6 @@ const BlogSlugPage = async ({ params: { slug } }) => {
           </div>
           <div className={styles.endSection}>
             <BlogTagLink heading="Tag List" tags={tags} />
-            <TwitterTimeline />
           </div>
         </div>
       </div>

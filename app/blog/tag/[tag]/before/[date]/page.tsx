@@ -13,8 +13,6 @@ import {
   PostTitle,
   PostThumbnail,
   PostLike,
-  //   ReadMoreLink,
-  TwitterTimeline,
 } from '../../../../../../components/blog-parts'
 import { NextBackPageLink } from '../../../../../../components/nextbackpage'
 import { BackPageLink } from '../../../../../../components/backpage'
@@ -92,7 +90,6 @@ const BlogTagBeforeDatePage = async ({
             <BlogTagLink heading="Tag List" tags={tags} />
             <BlogPostLink heading="Recommended" posts={rankedPosts} />
             <BlogPostLink heading="Latest Posts" posts={recentPosts} />
-            <TwitterTimeline />
           </div>
         </div>
         <div className={styles.endContent}>
@@ -105,7 +102,6 @@ const BlogTagBeforeDatePage = async ({
           </div>
           <div className={styles.endSection}>
             <BlogTagLink heading="Tag List" tags={tags} />
-            <TwitterTimeline />
           </div>
         </div>
       </div>

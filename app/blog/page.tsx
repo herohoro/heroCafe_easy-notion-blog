@@ -13,8 +13,6 @@ import {
   PostTitle,
   PostThumbnail,
   PostLike,
-  TwitterTimeline,
-  RssFeed,
 } from '../../components/blog-parts'
 import styles from '../../styles/blog.module.css'
 import {
@@ -24,7 +22,6 @@ import {
   getAllTags,
   getAllCategorys,
 } from '../../lib/notion/client'
-import Image from 'next/image'
 
 export const revalidate = 60
 
@@ -43,15 +40,6 @@ const BlogPage = async () => {
       <div className={styles.container}>
         <div className={styles.flexWraper}>
           <div className={styles.mainContent}>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <Image
-                src="/study-hero.jpeg"
-                width={300}
-                height={200}
-                style={{ objectFit: 'contain' }}
-                alt=""
-              />
-            </div>
             <NoContents contents={posts} />
             <div className={styles.mainGallery}>
               {posts.map((post) => {
@@ -76,11 +64,9 @@ const BlogPage = async () => {
           </div>
 
           <div className={styles.subContent}>
-            <RssFeed />
             <BlogCategoryLink heading="Category List" categorys={categorys} />
             <BlogTagLink heading="Tag List" tags={tags} />
             <BlogPostLink heading="Recommended" posts={rankedPosts} />
-            <TwitterTimeline />
           </div>
         </div>
 
@@ -90,7 +76,6 @@ const BlogPage = async () => {
           </div>
           <div className={styles.endSection}>
             <BlogCategoryLink heading="Category List" categorys={categorys} />
-            <TwitterTimeline />
           </div>
           <div className={styles.endSection}>
             <BlogTagLink heading="Tag List" tags={tags} />
