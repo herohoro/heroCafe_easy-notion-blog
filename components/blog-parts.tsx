@@ -14,6 +14,7 @@ import {
   getCategoryBeforeLink,
 } from '../lib/blog-helpers'
 import styles from '../styles/blog-parts.module.css'
+import NEXT_PUBLIC_URL from '../app/server-constants'
 
 export const PostDate = ({ post }) => (
   <div className={styles.postDate}>
@@ -41,9 +42,9 @@ export const PostThumbnail = ({ post }) => (
           height={160}
           alt="thumbnail"
         />
-      ) : (
+      ) : NEXT_PUBLIC_URL ? (
         <img src="/cafelogo.jpg" width={300} height={160} alt="default" />
-      )}
+      ) : null}
     </Link>
   </div>
 )
